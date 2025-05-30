@@ -20,6 +20,7 @@
     "@mui/x-data-grid": "^8.5.0",
     "@mui/x-date-pickers": "^8.5.0",
     "@mui/x-tree-view": "^8.5.0",
+    "@types/node": "^22.15.26",
     "dayjs": "^1.11.13",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

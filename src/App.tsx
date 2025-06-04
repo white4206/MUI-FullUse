@@ -1,30 +1,32 @@
-import './App.css'
-import Header from '@/layout/Header';
+import './App.css';
+import { lazy } from 'react';
+import NavBar from '@/layout/NavBar';
 import { CssBaseline, Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { lightTheme, darkTheme } from '@/theme/index.ts';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from '@/pages/home';
-import Other from '@/pages/other';
+
+const Home = lazy(() => import('@/pages/home'));
+const Download = lazy(() => import('@/pages/download'));
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
-  const theme = isDark ? darkTheme : lightTheme;
-  const [headerHeight, setHeaderHeight] = useState(0);
+    const [isDark, setIsDark] = useState(false);
+    const theme = isDark ? darkTheme : lightTheme;
+    const [navBarHeight, setNavBarHeight] = useState(0);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Header props={{ isDark, setIsDark, setHeaderHeight }} />
-      <Box id="container" p={2} mt={`${headerHeight}px`}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/other" element={<Other />} />
-        </Routes>
-      </Box>
-    </ThemeProvider>
-  )
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <NavBar props={{ isDark, setIsDark, setNavBarHeight }} />
+            <Box id="container" p={2} mt={`${navBarHeight}px`}>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/download" element={<Download />} />
+                </Routes>
+            </Box>
+        </ThemeProvider>
+    );
 }
 
-export default App
+export default App;

@@ -1,0 +1,12 @@
+@font-face {
+    font-family: '阿里妈妈方圆体 VF Regular';
+    src:
+        url('@/assets/font/AlimamaFangYuanTiVF-Thin.woff2') format('woff2'),
+        url('@/assets/font/AlimamaFangYuanTiVF-Thin.woff') format('woff'),
+        url('@/assets/font/AlimamaFangYuanTiVF-Thin.ttf') format('ttf');
+    font-display: swap;
+}
+
+* {
+    font-family: '阿里妈妈方圆体 VF Regular', 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+}

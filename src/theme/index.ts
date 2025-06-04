@@ -24,11 +24,6 @@ declare module "@mui/material/Chip" {
     wMain: true;
   }
 }
-declare module "@mui/material/AppBar" {
-  interface AppBarPropsColorOverrides {
-    appBarColor: true;
-  }
-}
 
 let lightTheme = createTheme({});
 lightTheme = createTheme(lightTheme, {
@@ -69,7 +64,6 @@ darkTheme = createTheme(darkTheme, {
       },
       name: "wMain",
     }),
-    appBarColor: "#000000",
   },
 });
 export { lightTheme, darkTheme };

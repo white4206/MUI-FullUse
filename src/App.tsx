@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { lightTheme, darkTheme } from '@/theme/index.ts';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useDark } from '@/utils/hook';
 
 const Home = lazy(() => import('@/pages/home'));
 const Article = lazy(() => import('@/pages/article'));
@@ -13,14 +14,14 @@ const Download = lazy(() => import('@/pages/download'));
 const Video = lazy(() => import('@/pages/video'));
 
 function App() {
-    const [isDark, setIsDark] = useState(false);
+    const { isDark, toggleTheme } = useDark();
     const theme = isDark ? darkTheme : lightTheme;
     const [navBarHeight, setNavBarHeight] = useState(0);
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <NavBar props={{ isDark, setIsDark, setNavBarHeight }} />
+            <NavBar props={{ isDark, toggleTheme, setNavBarHeight }} />
             <Box id="container" p={2} mt={`${navBarHeight}px`}>
                 <Routes>
                     <Route path="/" element={<Home />} />

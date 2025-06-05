@@ -8,7 +8,9 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 const Home = lazy(() => import('@/pages/home'));
+const Article = lazy(() => import('@/pages/article'));
 const Download = lazy(() => import('@/pages/download'));
+const Video = lazy(() => import('@/pages/video'));
 
 function App() {
     const [isDark, setIsDark] = useState(false);
@@ -22,7 +24,9 @@ function App() {
             <Box id="container" p={2} mt={`${navBarHeight}px`}>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/article" element={<Article />} />
                     <Route path="/download" element={<Download />} />
+                    <Route path="/video" element={<Video />} />
                 </Routes>
             </Box>
         </ThemeProvider>

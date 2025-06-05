@@ -1,27 +1,27 @@
 import { createTheme } from '@mui/material/styles';
 
-// 增加调色板参数，加入wMain主题色
+// 增加调色板参数，加入fullUseMain主题色
 declare module '@mui/material/styles' {
     interface Palette {
-        wMain: Palette['primary'];
+        fullUseMain: Palette['primary'];
         appBarColor: string;
     }
 
     interface PaletteOptions {
-        wMain?: PaletteOptions['primary'];
+        fullUseMain?: PaletteOptions['primary'];
         appBarColor?: string;
     }
 }
 
-// 更新badge,Chip的颜色选项，使其包含wMain主题色选项
+// 更新badge,Chip的颜色选项，使其包含fullUseMain主题色选项
 declare module '@mui/material/Badge' {
     interface BadgePropsColorOverrides {
-        wMain: true;
+        fullUseMain: true;
     }
 }
 declare module '@mui/material/Chip' {
     interface ChipPropsColorOverrides {
-        wMain: true;
+        fullUseMain: true;
     }
 }
 
@@ -33,13 +33,13 @@ lightTheme = createTheme(lightTheme, {
             color: {
                 main: '#9286d1',
             },
-            name: 'wMain',
+            name: 'fullUseMain',
         }),
-        wMain: lightTheme.palette.augmentColor({
+        fullUseMain: lightTheme.palette.augmentColor({
             color: {
                 main: '#9286d1',
             },
-            name: 'wMain',
+            name: 'fullUseMain',
         }),
         appBarColor: '#ffffff',
     },
@@ -56,13 +56,13 @@ darkTheme = createTheme(darkTheme, {
             color: {
                 main: '#9286d1',
             },
-            name: 'wMain',
+            name: 'fullUseMain',
         }),
-        wMain: darkTheme.palette.augmentColor({
+        fullUseMain: darkTheme.palette.augmentColor({
             color: {
                 main: '#9286d1',
             },
-            name: 'wMain',
+            name: 'fullUseMain',
         }),
     },
 });

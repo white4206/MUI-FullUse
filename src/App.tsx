@@ -1,4 +1,4 @@
-import './App.css';
+import '@/App.css';
 import { lazy } from 'react';
 import NavBar from '@/layout/NavBar';
 import { CssBaseline, Box } from '@mui/material';
@@ -7,6 +7,7 @@ import { lightTheme, darkTheme } from '@/theme/index.ts';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDark } from '@/utils/hook';
+import RouteProgress from '@/components/RouteProgress';
 
 const Home = lazy(() => import('@/pages/home'));
 const Article = lazy(() => import('@/pages/article'));
@@ -21,6 +22,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
+            <RouteProgress />
             <NavBar props={{ isDark, toggleTheme, setNavBarHeight }} />
             <Box id="container" p={2} mt={`${navBarHeight}px`}>
                 <Routes>

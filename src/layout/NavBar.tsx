@@ -6,7 +6,7 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import logo from '@/assets/svg/logo.svg';
 import ch from '@/assets/svg/ch.svg';
 import en from '@/assets/svg/en.svg';
-import { useRef, useLayoutEffect, useState, useEffect } from 'react';
+import { useRef, useLayoutEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 

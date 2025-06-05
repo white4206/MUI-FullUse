@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import en from './en';
-import ch from './ch';
+import en from '@/i18n/en';
+import ch from '@/i18n/ch';
 
 const language =
     localStorage.getItem('i18n') === 'auto'

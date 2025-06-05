@@ -1,5 +1,5 @@
 import '@/App.css';
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 import NavBar from '@/layout/NavBar';
 import { CssBaseline, Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
@@ -18,6 +18,14 @@ function App() {
     const { isDark, toggleTheme } = useDark();
     const theme = isDark ? darkTheme : lightTheme;
     const [navBarHeight, setNavBarHeight] = useState(0);
+
+    // 页面加载时读取用户字体首选项
+    useEffect(() => {
+        const font = localStorage.getItem('font');
+        if (font) {
+            document.documentElement.style.setProperty('--full-use-user-font-family', font);
+        }
+    }, []);
 
     return (
         <ThemeProvider theme={theme}>

@@ -6,10 +6,14 @@
         url('@/assets/font/AlimamaFangYuanTiVF-Thin.ttf') format('ttf');
     font-display: swap;
 }
-
-* {
-    font-family: '阿里妈妈方圆体 VF Regular', 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+:root {
+    --full-use-user-font-family: 'Roboto', sans-serif;
+    --full-use-scroll-bar-background-color: #e6e8eb;
 }
+* {
+    font-family: var(--full-use-user-font-family) !important;
+}
+
 html {
     /* 预留滚动条宽度防止内容长度造成的窗口抖动 */
     scrollbar-gutter: stable;
@@ -23,7 +27,7 @@ html {
 
 /* 滚动条样式 */
 ::-webkit-scrollbar-thumb {
-    background-color: var(--el-fill-color-darker);
+    background-color: var(--full-use-scroll-bar-background-color);
     border-radius: 8px;
 }
 

@@ -10,3 +10,30 @@
 * {
     font-family: '阿里妈妈方圆体 VF Regular', 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
 }
+html {
+    /* 预留滚动条宽度防止内容长度造成的窗口抖动 */
+    scrollbar-gutter: stable;
+}
+
+/* 滚动条宽高 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar-thumb {
+    background-color: var(--el-fill-color-darker);
+    border-radius: 8px;
+}
+
+/* 主题切换动画 */
+::view-transition-new(root),
+::view-transition-old(root) {
+    /* 关闭默认动画，否则影响自定义动画的执行 */
+    animation: none;
+}
+
+.dark::view-transition-old(root) {
+    z-index: 100;
+}

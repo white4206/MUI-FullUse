@@ -62,6 +62,9 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
 
     const handleChangeLanguage = (language: string) => {
         void i18n.changeLanguage(language);
+        // 若切换语言为浏览器当前语言则跟随浏览器变化
+        if (navigator.language || navigator.languages[0] === language) localStorage.setItem('i18n', 'auto');
+        else localStorage.setItem('i18n', language);
         setAnchorEl(null);
     };
 

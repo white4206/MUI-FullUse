@@ -43,7 +43,8 @@ export default tseslint.config(
             ...reactX.configs['recommended-typescript'].rules,
             ...reactDom.configs.recommended.rules,
             // 添加Prettier规则，将格式问题报告为错误
-            'prettier/prettier': 'error',
+            'prettier/prettier': ['error', { endOfLine: 'auto' }], //行尾序列设为自动, 就不会因为lf,crlf不同行尾序列prettier检测冒红报错
+            // 'prettier/prettier': 'error',
             'no-console': 'off',
             'no-debugger': 'off',
             'max-len': 'off',

@@ -8,6 +8,8 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDark } from '@/utils/hook';
 import RouteProgress from '@/components/RouteProgress';
+import { useUserPreference } from '@/store/module/userPreference';
+import useFont from './font';
 
 const Home = lazy(() => import('@/pages/home'));
 const Article = lazy(() => import('@/pages/article'));
@@ -18,14 +20,19 @@ function App() {
     const { isDark, toggleTheme } = useDark();
     const theme = isDark ? darkTheme : lightTheme;
     const [navBarHeight, setNavBarHeight] = useState(0);
+    const font = useUserPreference(state => state.font);
+    const loadFromStorage = useUserPreference(state => state.loadFromStorage);
+    const { changeFont } = useFont();
+
+    // 加载用户首选项
+    useEffect(() => {
+        loadFromStorage();
+    }, [loadFromStorage]);
 
     // 页面加载时读取用户字体首选项
     useEffect(() => {
-        const font = localStorage.getItem('font');
-        if (font) {
-            document.documentElement.style.setProperty('--full-use-user-font-family', font);
-        }
-    }, []);
+        changeFont(font);
+    }, [changeFont, font]);
 
     return (
         <ThemeProvider theme={theme}>

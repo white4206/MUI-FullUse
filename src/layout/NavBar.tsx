@@ -8,8 +8,8 @@ import logo from '@/assets/svg/logo.svg';
 import React, { useRef, useLayoutEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { fonts, fontTypographyList, changeFont } from '@/font';
-import { languages, changeLanguage } from '@/i18n';
+import useFont from '@/font';
+import useI18n from '@/i18n';
 
 interface NavBarProps {
     isDark: boolean;
@@ -32,7 +32,9 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
     const [fontAnchorEl, setFontAnchorEl] = useState<null | HTMLElement>(null);
     const i18nOpen = Boolean(i18nAnchorEl);
     const fontOpen = Boolean(fontAnchorEl);
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
+    const { fonts, fontTypographyList, changeFont } = useFont();
+    const { languages, changeLanguage } = useI18n();
 
     // 主题切换
     const handleChangeTheme = async (e: React.MouseEvent) => {
@@ -78,8 +80,8 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
     };
 
     // 字体切换
-    const handleChangeFont = (fontFamily: string) => {
-        changeFont(fontFamily);
+    const handleChangeFont = (font: string) => {
+        changeFont(font);
         setFontAnchorEl(null);
     };
 
@@ -87,7 +89,7 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
         if (appBarRef.current) {
             setNavBarHeight(appBarRef.current.clientHeight);
         }
-    }, [isDark]); // 主题切换时也重新获取高度
+    }, [isDark, setNavBarHeight]); // 主题切换时也重新获取高度
 
     return (
         <AppBar ref={appBarRef} sx={{ bgcolor: theme.palette.appBarColor }}>
@@ -127,14 +129,12 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
                 <Menu id="i18n-menu" anchorEl={i18nAnchorEl} open={i18nOpen} onClose={() => setI18nAnchorEl(null)}>
                     {languages.map(language => {
                         return (
-                            <React.Fragment key={language.id}>
-                                <MenuItem onClick={() => handleChangeLanguage(language.language)}>
-                                    <Stack sx={{ width: 96 }} flex={1} direction="row" justifyContent="space-between" alignItems="center">
-                                        <Typography fontSize={14}>{language.label}</Typography>
-                                        <CardMedia component={'img'} sx={{ width: 16, height: 16 }} image={language.icon} />
-                                    </Stack>
-                                </MenuItem>
-                            </React.Fragment>
+                            <MenuItem key={language.id} onClick={() => handleChangeLanguage(language.language)}>
+                                <Stack sx={{ width: 96 }} flex={1} direction="row" justifyContent="space-between" alignItems="center">
+                                    <Typography fontSize={14}>{language.label}</Typography>
+                                    <CardMedia component={'img'} sx={{ width: 16, height: 16 }} image={language.icon} />
+                                </Stack>
+                            </MenuItem>
                         );
                     })}
                 </Menu>
@@ -145,28 +145,25 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
                 <Menu id="font-menu" anchorEl={fontAnchorEl} open={fontOpen} onClose={() => setFontAnchorEl(null)}>
                     {fonts.map(font => {
                         return (
-                            <React.Fragment key={font.id}>
-                                <MenuItem onClick={() => handleChangeFont(font.fontFamily)} sx={{ whiteSpace: 'inherit' }}>
-                                    <Box sx={{ width: '100%', maxWidth: 520 }}>
-                                        <Typography sx={{ fontFamily: `${font.fontFamily} !important`, color: 'teal' }} variant="h3" gutterBottom>
-                                            {font.fontName}
-                                        </Typography>
-                                        {fontTypographyList.map(typography => {
-                                            return (
-                                                <React.Fragment key={typography.id}>
-                                                    <Typography
-                                                        sx={{ fontFamily: `${font.fontFamily} !important`, ...typography.sx }}
-                                                        variant={typography.variant as import('@mui/material').TypographyProps['variant']}
-                                                        gutterBottom
-                                                    >
-                                                        {typography.content}
-                                                    </Typography>
-                                                </React.Fragment>
-                                            );
-                                        })}
-                                    </Box>
-                                </MenuItem>
-                            </React.Fragment>
+                            <MenuItem key={font.id} onClick={() => handleChangeFont(font.font)} sx={{ whiteSpace: 'inherit' }}>
+                                <Box sx={{ width: '100%', maxWidth: 520 }}>
+                                    <Typography sx={{ fontFamily: `${font.font} !important`, color: 'teal' }} variant="h3" gutterBottom>
+                                        {font.name}
+                                    </Typography>
+                                    {fontTypographyList.map(typography => {
+                                        return (
+                                            <Typography
+                                                key={typography.id}
+                                                sx={{ fontFamily: `${font.font} !important`, ...typography.sx }}
+                                                variant={typography.variant as import('@mui/material').TypographyProps['variant']}
+                                                gutterBottom
+                                            >
+                                                {typography.content}
+                                            </Typography>
+                                        );
+                                    })}
+                                </Box>
+                            </MenuItem>
                         );
                     })}
                 </Menu>

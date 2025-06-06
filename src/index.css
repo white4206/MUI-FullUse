@@ -9,6 +9,7 @@
 :root {
     --full-use-user-font-family: 'Roboto', sans-serif;
     --full-use-scroll-bar-background-color: #e6e8eb;
+    --full-use-dark-scroll-bar-background-color: #424243;
 }
 * {
     font-family: var(--full-use-user-font-family) !important;
@@ -31,6 +32,9 @@ html {
     border-radius: 8px;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+    background-color: var(--full-use-dark-scroll-bar-background-color);
+}
 /* 主题切换动画 */
 ::view-transition-new(root),
 ::view-transition-old(root) {

@@ -6,5 +6,9 @@ export default {
             download: 'Download',
             video: 'Video',
         },
+        navBar: {
+            search: 'Search...',
+            setting: 'Setting',
+        },
     },
 };

@@ -1,5 +1,6 @@
 import { useUserPreference } from '@/store';
 import { useEffect, useState } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const useDark = () => {
     const theme = useUserPreference(state => state.theme);
@@ -36,4 +37,20 @@ const useDark = () => {
     };
     return { isDark, toggleTheme };
 };
-export { useDark };
+
+const useBreakpoint = () => {
+    /**
+     * xs, extra-small: 0px
+     * sm, small: 600px
+     * md, medium: 900px
+     * lg, large: 1200px
+     * xl, extra-large: 1536px
+     */
+    const xs = useMediaQuery(theme => theme.breakpoints.up('xs'));
+    const sm = useMediaQuery(theme => theme.breakpoints.down('sm'));
+    const md = useMediaQuery(theme => theme.breakpoints.between('sm', 'md'));
+    const lg = useMediaQuery(theme => theme.breakpoints.between('md', 'lg'));
+    const xl = useMediaQuery(theme => theme.breakpoints.up('xl'));
+    return { xs, sm, md, lg, xl };
+};
+export { useDark, useBreakpoint };

@@ -38,7 +38,7 @@ function App() {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <RouteProgress />
-            <NavBar props={{ isDark, toggleTheme, setNavBarHeight }} />
+            <NavBar props={{ isDark, toggleTheme, navBarHeight, setNavBarHeight }} />
             <Box id="container" p={2} mt={`${navBarHeight}px`}>
                 <Routes>
                     <Route path="/" element={<Home />} />

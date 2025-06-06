@@ -1,40 +1,26 @@
-import { AppBar, Toolbar, IconButton, CardMedia, Box, Button, Typography, useTheme, Menu, MenuItem, Stack } from '@mui/material';
+import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, useTheme, Divider, Link } from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import SearchIcon from '@mui/icons-material/Search';
-import TranslateIcon from '@mui/icons-material/Translate';
-import FontDownloadIcon from '@mui/icons-material/FontDownload';
 import logo from '@/assets/svg/logo.svg';
-import React, { useRef, useLayoutEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import useFont from '@/font';
-import useI18n from '@/i18n';
+import React, { useRef, useLayoutEffect } from 'react';
+import I18nButton from '@/layout/I18nButton';
+import FontButton from '@/layout/FontButton';
+import SearchButton from '@/layout/SearchButton';
+import SettingButton from '@/layout/SettingButton';
+import NotificationButton from '@/layout/NotificationButton';
+import Menu from '@/layout/Menu';
 
 interface NavBarProps {
     isDark: boolean;
     toggleTheme: () => void;
+    navBarHeight: number;
     setNavBarHeight: (clientHeight: number) => void;
 }
 
-const routeLinks = [
-    { id: 1, name: 'pages.home', to: '/' },
-    { id: 2, name: 'pages.article', to: '/article' },
-    { id: 3, name: 'pages.download', to: '/download' },
-    { id: 4, name: 'pages.video', to: '/video' },
-];
-
 const NavBar = ({ props }: { props: NavBarProps }) => {
-    const { isDark, toggleTheme, setNavBarHeight } = props;
+    const { isDark, toggleTheme, navBarHeight, setNavBarHeight } = props;
     const appBarRef = useRef<HTMLElement>(null);
     const theme = useTheme();
-    const [i18nAnchorEl, setI18nAnchorEl] = useState<null | HTMLElement>(null);
-    const [fontAnchorEl, setFontAnchorEl] = useState<null | HTMLElement>(null);
-    const i18nOpen = Boolean(i18nAnchorEl);
-    const fontOpen = Boolean(fontAnchorEl);
-    const { t } = useTranslation();
-    const { fonts, fontTypographyList, changeFont } = useFont();
-    const { languages, changeLanguage } = useI18n();
 
     // 主题切换
     const handleChangeTheme = async (e: React.MouseEvent) => {
@@ -73,100 +59,43 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
         }
     };
 
-    // 语言切换
-    const handleChangeLanguage = (language: string) => {
-        changeLanguage(language);
-        setI18nAnchorEl(null);
-    };
-
-    // 字体切换
-    const handleChangeFont = (font: string) => {
-        changeFont(font);
-        setFontAnchorEl(null);
-    };
-
     useLayoutEffect(() => {
         if (appBarRef.current) {
             setNavBarHeight(appBarRef.current.clientHeight);
         }
-    }, [isDark, setNavBarHeight]); // 主题切换时也重新获取高度
+    }, [navBarHeight, setNavBarHeight]); // 主题切换时也重新获取高度
 
     return (
         <AppBar ref={appBarRef} sx={{ bgcolor: theme.palette.appBarColor }}>
             <Toolbar>
                 {/* logo */}
-                <a href="http://resource.whitecc.top" target="_blank" rel="noreferrer noopener">
+                <Link href="http://resource.whitecc.top" target="_blank" rel="noreferrer noopener">
                     <CardMedia component={'img'} sx={{ width: 32 }} image={logo} />
-                </a>
-                <Typography p={1} color={theme.palette.text.primary}>
+                </Link>
+                <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 2.5, ml: 1, mr: 0, display: { sm: 'block', xs: 'none' } }} />
+                <Typography display={{ sm: 'block', xs: 'none' }} p={1} color={theme.palette.text.primary}>
                     MUI-FullUse
                 </Typography>
                 {/* 导航 */}
-                <Box ml={1.5} mr={1.5}>
-                    {routeLinks.map(routeLink => {
-                        return (
-                            <React.Fragment key={routeLink.id}>
-                                <Button sx={{ m: 0.5 }} component={Link} to={routeLink.to}>
-                                    <Typography color={theme.palette.text.primary}>{t(routeLink.name)}</Typography>
-                                </Button>
-                            </React.Fragment>
-                        );
-                    })}
-                </Box>
+                <Menu />
                 <Box sx={{ flexGrow: 1 }}></Box>
                 {/* 搜索 */}
-                <IconButton sx={{ m: 0.5, borderRadius: 2 }}>
-                    <SearchIcon />
-                </IconButton>
-                {/* 主题切换按钮 */}
-                <IconButton sx={{ m: 0.5, borderRadius: 2 }} onClick={e => void handleChangeTheme(e)}>
-                    {isDark ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
-                </IconButton>
-                {/* 国际化切换 */}
-                <IconButton sx={{ m: 0.5, borderRadius: 2 }} onClick={e => setI18nAnchorEl(e.currentTarget)}>
-                    <TranslateIcon />
-                </IconButton>
-                <Menu id="i18n-menu" anchorEl={i18nAnchorEl} open={i18nOpen} onClose={() => setI18nAnchorEl(null)}>
-                    {languages.map(language => {
-                        return (
-                            <MenuItem key={language.id} onClick={() => handleChangeLanguage(language.language)}>
-                                <Stack sx={{ width: 96 }} flex={1} direction="row" justifyContent="space-between" alignItems="center">
-                                    <Typography fontSize={14}>{language.label}</Typography>
-                                    <CardMedia component={'img'} sx={{ width: 16, height: 16 }} image={language.icon} />
-                                </Stack>
-                            </MenuItem>
-                        );
-                    })}
-                </Menu>
-                {/* 字体切换 */}
-                <IconButton sx={{ m: 0.5, borderRadius: 2 }} onClick={e => setFontAnchorEl(e.currentTarget)}>
-                    <FontDownloadIcon />
-                </IconButton>
-                <Menu id="font-menu" anchorEl={fontAnchorEl} open={fontOpen} onClose={() => setFontAnchorEl(null)}>
-                    {fonts.map(font => {
-                        return (
-                            <MenuItem key={font.id} onClick={() => handleChangeFont(font.font)} sx={{ whiteSpace: 'inherit' }}>
-                                <Box sx={{ width: '100%', maxWidth: 520 }}>
-                                    <Typography sx={{ fontFamily: `${font.font} !important`, color: 'teal' }} variant="h3" gutterBottom>
-                                        {font.name}
-                                    </Typography>
-                                    {fontTypographyList.map(typography => {
-                                        return (
-                                            <Typography
-                                                key={typography.id}
-                                                sx={{ fontFamily: `${font.font} !important`, ...typography.sx }}
-                                                variant={typography.variant as import('@mui/material').TypographyProps['variant']}
-                                                gutterBottom
-                                            >
-                                                {typography.content}
-                                            </Typography>
-                                        );
-                                    })}
-                                </Box>
-                            </MenuItem>
-                        );
-                    })}
-                </Menu>
+                <SearchButton />
+                {/* 功能按钮 */}
+                <Box display={{ md: 'block', xs: 'none' }}>
+                    {/* 主题切换按钮 */}
+                    <IconButton sx={{ m: 0.5, borderRadius: 2 }} onClick={e => void handleChangeTheme(e)}>
+                        {isDark ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
+                    </IconButton>
+                    {/* 国际化切换 */}
+                    <I18nButton />
+                    {/* 字体切换 */}
+                    <FontButton />
+                </Box>
+                {/* 消息通知 */}
+                <NotificationButton />
+                {/* 设置 */}
+                <SettingButton />
             </Toolbar>
         </AppBar>
     );

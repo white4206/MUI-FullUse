@@ -20,12 +20,16 @@ const useDark = () => {
         return () => media.removeEventListener('change', handler);
     }, [theme]);
 
+    // 监听黑暗模式
+    useEffect(() => {
+        // 黑暗模式下给html添加一个dark类
+        if (isDark) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+    }, [isDark]);
+
     // 用户切换时持久化
     const toggleTheme = () => {
         setIsDark(!isDark);
-        // 黑暗模式下给html添加一个dark类
-        if (!isDark) document.documentElement.classList.add('dark');
-        else document.documentElement.classList.remove('dark');
         // 若切换主题为系统当前主题则跟随系统变化
         if (!isDark === window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('auto');
         else setTheme(!isDark ? 'dark' : 'light');

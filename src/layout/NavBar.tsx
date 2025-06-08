@@ -60,10 +60,18 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
     };
 
     useLayoutEffect(() => {
-        if (appBarRef.current) {
-            setNavBarHeight(appBarRef.current.clientHeight);
-        }
-    }, [navBarHeight, setNavBarHeight]); // 主题切换时也重新获取高度
+        const updateHeight = () => {
+            if (appBarRef.current) {
+                setNavBarHeight(appBarRef.current.clientHeight);
+            }
+        };
+        updateHeight(); // 初始化时设置一次
+
+        window.addEventListener('resize', updateHeight);
+        return () => {
+            window.removeEventListener('resize', updateHeight);
+        };
+    }, [setNavBarHeight]);
 
     return (
         <AppBar ref={appBarRef} sx={{ bgcolor: theme.palette.appBarColor, backdropFilter: 'blur(8px)' }}>

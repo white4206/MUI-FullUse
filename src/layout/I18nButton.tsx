@@ -17,7 +17,7 @@ const I18nButton = () => {
 
     return (
         <>
-            <IconButton sx={{ m: 0.5, borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
+            <IconButton sx={{ borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
                 <TranslateIcon />
             </IconButton>
             <Menu id="i18n-menu" anchorEl={anchorEl} open={i18nOpen} onClose={() => setAnchorEl(null)}>

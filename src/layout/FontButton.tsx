@@ -14,7 +14,7 @@ const FontButton = () => {
     };
     return (
         <>
-            <IconButton sx={{ m: 0.5, borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
+            <IconButton sx={{ borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
                 <FontDownloadIcon />
             </IconButton>
             <Menu id="font-menu" anchorEl={anchorEl} open={fontOpen} onClose={() => setAnchorEl(null)}>

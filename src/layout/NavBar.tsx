@@ -66,7 +66,7 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
     }, [navBarHeight, setNavBarHeight]); // 主题切换时也重新获取高度
 
     return (
-        <AppBar ref={appBarRef} sx={{ bgcolor: theme.palette.appBarColor }}>
+        <AppBar ref={appBarRef} sx={{ bgcolor: theme.palette.appBarColor, backdropFilter: 'blur(8px)' }}>
             <Toolbar>
                 {/* logo */}
                 <Link href="http://resource.whitecc.top" target="_blank" rel="noreferrer noopener">

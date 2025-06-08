@@ -9,7 +9,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import DownloadIcon from '@mui/icons-material/Download';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 
-const Menu = () => {
+const Menu = ({ props }: { props: { navBarHeight: number } }) => {
     const routeLinks = [
         { id: 1, title: 'pages.home', path: '/', icon: <HomeIcon /> },
         { id: 2, title: 'pages.article', path: '/article', icon: <ArticleIcon /> },
@@ -20,14 +20,22 @@ const Menu = () => {
     const [open, setOpen] = useState(false);
     const { t } = useTranslation();
     const currentPath = useLocation().pathname;
-    console.log(theme);
+    const { navBarHeight } = { ...props };
 
     return (
         <>
             <Stack direction="row" alignItems="center" display={{ lg: 'flex', xs: 'none' }} ml={1.5} mr={1.5}>
                 {routeLinks.map(routeLink => {
                     return (
-                        <Box key={routeLink.id}>
+                        <Box
+                            key={routeLink.id}
+                            className={currentPath === routeLink.path ? 'active-horizontal-menu-item' : ''}
+                            sx={{
+                                height: navBarHeight - 4,
+                                display: 'flex',
+                                alignItems: 'center',
+                            }}
+                        >
                             <Button sx={{ m: 0.5 }} component={Link} to={routeLink.path}>
                                 <Typography color={theme.palette.text.primary}>{t(routeLink.title)}</Typography>
                             </Button>

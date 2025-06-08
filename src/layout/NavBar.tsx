@@ -9,6 +9,7 @@ import SearchButton from '@/layout/SearchButton';
 import SettingButton from '@/layout/SettingButton';
 import NotificationButton from '@/layout/NotificationButton';
 import Menu from '@/layout/Menu';
+import { useUserPreference } from '@/store';
 
 interface NavBarProps {
     isDark: boolean;
@@ -21,6 +22,7 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
     const { isDark, toggleTheme, navBarHeight, setNavBarHeight } = props;
     const appBarRef = useRef<HTMLElement>(null);
     const theme = useTheme();
+    const navBarButtons = useUserPreference(state => state.navBarButtons);
 
     // 主题切换
     const handleChangeTheme = async (e: React.MouseEvent) => {
@@ -90,15 +92,18 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
                 {/* 搜索 */}
                 <SearchButton />
                 {/* 功能按钮 */}
+
                 <Box display={{ md: 'block', xs: 'none' }}>
                     {/* 主题切换按钮 */}
-                    <IconButton sx={{ m: 0.5, borderRadius: 2 }} onClick={e => void handleChangeTheme(e)}>
-                        {isDark ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
-                    </IconButton>
+                    {navBarButtons.theme === 'navBar' && (
+                        <IconButton sx={{ m: 0.5, borderRadius: 2 }} onClick={e => void handleChangeTheme(e)}>
+                            {isDark ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
+                        </IconButton>
+                    )}
                     {/* 国际化切换 */}
-                    <I18nButton />
+                    {navBarButtons.i18n === 'navBar' && <I18nButton />}
                     {/* 字体切换 */}
-                    <FontButton />
+                    {navBarButtons.font === 'navBar' && <FontButton />}
                 </Box>
                 {/* 消息通知 */}
                 <NotificationButton />

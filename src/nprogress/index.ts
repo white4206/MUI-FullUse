@@ -1,4 +1,5 @@
 import NProgress from 'nprogress';
+import '@/theme/index.css';
 // 自定义 nprogress 样式文件
 import '@/nprogress/index.css';
 

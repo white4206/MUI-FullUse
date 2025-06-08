@@ -5,11 +5,13 @@ declare module '@mui/material/styles' {
     interface Palette {
         fullUseMain: Palette['primary'];
         appBarColor: string;
+        hoverBgColor: string;
     }
 
     interface PaletteOptions {
         fullUseMain?: PaletteOptions['primary'];
         appBarColor?: string;
+        hoverBgColor?: string;
     }
 }
 
@@ -41,7 +43,8 @@ lightTheme = createTheme(lightTheme, {
             },
             name: 'fullUseMain',
         }),
-        appBarColor: '#ffffff',
+        appBarColor: 'rgba(255,255,255,0.6)',
+        hoverBgColor: 'rgba(0,0,0,0.04)',
     },
 });
 let darkTheme = createTheme({
@@ -64,6 +67,8 @@ darkTheme = createTheme(darkTheme, {
             },
             name: 'fullUseMain',
         }),
+        appBarColor: 'rgba(0,0,0,0.6)',
+        hoverBgColor: 'rgba(255,255,255,0.08)',
     },
 });
 export { lightTheme, darkTheme };

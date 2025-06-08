@@ -1,8 +1,4 @@
 /* Make clicks pass-through */
-:root {
-    --full-use-theme-main: #9286d1;
-}
-
 #nprogress {
     pointer-events: none;
 }

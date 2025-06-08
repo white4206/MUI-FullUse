@@ -31,7 +31,7 @@ const Menu = ({ props }: { props: { navBarHeight: number } }) => {
                             key={routeLink.id}
                             className={currentPath === routeLink.path ? 'active-horizontal-menu-item' : ''}
                             sx={{
-                                height: navBarHeight - 4,
+                                height: navBarHeight - 8,
                                 display: 'flex',
                                 alignItems: 'center',
                             }}
@@ -68,7 +68,7 @@ const Menu = ({ props }: { props: { navBarHeight: number } }) => {
                                 component={Link}
                                 to={routeLink.path}
                                 className={(currentPath === routeLink.path ? 'active-vertical-menu-item' : '') + ' clear-default'}
-                                sx={{ m: 1, borderRadius: 2, transition: '.2s', '&:hover': { bgcolor: theme.palette.hoverBgColor } }}
+                                sx={{ m: 1, borderRadius: 2, transition: '.2s', '&:hover': { bgcolor: theme.palette.action.hover } }}
                             >
                                 <IconButton sx={{ borderRadius: 2 }}>{routeLink.icon}</IconButton>
                                 <Typography ml={2} color={theme.palette.text.primary}>

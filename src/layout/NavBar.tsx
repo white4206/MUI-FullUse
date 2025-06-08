@@ -85,7 +85,7 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
                     MUI-FullUse
                 </Typography>
                 {/* 导航 */}
-                <Menu />
+                <Menu props={{ navBarHeight }} />
                 <Box sx={{ flexGrow: 1 }}></Box>
                 {/* 搜索 */}
                 <SearchButton />

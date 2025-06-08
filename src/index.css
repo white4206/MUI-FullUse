@@ -1,7 +1,3 @@
-html {
-    /* 预留滚动条宽度防止内容长度造成的窗口抖动 */
-    scrollbar-gutter: stable;
-}
 a.clear-default {
     color: inherit;
     text-decoration: none;

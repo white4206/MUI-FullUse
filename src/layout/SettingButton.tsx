@@ -14,7 +14,7 @@ const SettingButton = () => {
     return (
         <>
             <IconButton sx={{ borderRadius: 2 }} onClick={() => setOpen(true)}>
-                <SettingsIcon />
+                <SettingsIcon sx={{ color: theme.palette.fullUseMain.main }} />
             </IconButton>
             <SwipeableDrawer anchor="right" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
                 <Stack direction="row" justifyContent="space-between" alignItems="center" p={2} width={sm ? 280 : 360}>

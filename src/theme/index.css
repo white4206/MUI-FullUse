@@ -7,11 +7,15 @@
     font-display: swap;
 }
 :root {
+    --full-use-theme-text-main-dark: #ffffff;
+    --full-use-theme-text-main-light: rgba(0, 0, 0, 0.87);
+    --full-use-theme-icon-button-color-light: rgba(0, 0, 0, 0.54);
     --full-use-theme-main: #9286d1;
     --full-use-theme-main-dark: rgb(102, 93, 146);
+    --full-use-theme-main-light: rgb(167, 158, 218);
     --full-use-user-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     --full-use-scroll-bar-background-color: #e6e8eb;
-    --full-use-dark-scroll-bar-background-color: #424243;
+    --full-use-scroll-bar-background-color-dark: #424243;
 }
 * {
     font-family: var(--full-use-user-font-family) !important;
@@ -29,7 +33,7 @@
 }
 
 .dark ::-webkit-scrollbar-thumb {
-    background-color: var(--full-use-dark-scroll-bar-background-color);
+    background-color: var(--full-use-scroll-bar-background-color-dark);
 }
 /* 主题切换动画 */
 ::view-transition-new(root),
@@ -41,15 +45,45 @@
 .dark::view-transition-old(root) {
     z-index: 100;
 }
-/* .active-horizontal-menu-item {
-} */
+/* 水平激活菜单项 */
+.active-horizontal-menu-item {
+    background-color: var(--full-use-theme-main) !important;
+    border-radius: 4px 4px 32px 32px !important;
+}
+.active-horizontal-menu-item a {
+    background-color: var(--full-use-theme-main-light) !important;
+    border-bottom-left-radius: 32px !important;
+    border-bottom-right-radius: 32px !important;
+    color: var(--full-use-theme-text-main-dark);
+}
+.active-horizontal-menu-item .MuiTypography-root {
+    color: var(--full-use-theme-text-main-dark);
+}
+.dark .active-horizontal-menu-item a {
+    color: var(--full-use-theme-icon-button-color-light);
+}
+.dark .active-horizontal-menu-item .MuiTypography-root {
+    color: var(--full-use-theme-text-main-light);
+}
+/* 垂直激活菜单项 */
 .active-vertical-menu-item {
     background-color: var(--full-use-theme-main) !important;
     border-top-right-radius: 16px !important;
     border-bottom-right-radius: 16px !important;
 }
 .active-vertical-menu-item button {
-    background-color: var(--full-use-theme-main-dark) !important;
+    background-color: var(--full-use-theme-main-light) !important;
     border-top-right-radius: 32px !important;
     border-bottom-right-radius: 32px !important;
+    color: var(--full-use-theme-text-main-dark);
+}
+.active-vertical-menu-item .MuiTypography-root {
+    color: var(--full-use-theme-text-main-dark);
+}
+.dark .active-vertical-menu-item button {
+    background-color: var(--full-use-theme-main-dark) !important;
+    color: var(--full-use-theme-icon-button-color-light);
+}
+.dark .active-vertical-menu-item .MuiTypography-root {
+    color: var(--full-use-theme-text-main-light);
 }

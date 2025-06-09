@@ -1,28 +1,29 @@
 import { create } from 'zustand';
 
 interface UserPreferenceState {
-    theme: 'light' | 'dark' | 'auto';
+    themeMode: 'light' | 'dark' | 'auto';
     language: string;
     font: string;
     navBarButtons: Record<string, 'navBar' | 'settings'>;
-    setTheme: (theme: 'light' | 'dark' | 'auto') => void;
+    setThemeMode: (themeMode: 'light' | 'dark' | 'auto') => void;
     setLanguage: (language: string) => void;
     setFont: (font: string) => void;
     setNavBarButton: (key: string, value: 'navBar' | 'settings') => void;
+    toggleShowNavBarButton: (key: string) => void;
     loadFromStorage: () => void;
 }
 
 export const useUserPreference = create<UserPreferenceState>(set => ({
-    theme: (localStorage.getItem('theme') as 'light' | 'dark' | 'auto') || 'auto',
+    themeMode: (localStorage.getItem('themeMode') as 'light' | 'dark' | 'auto') || 'auto',
     language: localStorage.getItem('i18n') || 'auto',
     font: localStorage.getItem('font') || 'system-ui',
     navBarButtons: JSON.parse(localStorage.getItem('navBarButtons') || '{"theme":"navBar","i18n":"navBar","font":"settings"}') as Record<
         string,
         'navBar' | 'settings'
     >,
-    setTheme: theme => {
-        localStorage.setItem('theme', theme);
-        set({ theme });
+    setThemeMode: themeMode => {
+        localStorage.setItem('themeMode', themeMode);
+        set({ themeMode });
     },
     setLanguage: language => {
         localStorage.setItem('i18n', language);
@@ -39,9 +40,19 @@ export const useUserPreference = create<UserPreferenceState>(set => ({
             return { navBarButtons };
         });
     },
+    toggleShowNavBarButton: key => {
+        set(state => {
+            const navBarButtons = { ...state.navBarButtons, [key]: state.navBarButtons[key] === 'navBar' ? 'settings' : 'navBar' } as Record<
+                string,
+                'navBar' | 'settings'
+            >;
+            localStorage.setItem('navBarButtons', JSON.stringify(navBarButtons));
+            return { navBarButtons };
+        });
+    },
     loadFromStorage: () => {
         set({
-            theme: (localStorage.getItem('theme') as 'light' | 'dark' | 'auto') || 'auto',
+            themeMode: (localStorage.getItem('themeMode') as 'light' | 'dark' | 'auto') || 'auto',
             language: localStorage.getItem('i18n') || 'auto',
             font: localStorage.getItem('font') || 'system-ui',
             navBarButtons: JSON.parse(localStorage.getItem('navBarButtons') || '{"theme":"navBar","i18n":"navBar","font":"settings"}') as Record<

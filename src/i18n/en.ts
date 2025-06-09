@@ -8,7 +8,15 @@ export default {
         },
         navBar: {
             search: 'Search...',
-            setting: 'Setting',
+            setting: 'Settings',
+            visible: 'Display on the toolbar',
+            invisible: 'Hide on the toolbar',
+            theme: {
+                mode: 'Mode',
+                light: 'Light',
+                system: 'System',
+                dark: 'Dark',
+            },
         },
     },
 };

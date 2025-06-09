@@ -17,8 +17,7 @@ const Download = lazy(() => import('@/pages/download'));
 const Video = lazy(() => import('@/pages/video'));
 
 function App() {
-    const { isDark, toggleTheme } = useDark();
-    const theme = isDark ? darkTheme : lightTheme;
+    const { theme } = useDark();
     const [navBarHeight, setNavBarHeight] = useState(0);
     const font = useUserPreference(state => state.font);
     const loadFromStorage = useUserPreference(state => state.loadFromStorage);
@@ -38,7 +37,7 @@ function App() {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <RouteProgress />
-            <NavBar props={{ isDark, toggleTheme, navBarHeight, setNavBarHeight }} />
+            <NavBar props={{ navBarHeight, setNavBarHeight }} />
             <Box id="container" p={2} mt={`${navBarHeight}px`}>
                 <Routes>
                     <Route path="/" element={<Home />} />

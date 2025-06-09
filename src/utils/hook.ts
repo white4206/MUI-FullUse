@@ -1,41 +1,77 @@
 import { useUserPreference } from '@/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { darkTheme, lightTheme } from '@/theme';
 
 const useDark = () => {
-    const theme = useUserPreference(state => state.theme);
-    const setTheme = useUserPreference(state => state.setTheme);
-    // 读取用户首选项或系统主题
-    const [isDark, setIsDark] = useState(theme === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : theme === 'dark');
+    const themeMode = useUserPreference(state => state.themeMode);
+    const setThemeMode = useUserPreference(state => state.setThemeMode);
 
-    // 监听系统主题变化（仅当用户未手动设置时）
+    // 跟随 themeMode 和系统主题
+    const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = themeMode === 'auto' ? isSystemDark : themeMode === 'dark';
+
+    // 响应式 theme
+    const theme = useMemo(() => (isDark ? darkTheme : lightTheme), [isDark]);
+
+    // 监听系统主题变化（仅当 themeMode 为 auto 时）
     useEffect(() => {
+        if (themeMode !== 'auto') return;
         const media = window.matchMedia('(prefers-color-scheme: dark)');
-
-        const handler = (e: MediaQueryListEvent) => {
-            if (!theme || theme === 'auto') {
-                setIsDark(e.matches);
-            }
-        };
+        const handler = () => setThemeMode('auto'); // 触发 zustand 状态更新
         media.addEventListener('change', handler);
         return () => media.removeEventListener('change', handler);
-    }, [theme]);
+    }, [themeMode, setThemeMode]);
 
-    // 监听黑暗模式
+    // 切换主题，支持传入目标主题
+    const toggleTheme = (target?: 'light' | 'dark' | 'auto') => {
+        if (target) {
+            setThemeMode(target);
+            return;
+        }
+        if (themeMode === 'auto') setThemeMode(isSystemDark ? 'light' : 'dark');
+        else if (themeMode === 'dark') setThemeMode('light');
+        else setThemeMode('dark');
+    };
+
+    // 切换主题 (动画)，支持传入目标主题
+    const toggleThemeWithAnimation = async (e: React.MouseEvent, target?: 'light' | 'dark' | 'auto') => {
+        // 若传入目标主题 判断目标主题是否为黑暗模式
+        const nextIsDark = target ? (target === 'dark' ? true : target === 'light' ? false : isSystemDark ? true : false) : !isDark;
+        // 若传入目标主题不为空且无变化则直接返回跳出
+        if (target && nextIsDark === isDark) {
+            setThemeMode(target);
+            return;
+        }
+
+        if (!document.startViewTransition) {
+            toggleTheme(target);
+        } else {
+            const transition = document.startViewTransition(() => {
+                toggleTheme(target);
+            });
+            await transition.ready;
+            const { clientX, clientY } = e;
+            const radius = Math.hypot(Math.max(clientX, innerWidth - clientX), Math.max(clientY, innerHeight - clientY));
+            const clipPath = [`circle(0% at ${clientX}px ${clientY}px)`, `circle(${radius}px at ${clientX}px ${clientY}px)`];
+            document.documentElement.animate(
+                {
+                    clipPath: nextIsDark ? clipPath.reverse() : clipPath,
+                },
+                {
+                    duration: 500,
+                    pseudoElement: nextIsDark ? '::view-transition-old(root)' : '::view-transition-new(root)',
+                }
+            );
+        }
+    };
+
+    // 切换 html 类
     useEffect(() => {
-        // 黑暗模式下给html添加一个dark类
-        if (isDark) document.documentElement.classList.add('dark');
-        else document.documentElement.classList.remove('dark');
+        document.documentElement.classList.toggle('dark', isDark);
     }, [isDark]);
 
-    // 用户切换时持久化
-    const toggleTheme = () => {
-        setIsDark(!isDark);
-        // 若切换主题为系统当前主题则跟随系统变化
-        if (!isDark === window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('auto');
-        else setTheme(!isDark ? 'dark' : 'light');
-    };
-    return { isDark, toggleTheme };
+    return { isDark, theme, toggleTheme, toggleThemeWithAnimation };
 };
 
 const useBreakpoint = () => {

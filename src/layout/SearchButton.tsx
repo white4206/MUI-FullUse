@@ -18,7 +18,7 @@ const SearchButton = () => {
                 </>
             ) : (
                 <>
-                    <Paper variant="outlined" elevation={1} sx={{ borderRadius: 3 }}>
+                    <Paper variant="outlined" elevation={1} sx={{ borderRadius: 3, m: 0.5 }}>
                         <Button sx={{ m: 0, borderRadius: 3, textTransform: 'none' }}>
                             <SearchIcon />
                             <Typography ml={0.5} mr={3} color={theme.palette.text.secondary} fontSize={14}>

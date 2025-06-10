@@ -18,13 +18,16 @@ const SearchButton = () => {
                 </>
             ) : (
                 <>
-                    <Paper variant="outlined" elevation={1} sx={{ borderRadius: 3, m: 0.5 }}>
+                    <Paper
+                        variant="outlined"
+                        sx={{ borderRadius: 3, m: 0.5, borderWidth: 2, transition: '.4s', '&:hover': { borderColor: theme.palette.fullUseMain.main } }}
+                    >
                         <Button sx={{ m: 0, borderRadius: 3, textTransform: 'none' }}>
                             <SearchIcon />
                             <Typography ml={0.5} mr={3} color={theme.palette.text.secondary} fontSize={14}>
                                 {t('navBar.search')}
                             </Typography>
-                            <Chip size="small" label="Ctrl+K" sx={{ fontSize: 12, fontWeight: 600 }} />
+                            <Chip size="small" label="Ctrl+K" sx={{ height: 'auto', fontSize: 12, fontWeight: 600, p: 0 }} />
                         </Button>
                     </Paper>
                 </>

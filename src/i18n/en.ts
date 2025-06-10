@@ -8,14 +8,31 @@ export default {
         },
         navBar: {
             search: 'Search...',
-            setting: 'Settings',
+            theme: 'Theme',
+            language: 'Language',
+            font: 'Font',
+            notification: 'Notification',
+            setting: 'Setting',
+        },
+        setting: {
+            title: 'Settings',
             visible: 'Display on the toolbar',
             invisible: 'Hide on the toolbar',
             theme: {
-                mode: 'Mode',
+                title: 'Mode',
                 light: 'Light',
                 system: 'System',
                 dark: 'Dark',
+            },
+            i18n: {
+                title: 'Internationalization',
+                language: 'Language',
+                system: 'System',
+            },
+            font: {
+                title: 'Font',
+                default: 'Default',
+                apply: 'Apply',
             },
         },
     },

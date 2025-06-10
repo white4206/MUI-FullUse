@@ -34,6 +34,7 @@ export default {
                 title: '字体',
                 default: '默认',
                 apply: '应用',
+                current: '当前',
             },
             fullscreen: {
                 title: '全屏',

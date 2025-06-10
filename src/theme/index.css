@@ -25,7 +25,9 @@
     width: 8px;
     height: 8px;
 }
-
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
 /* 滚动条样式 */
 ::-webkit-scrollbar-thumb {
     background-color: var(--full-use-scroll-bar-background-color);

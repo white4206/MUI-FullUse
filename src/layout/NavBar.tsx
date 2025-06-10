@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, useTheme, Divider, Tooltip } from '@mui/material';
+import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, useTheme, Divider, Tooltip, Button } from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import logo from '@/assets/svg/logo.svg';
@@ -12,6 +12,7 @@ import Menu from '@/layout/Menu';
 import { useUserPreference } from '@/store';
 import { useDark } from '@/utils/hook';
 import { useTranslation } from 'react-i18next';
+import FullscreenButton from '@/layout/FullscreenButton';
 
 interface NavBarProps {
     navBarHeight: number;
@@ -70,6 +71,8 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
                     {navBarButtons.i18n === 'navBar' && <I18nButton />}
                     {/* 字体切换 */}
                     {navBarButtons.font === 'navBar' && <FontButton />}
+                    {/* 全屏切换 */}
+                    {navBarButtons.fullscreen === 'navBar' && <FullscreenButton />}
                 </Box>
                 {/* 消息通知 */}
                 <NotificationButton />

@@ -12,6 +12,7 @@ export default {
             i18n: '国际化',
             font: '字体',
             notification: '通知',
+            fullscreen: '全屏',
             setting: '设置',
         },
         setting: {
@@ -33,6 +34,11 @@ export default {
                 title: '字体',
                 default: '默认',
                 apply: '应用',
+            },
+            fullscreen: {
+                title: '全屏',
+                exit: '退出',
+                enter: '进入',
             },
         },
     },

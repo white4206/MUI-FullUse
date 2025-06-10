@@ -1,5 +1,5 @@
 import { useUserPreference } from '@/store';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import { useShallow } from 'zustand/shallow';
 
 const Home = () => {

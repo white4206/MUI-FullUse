@@ -49,20 +49,14 @@
 }
 /* 水平激活菜单项 */
 .active-horizontal-menu-item {
-    background-color: var(--full-use-theme-main) !important;
-    border-radius: 4px 4px 32px 32px !important;
-}
-.active-horizontal-menu-item a {
     background-color: var(--full-use-theme-main-light) !important;
-    border-bottom-left-radius: 32px !important;
-    border-bottom-right-radius: 32px !important;
-    color: var(--full-use-theme-text-main-dark);
+    border-radius: 32px;
 }
 .active-horizontal-menu-item .MuiTypography-root {
     color: var(--full-use-theme-text-main-dark);
 }
-.dark .active-horizontal-menu-item a {
-    color: var(--full-use-theme-icon-button-color-light);
+.dark .active-horizontal-menu-item {
+    background-color: var(--full-use-theme-main-dark) !important;
 }
 .dark .active-horizontal-menu-item .MuiTypography-root {
     color: var(--full-use-theme-text-main-light);

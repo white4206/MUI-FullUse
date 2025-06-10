@@ -43,22 +43,24 @@ const SettingItemTitle = ({ props }: { props: { title: string; setting: string; 
     const toggleShowNavBarButton = useUserPreference(state => state.toggleShowNavBarButton);
 
     return (
-        <Stack mb={1} direction="row" alignItems="center">
-            <Typography fontSize={12} fontWeight={600} textTransform="uppercase" variant="subtitle2" color={theme.palette.text.secondary}>
-                {t(title)}
-            </Typography>
-            {canShow && (
-                <Tooltip title={t(navBarButtons[setting] === 'navBar' ? 'setting.invisible' : 'setting.visible')} placement="right" enterDelay={500}>
-                    <IconButton size="small" onClick={() => toggleShowNavBarButton(setting)} sx={{ borderRadius: 1, ml: 0.5 }}>
-                        {navBarButtons[setting] === 'navBar' ? (
-                            <VisibilityIcon sx={{ fontSize: 14, color: theme.palette.fullUseMain.main }} />
-                        ) : (
-                            <VisibilityOffIcon sx={{ fontSize: 14 }} />
-                        )}
-                    </IconButton>
-                </Tooltip>
-            )}
-        </Stack>
+        <Divider textAlign="left" sx={{ mb: 1 }}>
+            <Stack direction="row" alignItems="center">
+                <Typography fontSize={12} fontWeight={600} textTransform="uppercase" variant="subtitle2" color={theme.palette.text.secondary}>
+                    {t(title)}
+                </Typography>
+                {canShow && (
+                    <Tooltip title={t(navBarButtons[setting] === 'navBar' ? 'setting.invisible' : 'setting.visible')} placement="right" enterDelay={500}>
+                        <IconButton size="small" onClick={() => toggleShowNavBarButton(setting)} sx={{ borderRadius: 1, ml: 0.5 }}>
+                            {navBarButtons[setting] === 'navBar' ? (
+                                <VisibilityIcon sx={{ fontSize: 14, color: theme.palette.fullUseMain.main }} />
+                            ) : (
+                                <VisibilityOffIcon sx={{ fontSize: 14 }} />
+                            )}
+                        </IconButton>
+                    </Tooltip>
+                )}
+            </Stack>
+        </Divider>
     );
 };
 
@@ -72,6 +74,7 @@ const SettingButton = () => {
     const { languages, changeLanguage } = useI18n();
     const language = useUserPreference(state => state.language);
     const { fonts, changeFont } = useFont();
+    const currentFont = useUserPreference(state => state.font);
     const { isFullscreen, toggleFullscreen } = useFullScreen();
 
     return (
@@ -82,8 +85,8 @@ const SettingButton = () => {
                 </IconButton>
             </Tooltip>
             <SwipeableDrawer anchor="right" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
-                <Box p={2} width={sm ? 320 : 360}>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                <Box width={sm ? 280 : 360}>
+                    <Stack p={2} direction="row" justifyContent="space-between" alignItems="center">
                         <Typography fontWeight={500}>{t('setting.title')}</Typography>
                         <IconButton onClick={() => setOpen(false)}>
                             <CloseIcon sx={{ color: theme.palette.fullUseMain.main }} />
@@ -148,7 +151,7 @@ const SettingButton = () => {
                                 label={t('setting.i18n.language')}
                                 fullWidth
                                 value={language}
-                                sx={{ mt: 1, '& .MuiInputBase-root': { fontSize: '14px !important' } }}
+                                sx={{ '& .MuiInputBase-root': { fontSize: '14px !important' } }}
                             >
                                 <MenuItem sx={{ fontSize: 14 }} value="auto" onClick={() => changeLanguage('auto')}>
                                     {t('setting.i18n.auto')}
@@ -168,30 +171,41 @@ const SettingButton = () => {
                         {/* 字体切换 */}
                         <Box mb={1}>
                             <SettingItemTitle props={{ title: 'setting.font.title', setting: 'font' }} />
-                            {fonts.map(font => {
-                                return (
-                                    <Accordion key={font.id} disableGutters>
-                                        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-                                            <Stack direction="row" alignItems="center">
-                                                <Typography fontSize={14} component="span">
-                                                    {font.name}
-                                                </Typography>
-                                                {font.default && (
-                                                    <Chip sx={{ ml: 1, fontSize: 12 }} size="small" color="fullUseMain" label={t('setting.font.default')} />
-                                                )}
-                                            </Stack>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <Box sx={{ height: 120, overflow: 'auto' }}>
-                                                <FontTypographyList font={font.font} />
-                                            </Box>
-                                        </AccordionDetails>
-                                        <AccordionActions>
-                                            <Button onClick={() => changeFont(font.font)}>{t('setting.font.apply')}</Button>
-                                        </AccordionActions>
-                                    </Accordion>
-                                );
-                            })}
+                            <Box>
+                                {fonts.map(font => {
+                                    return (
+                                        <Accordion key={font.id} elevation={3}>
+                                            <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+                                                <Stack direction="row" alignItems="center">
+                                                    <Typography fontSize={14} component="span">
+                                                        {font.name}
+                                                    </Typography>
+                                                    {font.default && (
+                                                        <Chip sx={{ ml: 1, fontSize: 12 }} size="small" color="fullUseMain" label={t('setting.font.default')} />
+                                                    )}
+                                                    {currentFont === font.font && (
+                                                        <Chip
+                                                            sx={{ ml: 1, fontSize: 12 }}
+                                                            variant="outlined"
+                                                            size="small"
+                                                            color="fullUseMain"
+                                                            label={t('setting.font.current')}
+                                                        />
+                                                    )}
+                                                </Stack>
+                                            </AccordionSummary>
+                                            <AccordionDetails>
+                                                <Box sx={{ height: 120, overflow: 'auto' }}>
+                                                    <FontTypographyList font={font.font} />
+                                                </Box>
+                                            </AccordionDetails>
+                                            <AccordionActions>
+                                                <Button onClick={() => changeFont(font.font)}>{t('setting.font.apply')}</Button>
+                                            </AccordionActions>
+                                        </Accordion>
+                                    );
+                                })}
+                            </Box>
                         </Box>
                         {/* 全屏切换 */}
                         <Box mb={1}>

@@ -1,4 +1,4 @@
-import { useBreakpoint, useDark } from '@/utils/hook';
+import { useBreakpoint, useDark, useFullScreen } from '@/utils/hook';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
@@ -6,6 +6,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 import {
     Accordion,
     AccordionActions,
@@ -20,6 +21,7 @@ import {
     MenuItem,
     Stack,
     SwipeableDrawer,
+    Switch,
     TextField,
     Tooltip,
     Typography,
@@ -46,7 +48,7 @@ const SettingItemTitle = ({ props }: { props: { title: string; setting: string; 
                 {t(title)}
             </Typography>
             {canShow && (
-                <Tooltip title={t(navBarButtons[setting] === 'navBar' ? 'setting.invisible' : 'setting.visible')} enterDelay={500}>
+                <Tooltip title={t(navBarButtons[setting] === 'navBar' ? 'setting.invisible' : 'setting.visible')} placement="right" enterDelay={500}>
                     <IconButton size="small" onClick={() => toggleShowNavBarButton(setting)} sx={{ borderRadius: 1, ml: 0.5 }}>
                         {navBarButtons[setting] === 'navBar' ? (
                             <VisibilityIcon sx={{ fontSize: 14, color: theme.palette.fullUseMain.main }} />
@@ -70,6 +72,7 @@ const SettingButton = () => {
     const { languages, changeLanguage } = useI18n();
     const language = useUserPreference(state => state.language);
     const { fonts, changeFont } = useFont();
+    const { isFullscreen, toggleFullscreen } = useFullScreen();
 
     return (
         <>
@@ -137,8 +140,8 @@ const SettingButton = () => {
                                 </Button>
                             </ButtonGroup>
                         </Box>
+                        {/* 国际化切换 */}
                         <Box mb={1}>
-                            {/* 国际化切换 */}
                             <SettingItemTitle props={{ title: 'setting.i18n.title', setting: 'i18n' }} />
                             <TextField
                                 select
@@ -162,8 +165,8 @@ const SettingButton = () => {
                                 ))}
                             </TextField>
                         </Box>
+                        {/* 字体切换 */}
                         <Box mb={1}>
-                            {/* 字体切换 */}
                             <SettingItemTitle props={{ title: 'setting.font.title', setting: 'font' }} />
                             {fonts.map(font => {
                                 return (
@@ -189,6 +192,15 @@ const SettingButton = () => {
                                     </Accordion>
                                 );
                             })}
+                        </Box>
+                        {/* 全屏切换 */}
+                        <Box mb={1}>
+                            <SettingItemTitle props={{ title: 'setting.fullscreen.title', setting: 'fullscreen' }} />
+                            <Stack direction="row" alignItems="center">
+                                <Typography fontSize={14}>{t('setting.fullscreen.exit')}</Typography>
+                                <Switch checked={isFullscreen} onChange={() => toggleFullscreen()} />
+                                <Typography fontSize={14}>{t('setting.fullscreen.enter')}</Typography>
+                            </Stack>
                         </Box>
                     </Stack>
                 </Box>

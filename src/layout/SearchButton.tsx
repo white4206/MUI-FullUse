@@ -12,7 +12,7 @@ const SearchButton = () => {
         <>
             {sm ? (
                 <>
-                    <IconButton sx={{ m: 0.5, borderRadius: 2 }}>
+                    <IconButton sx={{ borderRadius: 2 }}>
                         <SearchIcon sx={{ color: theme.palette.fullUseMain.main }} />
                     </IconButton>
                 </>

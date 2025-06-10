@@ -1,16 +1,17 @@
-import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, useTheme, Divider } from '@mui/material';
+import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, useTheme, Divider, Tooltip } from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import logo from '@/assets/svg/logo.svg';
 import { useRef, useLayoutEffect } from 'react';
 import I18nButton from '@/layout/I18nButton';
-import FontButton from '@/layout/FontButton';
+import { FontButton } from '@/layout/FontButton';
 import SearchButton from '@/layout/SearchButton';
 import SettingButton from '@/layout/SettingButton';
 import NotificationButton from '@/layout/NotificationButton';
 import Menu from '@/layout/Menu';
 import { useUserPreference } from '@/store';
 import { useDark } from '@/utils/hook';
+import { useTranslation } from 'react-i18next';
 
 interface NavBarProps {
     navBarHeight: number;
@@ -23,6 +24,7 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
     const theme = useTheme();
     const navBarButtons = useUserPreference(state => state.navBarButtons);
     const { isDark, toggleThemeWithAnimation } = useDark();
+    const { t } = useTranslation();
 
     useLayoutEffect(() => {
         const updateHeight = () => {
@@ -58,9 +60,11 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
                 <Box display={{ md: 'block', xs: 'none' }}>
                     {/* 主题切换按钮 */}
                     {navBarButtons.theme === 'navBar' && (
-                        <IconButton sx={{ borderRadius: 2 }} onClick={e => void toggleThemeWithAnimation(e)}>
-                            {isDark ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
-                        </IconButton>
+                        <Tooltip title={t('navBar.theme')} enterDelay={500}>
+                            <IconButton sx={{ borderRadius: 2 }} onClick={e => void toggleThemeWithAnimation(e)}>
+                                {isDark ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
+                            </IconButton>
+                        </Tooltip>
                     )}
                     {/* 国际化切换 */}
                     {navBarButtons.i18n === 'navBar' && <I18nButton />}

@@ -1,12 +1,35 @@
 import useFont from '@/font';
-import { IconButton, Menu, MenuItem, Box, Typography } from '@mui/material';
+import { IconButton, Menu, MenuItem, Box, Typography, Tooltip } from '@mui/material';
 import { useState } from 'react';
 import FontDownloadIcon from '@mui/icons-material/FontDownload';
+import { useTranslation } from 'react-i18next';
+
+const FontTypographyList = ({ font }: { font: string }) => {
+    const { fontTypographyList } = useFont();
+    return (
+        <>
+            {fontTypographyList.map(typography => {
+                return (
+                    <Typography
+                        key={typography.id}
+                        sx={{ fontFamily: `${font} !important`, ...typography.sx }}
+                        variant={typography.variant as import('@mui/material').TypographyProps['variant']}
+                        gutterBottom
+                    >
+                        {typography.content}
+                    </Typography>
+                );
+            })}
+        </>
+    );
+};
 
 const FontButton = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const fontOpen = Boolean(anchorEl);
-    const { fonts, fontTypographyList, changeFont } = useFont();
+    const { fonts, changeFont } = useFont();
+    const { t } = useTranslation();
+
     // 字体切换
     const handleChangeFont = (font: string) => {
         changeFont(font);
@@ -14,9 +37,11 @@ const FontButton = () => {
     };
     return (
         <>
-            <IconButton sx={{ borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
-                <FontDownloadIcon />
-            </IconButton>
+            <Tooltip title={t('navBar.font')} enterDelay={500}>
+                <IconButton sx={{ borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
+                    <FontDownloadIcon />
+                </IconButton>
+            </Tooltip>
             <Menu id="font-menu" anchorEl={anchorEl} open={fontOpen} onClose={() => setAnchorEl(null)}>
                 {fonts.map(font => {
                     return (
@@ -25,18 +50,7 @@ const FontButton = () => {
                                 <Typography sx={{ fontFamily: `${font.font} !important`, color: 'teal' }} variant="h3" gutterBottom>
                                     {font.name}
                                 </Typography>
-                                {fontTypographyList.map(typography => {
-                                    return (
-                                        <Typography
-                                            key={typography.id}
-                                            sx={{ fontFamily: `${font.font} !important`, ...typography.sx }}
-                                            variant={typography.variant as import('@mui/material').TypographyProps['variant']}
-                                            gutterBottom
-                                        >
-                                            {typography.content}
-                                        </Typography>
-                                    );
-                                })}
+                                <FontTypographyList font={font.font} />
                             </Box>
                         </MenuItem>
                     );
@@ -45,4 +59,4 @@ const FontButton = () => {
         </>
     );
 };
-export default FontButton;
+export { FontTypographyList, FontButton };

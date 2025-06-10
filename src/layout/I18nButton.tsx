@@ -1,13 +1,15 @@
-import { IconButton, Menu, MenuItem, Stack, Typography, CardMedia } from '@mui/material';
+import { IconButton, Menu, MenuItem, Stack, Typography, CardMedia, Tooltip } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import CallMadeIcon from '@mui/icons-material/CallMade';
 import useI18n from '@/i18n';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const I18nButton = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const i18nOpen = Boolean(anchorEl);
     const { languages, changeLanguage } = useI18n();
+    const { t } = useTranslation();
 
     // 语言切换
     const handleChangeLanguage = (language: string) => {
@@ -17,9 +19,11 @@ const I18nButton = () => {
 
     return (
         <>
-            <IconButton sx={{ borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
-                <TranslateIcon />
-            </IconButton>
+            <Tooltip title={t('navBar.i18n')} enterDelay={500}>
+                <IconButton sx={{ borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
+                    <TranslateIcon />
+                </IconButton>
+            </Tooltip>
             <Menu id="i18n-menu" anchorEl={anchorEl} open={i18nOpen} onClose={() => setAnchorEl(null)}>
                 {languages.map(language => {
                     return (

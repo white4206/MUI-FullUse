@@ -33,7 +33,7 @@ const useI18n = () => {
     const changeLanguage = (language: string) => {
         void i18n.changeLanguage(language);
         // 若切换语言为浏览器当前语言则跟随浏览器变化
-        if ((navigator.language || navigator.languages[0]) === language) setLanguage('auto');
+        if ((navigator.language || navigator.languages[0]) === language || language === 'auto') setLanguage('auto');
         else setLanguage(language);
     };
 

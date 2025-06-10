@@ -79,7 +79,7 @@ const SettingButton = () => {
                 </IconButton>
             </Tooltip>
             <SwipeableDrawer anchor="right" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
-                <Box p={2} width={sm ? 280 : 360}>
+                <Box p={2} width={sm ? 320 : 360}>
                     <Stack direction="row" justifyContent="space-between" alignItems="center">
                         <Typography fontWeight={500}>{t('setting.title')}</Typography>
                         <IconButton onClick={() => setOpen(false)}>

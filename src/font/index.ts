@@ -2,8 +2,9 @@ import { useUserPreference } from '@/store';
 
 const useFont = () => {
     const fonts = [
-        { id: 1, name: 'Roboto', font: "'Roboto','Helvetica','Arial',sans-serif" },
-        { id: 2, name: '阿里妈妈方圆体', font: "'阿里妈妈方圆体 VF Regular', 'Roboto','Helvetica','Arial',sans-serif" },
+        { id: 1, name: 'Roboto', font: "'Roboto','Helvetica','Arial',sans-serif", default: true },
+        { id: 2, name: '阿里妈妈方圆体', font: "'阿里妈妈方圆体 VF Regular', 'Roboto','Helvetica','Arial',sans-serif", default: false },
+        { id: 3, name: 'system-ui', font: 'system-ui', default: false },
     ];
     const fontTypographyList = [
         { id: 1, variant: 'h1', content: 'h1. Heading', sx: {} },

@@ -22,18 +22,19 @@ export default {
             theme: {
                 title: 'Mode',
                 light: 'Light',
-                system: 'System',
+                auto: 'System',
                 dark: 'Dark',
             },
             i18n: {
                 title: 'Internationalization',
                 language: 'Language',
-                system: 'System',
+                auto: 'Following system',
             },
             font: {
                 title: 'Font',
                 default: 'Default',
                 apply: 'Apply',
+                current: 'Current',
             },
             fullscreen: {
                 title: 'Fullscreen',

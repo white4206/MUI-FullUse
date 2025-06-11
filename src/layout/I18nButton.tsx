@@ -4,6 +4,7 @@ import CallMadeIcon from '@mui/icons-material/CallMade';
 import useI18n from '@/i18n';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import SvgIcon from '@/components/SvgIcon';
 
 const I18nButton = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -33,7 +34,7 @@ const I18nButton = () => {
                                     <Typography fontSize={14}>{language.label}</Typography>
                                     <CallMadeIcon sx={{ fontSize: 12 }} />
                                 </Stack>
-                                <CardMedia component={'img'} sx={{ width: 16, height: 16 }} image={language.icon} />
+                                <SvgIcon iconName={language.language} />
                             </Stack>
                         </MenuItem>
                     );

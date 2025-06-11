@@ -5,12 +5,12 @@ import { useTranslation } from 'react-i18next';
 
 const SearchButton = () => {
     const theme = useTheme();
-    const { sm } = useBreakpoint();
+    const { xs } = useBreakpoint();
     const { t } = useTranslation();
 
     return (
         <>
-            {sm ? (
+            {xs ? (
                 <>
                     <IconButton sx={{ borderRadius: 2 }}>
                         <SearchIcon sx={{ color: theme.palette.fullUseMain.main }} />

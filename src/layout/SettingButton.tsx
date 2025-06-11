@@ -66,7 +66,7 @@ const SettingItemTitle = ({ props }: { props: { title: string; setting: string; 
 
 const SettingButton = () => {
     const [open, setOpen] = useState(false);
-    const { sm } = useBreakpoint();
+    const { xs } = useBreakpoint();
     const theme = useTheme();
     const { t } = useTranslation();
     const { toggleThemeWithAnimation } = useDark();
@@ -85,7 +85,7 @@ const SettingButton = () => {
                 </IconButton>
             </Tooltip>
             <SwipeableDrawer anchor="right" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
-                <Box width={sm ? 280 : 360}>
+                <Box width={xs ? 280 : 360}>
                     <Stack p={2} direction="row" justifyContent="space-between" alignItems="center">
                         <Typography fontWeight={500}>{t('setting.title')}</Typography>
                         <IconButton onClick={() => setOpen(false)}>

@@ -51,7 +51,7 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
             <Toolbar>
                 {/* logo */}
                 <a href="http://resource.whitecc.top" target="_blank" rel="noreferrer noopener">
-                    <CardMedia component={'img'} sx={{ width: 32, transition: '.4s', '&:hover': { transform: 'rotate(180deg)' } }} image={logo} />
+                    <CardMedia component="img" sx={{ width: 32, transition: '.4s', '&:hover': { transform: 'rotate(180deg)' } }} image={logo} />
                 </a>
                 <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 2.5, ml: 1, mr: 0, display: { sm: 'block', xs: 'none' } }} />
                 <Typography display={{ sm: 'block', xs: 'none' }} p={1} color={theme.palette.text.primary}>

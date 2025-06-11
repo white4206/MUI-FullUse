@@ -130,10 +130,10 @@ const useBreakpoint = () => {
      * lg, large: 1200px
      * xl, extra-large: 1536px
      */
-    const xs = useMediaQuery(theme => theme.breakpoints.up('xs'));
-    const sm = useMediaQuery(theme => theme.breakpoints.down('sm'));
-    const md = useMediaQuery(theme => theme.breakpoints.between('sm', 'md'));
-    const lg = useMediaQuery(theme => theme.breakpoints.between('md', 'lg'));
+    const xs = useMediaQuery(theme => theme.breakpoints.between('xs', 'sm'));
+    const sm = useMediaQuery(theme => theme.breakpoints.between('sm', 'md'));
+    const md = useMediaQuery(theme => theme.breakpoints.between('md', 'lg'));
+    const lg = useMediaQuery(theme => theme.breakpoints.between('lg', 'xl'));
     const xl = useMediaQuery(theme => theme.breakpoints.up('xl'));
     return { xs, sm, md, lg, xl };
 };

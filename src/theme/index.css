@@ -47,6 +47,22 @@
 .dark::view-transition-old(root) {
     z-index: 100;
 }
+/* 回到顶部按钮 */
+.back-to-top-button {
+    border: 1px solid !important;
+    background-color: rgba(146, 134, 209, 0.2) !important;
+}
+.back-to-top-button:hover {
+    background-color: rgba(146, 134, 209, 0.6) !important;
+}
+.dark .back-to-top-button {
+    border: 1px solid !important;
+    background-color: rgba(146, 134, 209, 0.6) !important;
+}
+.dark .back-to-top-button:hover {
+    background-color: rgba(146, 134, 209, 0.2) !important;
+}
+
 /* 水平激活菜单项 */
 .active-horizontal-menu-item {
     background-color: var(--full-use-theme-main-light) !important;
@@ -61,6 +77,7 @@
 .dark .active-horizontal-menu-item .MuiTypography-root {
     color: var(--full-use-theme-text-main-light);
 }
+
 /* 垂直激活菜单项 */
 .active-vertical-menu-item {
     background-color: var(--full-use-theme-main) !important;
@@ -83,6 +100,7 @@
 .dark .active-vertical-menu-item .MuiTypography-root {
     color: var(--full-use-theme-text-main-light);
 }
+
 /* 主题激活按钮 */
 .active-theme-button {
     border-color: var(--full-use-theme-main-light) !important;

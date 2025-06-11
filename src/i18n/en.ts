@@ -6,6 +6,7 @@ export default {
             download: 'Download',
             video: 'Video',
         },
+        backToTop: 'Scroll to the top',
         navBar: {
             search: 'Search...',
             theme: 'Theme',

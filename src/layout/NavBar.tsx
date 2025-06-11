@@ -2,7 +2,7 @@ import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, useTheme, Divi
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import logo from '@/assets/svg/logo.svg';
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, type Dispatch, type SetStateAction } from 'react';
 import I18nButton from '@/layout/I18nButton';
 import { FontButton } from '@/layout/FontButton';
 import SearchButton from '@/layout/SearchButton';
@@ -14,7 +14,7 @@ import { useDark } from '@/utils/hook';
 import { useTranslation } from 'react-i18next';
 import FullscreenButton from '@/layout/FullscreenButton';
 
-const NavBar = ({ setNavBarHeight }: { setNavBarHeight: (clientHeight: number) => void }) => {
+const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<number>> }) => {
     const appBarRef = useRef<HTMLElement>(null);
     const theme = useTheme();
     const navBarButtons = useUserPreference(state => state.navBarButtons);

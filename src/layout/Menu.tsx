@@ -2,13 +2,13 @@ import { Box, Button, Typography, useTheme, SwipeableDrawer, IconButton, CardMed
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-import logo from '@/assets/svg/logo.svg';
 import { useTranslation } from 'react-i18next';
 import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
 import DownloadIcon from '@mui/icons-material/Download';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import { useBreakpoint, useDark } from '@/utils/hook';
+import SvgIcon from '@/components/SvgIcon';
 
 const Menu = () => {
     const routeLinks = [
@@ -65,9 +65,7 @@ const Menu = () => {
             <SwipeableDrawer anchor="left" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
                 <Stack direction="row" alignItems="center" p={2} width={xs ? 190 : 240}>
                     {/* logo */}
-                    <a href="http://resource.whitecc.top" target="_blank" rel="noreferrer noopener">
-                        <CardMedia component={'img'} sx={{ width: 32, transition: '.4s', '&:hover': { transform: 'rotate(180deg)' } }} image={logo} />
-                    </a>
+                    <SvgIcon iconName="logo" size="32px" />
                     <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 1, ml: 1, mr: 0 }} />
                     <Typography p={1} color={theme.palette.text.primary}>
                         MUI-FullUse

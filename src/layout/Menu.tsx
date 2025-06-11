@@ -26,7 +26,16 @@ const Menu = () => {
 
     return (
         <>
-            <Paper variant="outlined" sx={{ display: { lg: 'flex', xs: 'none' }, borderRadius: 8, ml: 1, mr: 1 }}>
+            <Paper
+                variant="outlined"
+                sx={{
+                    display: { lg: 'flex', xs: 'none' },
+                    borderRadius: 8,
+                    ml: 1,
+                    mr: 1,
+                    bgcolor: theme.palette.navBarButtonBgColor,
+                }}
+            >
                 <Stack direction="row" alignItems="center">
                     {routeLinks.map(routeLink => {
                         return (

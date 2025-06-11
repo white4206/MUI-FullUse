@@ -21,7 +21,7 @@ const Menu = () => {
     const [open, setOpen] = useState(false);
     const { t } = useTranslation();
     const currentPath = useLocation().pathname;
-    const { sm } = useBreakpoint();
+    const { xs } = useBreakpoint();
     const { isDark } = useDark();
 
     return (
@@ -63,7 +63,7 @@ const Menu = () => {
                 <MenuIcon sx={{ color: theme.palette.fullUseMain.main }} />
             </IconButton>
             <SwipeableDrawer anchor="left" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
-                <Stack direction="row" alignItems="center" p={2} width={sm ? 190 : 240}>
+                <Stack direction="row" alignItems="center" p={2} width={xs ? 190 : 240}>
                     {/* logo */}
                     <a href="http://resource.whitecc.top" target="_blank" rel="noreferrer noopener">
                         <CardMedia component={'img'} sx={{ width: 32, transition: '.4s', '&:hover': { transform: 'rotate(180deg)' } }} image={logo} />

@@ -177,7 +177,7 @@ const SettingButton = () => {
                                         <Accordion key={font.id} elevation={3}>
                                             <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                                                 <Stack direction="row" alignItems="center">
-                                                    <Typography fontSize={14} component="span">
+                                                    <Typography fontSize={14} sx={{ fontFamily: `${font.font} !important` }} component="span">
                                                         {font.name}
                                                     </Typography>
                                                     {font.default && (

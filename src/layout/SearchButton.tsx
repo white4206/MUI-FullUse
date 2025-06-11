@@ -20,7 +20,14 @@ const SearchButton = () => {
                 <>
                     <Paper
                         variant="outlined"
-                        sx={{ borderRadius: 3, m: 0.5, borderWidth: 2, transition: '.4s', '&:hover': { borderColor: theme.palette.fullUseMain.main } }}
+                        sx={{
+                            borderRadius: 3,
+                            m: 0.5,
+                            borderWidth: 2,
+                            transition: '.4s',
+                            '&:hover': { borderColor: theme.palette.fullUseMain.main },
+                            bgcolor: theme.palette.navBarButtonBgColor,
+                        }}
                     >
                         <Button sx={{ m: 0, borderRadius: 3, textTransform: 'none' }}>
                             <SearchIcon />

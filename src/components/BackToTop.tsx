@@ -29,8 +29,8 @@ const BackToTop = (props: BackToTopProps) => {
         trigger && (
             <Tooltip title={t('backToTop')} placement="left" enterDelay={500}>
                 <Box position="fixed" right={right} bottom={bottom}>
-                    <IconButton className="back-to-top-button" color="primary" onClick={handleBackToTop}>
-                        <KeyboardArrowUpIcon sx={{ color: isDark ? theme.palette.fullUseMain.light : theme.palette.fullUseMain.dark }} />
+                    <IconButton sx={{ backdropFilter: 'blur(8px)' }} className="back-to-top-button" color="primary" onClick={handleBackToTop}>
+                        <KeyboardArrowUpIcon sx={{ color: theme.palette.fullUseMain[isDark ? 'light' : 'dark'] }} />
                     </IconButton>
                 </Box>
             </Tooltip>

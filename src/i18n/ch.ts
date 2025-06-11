@@ -7,6 +7,9 @@ export default {
             video: '视频',
         },
         backToTop: '滚动到顶部',
+        toolbox: {
+            edit: '编辑工具箱',
+        },
         navBar: {
             search: '搜索...',
             theme: '主题',

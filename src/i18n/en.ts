@@ -7,6 +7,9 @@ export default {
             video: 'Video',
         },
         backToTop: 'Scroll to the top',
+        toolbox: {
+            edit: 'Editing toolbox',
+        },
         navBar: {
             search: 'Search...',
             theme: 'Theme',

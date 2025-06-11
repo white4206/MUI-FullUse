@@ -1,16 +1,69 @@
-import { useUserPreference } from '@/store';
-import { Box } from '@mui/material';
-import { useShallow } from 'zustand/shallow';
+import { Card, CardActionArea, CardContent, CardMedia, Container, Grid, IconButton, Stack, Tooltip, Typography, useTheme } from '@mui/material';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import { useBreakpoint } from '@/utils/hook';
+import HandymanIcon from '@mui/icons-material/Handyman';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
-    const [themeMode, language, font] = useUserPreference(useShallow(state => [state.themeMode, state.language, state.font]));
-
+    const theme = useTheme();
+    const { xs } = useBreakpoint();
+    const { t } = useTranslation();
+    const swiperData = [
+        { id: 1, url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg' },
+        { id: 2, url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg' },
+        { id: 3, url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg' },
+        { id: 4, url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg' },
+    ];
     return (
         <>
-            <Box>当前用户首选项</Box>
-            <Box>{themeMode}</Box>
-            <Box>{language}</Box>
-            <Box>{font}</Box>
+            <Container fixed>
+                <Grid container spacing={6}>
+                    <Grid size={{ xs: 12, sm: 12, md: 12, lg: 8, xl: 8 }}>
+                        <Swiper modules={[Pagination]} pagination={{ clickable: true, dynamicBullets: true }} autoplay={{ pauseOnMouseEnter: true }} loop>
+                            {swiperData.map(swiper => {
+                                return (
+                                    <SwiperSlide key={swiper.id}>
+                                        <CardMedia sx={{ borderRadius: 2 }} height={xs ? 300 : 450} component="img" image={swiper.url} />
+                                    </SwiperSlide>
+                                );
+                            })}
+                        </Swiper>
+                    </Grid>
+                    <Grid size={{ xs: 0, sm: 0, md: 0, lg: 4, xl: 4 }}>
+                        <Stack height="100%" direction="column" justifyContent="space-between">
+                            <Card sx={{ borderRadius: 2 }} elevation={3}>
+                                <CardActionArea>
+                                    <CardMedia sx={{ height: 180 }} image="https://mui.com/static/images/cards/contemplative-reptile.jpg" />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="div">
+                                            Lizard
+                                        </Typography>
+                                        <Typography variant="body2" sx={{ color: theme.palette.text.secondary }} className="text-ellipsis-2">
+                                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except
+                                            Antarctica
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                            <Card sx={{ borderRadius: 2 }} elevation={3}>
+                                <CardContent>
+                                    <Typography gutterBottom fontWeight={600} variant="h6" component="div">
+                                        <Stack direction="row" alignItems="center">
+                                            工具箱
+                                            <Tooltip title={t('toolbox.edit')} enterDelay={500} placement="right">
+                                                <IconButton sx={{ borderRadius: 2, ml: 1, transition: '.4s', '&:hover': { transform: 'rotate(15deg)' } }}>
+                                                    <HandymanIcon sx={{ fontSize: 14, color: theme.palette.fullUseMain.main }} />
+                                                </IconButton>
+                                            </Tooltip>
+                                        </Stack>
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Stack>
+                    </Grid>
+                </Grid>
+            </Container>
         </>
     );
 };

@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, useTheme, Divider, Tooltip } from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import logo from '@/assets/svg/logo.svg';
+import logo from '@/assets/icons/svg/logo.svg';
 import { useRef, useLayoutEffect } from 'react';
 import I18nButton from '@/layout/I18nButton';
 import { FontButton } from '@/layout/FontButton';

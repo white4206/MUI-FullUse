@@ -6,12 +6,14 @@ declare module '@mui/material/styles' {
         fullUseMain: Palette['primary'];
         appBarColor: string;
         themeButtonBorderColor: string;
+        navBarButtonBgColor: string;
     }
 
     interface PaletteOptions {
         fullUseMain?: PaletteOptions['primary'];
         appBarColor?: string;
         themeButtonBorderColor?: string;
+        navBarButtonBgColor?: string;
     }
 }
 
@@ -45,6 +47,7 @@ lightTheme = createTheme(lightTheme, {
         }),
         appBarColor: 'rgba(255,255,255,0.6)',
         themeButtonBorderColor: lightTheme.palette.grey[300],
+        navBarButtonBgColor: 'rgba(250,250,250)',
     },
 });
 let darkTheme = createTheme({

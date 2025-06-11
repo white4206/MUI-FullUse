@@ -16,6 +16,8 @@
     --full-use-user-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     --full-use-scroll-bar-background-color: #e6e8eb;
     --full-use-scroll-bar-background-color-dark: #424243;
+    --swiper-navigation-color: var(--full-use-theme-main);
+    --swiper-pagination-color: var(--full-use-theme-main);
 }
 * {
     font-family: var(--full-use-user-font-family) !important;

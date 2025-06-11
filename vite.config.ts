@@ -1,10 +1,16 @@
 import { defineConfig } from 'vite';
-
 import react from '@vitejs/plugin-react';
 import path from 'path';
-// https://vite.dev/config/
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+
 export default defineConfig({
-    plugins: [react()],
+    plugins: [
+        react(),
+        createSvgIconsPlugin({
+            iconDirs: [path.resolve(process.cwd(), 'src/assets/icons/svg')],
+            symbolId: 'icon-[name]',
+        }),
+    ],
     server: {
         port: 80,
         host: true,

@@ -40,7 +40,7 @@ const App = () => {
             <CssBaseline />
             <RouteProgress />
             <NavBar setNavBarHeight={setNavBarHeight} />
-            <Box id="container" p={2} mt={`${navBarHeight}px`}>
+            <Box id="container" mt={`${navBarHeight}px`}>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/article" element={<Article />} />

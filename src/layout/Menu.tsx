@@ -50,9 +50,7 @@ const Menu = () => {
                                 className={currentPath === routeLink.path ? 'active-horizontal-menu-item' : ''}
                             >
                                 <Button sx={{ borderRadius: 8 }} size="large" component={Link} to={routeLink.path}>
-                                    <Typography color={isDark ? theme.palette.fullUseMain.light : theme.palette.fullUseMain.dark}>
-                                        {t(routeLink.title)}
-                                    </Typography>
+                                    <Typography color={theme.palette.fullUseMain[isDark ? 'light' : 'dark']}>{t(routeLink.title)}</Typography>
                                 </Button>
                             </Box>
                         );

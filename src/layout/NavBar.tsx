@@ -14,13 +14,7 @@ import { useDark } from '@/utils/hook';
 import { useTranslation } from 'react-i18next';
 import FullscreenButton from '@/layout/FullscreenButton';
 
-interface NavBarProps {
-    navBarHeight: number;
-    setNavBarHeight: (clientHeight: number) => void;
-}
-
-const NavBar = ({ props }: { props: NavBarProps }) => {
-    const { navBarHeight, setNavBarHeight } = props;
+const NavBar = ({ setNavBarHeight }: { setNavBarHeight: (clientHeight: number) => void }) => {
     const appBarRef = useRef<HTMLElement>(null);
     const theme = useTheme();
     const navBarButtons = useUserPreference(state => state.navBarButtons);
@@ -42,7 +36,13 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
     }, [setNavBarHeight]);
 
     return (
-        <AppBar ref={appBarRef} sx={{ bgcolor: theme.palette.appBarColor, backdropFilter: 'blur(8px)' }}>
+        <AppBar
+            ref={appBarRef}
+            sx={{
+                bgcolor: theme.palette.appBarColor,
+                backdropFilter: 'blur(8px)',
+            }}
+        >
             <Toolbar>
                 {/* logo */}
                 <Link href="http://resource.whitecc.top" target="_blank" rel="noreferrer noopener">

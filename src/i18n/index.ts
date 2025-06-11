@@ -2,8 +2,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import en from '@/i18n/en';
 import ch from '@/i18n/ch';
-import chSvg from '@/assets/svg/ch.svg';
-import enSvg from '@/assets/svg/en.svg';
 import { useUserPreference } from '@/store';
 
 const language =
@@ -25,8 +23,8 @@ void i18n.use(initReactI18next).init({
 
 const useI18n = () => {
     const languages = [
-        { id: 1, language: 'ch', label: '简体中文', icon: chSvg },
-        { id: 2, language: 'en', label: 'English', icon: enSvg },
+        { id: 1, language: 'ch', label: '简体中文' },
+        { id: 2, language: 'en', label: 'English' },
     ];
     const setLanguage = useUserPreference(state => state.setLanguage);
 

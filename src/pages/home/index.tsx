@@ -29,7 +29,7 @@ const ToolBoxItem = () => {
 
 const Home = () => {
     const theme = useTheme();
-    const { xs } = useBreakpoint();
+    const { xl, lg, md, sm } = useBreakpoint();
     const { t } = useTranslation();
     const { isDark } = useDark();
     const swiperData = [
@@ -40,14 +40,19 @@ const Home = () => {
     ];
     return (
         <>
-            <Container fixed>
-                <Grid container spacing={6}>
-                    <Grid size={{ xs: 12, sm: 12, md: 12, lg: 8, xl: 8 }}>
+            <Container maxWidth="xl" sx={{ p: 2, pl: { xl: 10, lg: 10 }, pr: { xl: 10, lg: 10 } }}>
+                <Grid justifyContent="center" container spacing={xl ? 8 : lg ? 6 : 0}>
+                    <Grid size={{ xs: 12, sm: 11, md: 10, lg: 8, xl: 8 }}>
                         <Swiper modules={[Pagination]} pagination={{ clickable: true, dynamicBullets: true }} autoplay={{ pauseOnMouseEnter: true }} loop>
                             {swiperData.map(swiper => {
                                 return (
                                     <SwiperSlide key={swiper.id}>
-                                        <CardMedia sx={{ borderRadius: 2 }} height={xs ? 300 : 450} component="img" image={swiper.url} />
+                                        <CardMedia
+                                            sx={{ borderRadius: 2 }}
+                                            height={xl ? 500 : lg ? 500 : md ? 400 : sm ? 300 : 200}
+                                            component="img"
+                                            image={swiper.url}
+                                        />
                                     </SwiperSlide>
                                 );
                             })}
@@ -59,12 +64,17 @@ const Home = () => {
                                 <CardActionArea>
                                     <CardMedia sx={{ height: 180 }} image="https://mui.com/static/images/cards/contemplative-reptile.jpg" />
                                     <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div" sx={{ '&:hover': { textDecoration: 'underline' } }}>
-                                            Lizard
+                                        <Typography
+                                            className="text-ellipsis-2"
+                                            gutterBottom
+                                            variant="h6"
+                                            component="div"
+                                            sx={{ '&:hover': { textDecoration: 'underline' } }}
+                                        >
+                                            在 Spring Boot 中部署 Vue 单页面应用（SPA）并启用 Vue Router 的 history 模式
                                         </Typography>
                                         <Typography variant="body2" sx={{ color: theme.palette.text.secondary }} className="text-ellipsis-2">
-                                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except
-                                            Antarctica
+                                            在 Spring Boot 中部署 Vue 单页面应用（SPA）并启用 Vue Router 的 history 模式时，需通过后端配置确保所有非静态资
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>

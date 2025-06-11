@@ -6,6 +6,7 @@ export default {
             download: '下载',
             video: '视频',
         },
+        backToTop: '滚动到顶部',
         navBar: {
             search: '搜索...',
             theme: '主题',

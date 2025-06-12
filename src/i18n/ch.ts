@@ -1,5 +1,10 @@
 export default {
     translation: {
+        iconSelect: {
+            title: '图标选择',
+            placeholder: '请输入图标名称',
+            label: '图标名称',
+        },
         pages: {
             home: '主页',
             article: '文章',

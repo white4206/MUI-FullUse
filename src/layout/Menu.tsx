@@ -59,7 +59,7 @@ const Menu = () => {
             <IconButton sx={{ m: 0.5, borderRadius: 2, display: { lg: 'none', xs: 'flex' } }} onClick={() => setOpen(true)}>
                 <MenuIcon sx={{ color: theme.palette.fullUseMain.main }} />
             </IconButton>
-            <SwipeableDrawer anchor="left" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
+            <SwipeableDrawer elevation={1} anchor="left" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
                 <Stack direction="row" alignItems="center" p={2} width={xs ? 190 : 240}>
                     {/* logo */}
                     <SvgIcon iconName="logo" size="32px" />

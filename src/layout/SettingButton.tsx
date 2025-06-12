@@ -84,7 +84,7 @@ const SettingButton = () => {
                     <SettingsIcon sx={{ color: theme.palette.fullUseMain.main }} />
                 </IconButton>
             </Tooltip>
-            <SwipeableDrawer anchor="right" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
+            <SwipeableDrawer elevation={1} anchor="right" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
                 <Box width={xs ? 280 : 360}>
                     <Stack p={2} direction="row" justifyContent="space-between" alignItems="center">
                         <Typography fontWeight={500}>{t('setting.title')}</Typography>

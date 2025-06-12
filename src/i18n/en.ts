@@ -1,5 +1,10 @@
 export default {
     translation: {
+        iconSelect: {
+            title: 'Icon select',
+            placeholder: 'Please enter the name of the icon',
+            label: 'Icon name',
+        },
         pages: {
             home: 'Home',
             article: 'Article',

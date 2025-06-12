@@ -49,7 +49,7 @@ const Home = () => {
                                     <SwiperSlide key={swiper.id}>
                                         <CardMedia
                                             sx={{ borderRadius: 2 }}
-                                            height={xl ? 500 : lg ? 500 : md ? 400 : sm ? 300 : 200}
+                                            height={xl ? 500 : lg ? 450 : md ? 400 : sm ? 300 : 200}
                                             component="img"
                                             image={swiper.url}
                                         />
@@ -62,12 +62,13 @@ const Home = () => {
                         <Stack height="100%" direction="column" justifyContent="space-between">
                             <Card sx={{ borderRadius: 2 }} elevation={3}>
                                 <CardActionArea>
-                                    <CardMedia sx={{ height: 180 }} image="https://mui.com/static/images/cards/contemplative-reptile.jpg" />
+                                    <CardMedia sx={{ height: { xl: 180, lg: 130 } }} image="https://mui.com/static/images/cards/contemplative-reptile.jpg" />
                                     <CardContent>
                                         <Typography
                                             className="text-ellipsis-2"
                                             gutterBottom
-                                            variant="h6"
+                                            variant="subtitle1"
+                                            fontWeight={500}
                                             component="div"
                                             sx={{ '&:hover': { textDecoration: 'underline' } }}
                                         >
@@ -92,10 +93,9 @@ const Home = () => {
                                         </Stack>
                                     </Typography>
                                     <Paper
-                                        variant="outlined"
                                         sx={{
                                             borderRadius: 2,
-                                            borderTop: `4px solid ${theme.palette.fullUseMain[isDark ? 'dark' : 'light']}`,
+                                            borderTop: `4px solid ${theme.palette.fullUseMain.main}`,
                                             bgcolor: theme.palette.navBarButtonBgColor,
                                         }}
                                     >

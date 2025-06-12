@@ -30,7 +30,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
     }),
 }));
 
-export default function RecipeReviewCard() {
+const Download = () => {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -91,4 +91,5 @@ export default function RecipeReviewCard() {
             </Collapse>
         </Card>
     );
-}
+};
+export default Download;

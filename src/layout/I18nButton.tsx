@@ -1,4 +1,4 @@
-import { IconButton, Menu, MenuItem, Stack, Typography, CardMedia, Tooltip } from '@mui/material';
+import { IconButton, Menu, MenuItem, Stack, Typography, Tooltip } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import CallMadeIcon from '@mui/icons-material/CallMade';
 import useI18n from '@/i18n';

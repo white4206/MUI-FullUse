@@ -1,4 +1,4 @@
-import { Box, Button, Typography, useTheme, SwipeableDrawer, IconButton, CardMedia, Stack, Divider, Paper } from '@mui/material';
+import { Box, Button, Typography, useTheme, SwipeableDrawer, IconButton, Stack, Divider, Paper } from '@mui/material';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -7,7 +7,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
 import DownloadIcon from '@mui/icons-material/Download';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
-import { useBreakpoint, useDark } from '@/utils/hook';
+import { useBreakpoint } from '@/utils/hook';
 import SvgIcon from '@/components/SvgIcon';
 
 const Menu = () => {
@@ -22,7 +22,6 @@ const Menu = () => {
     const { t } = useTranslation();
     const currentPath = useLocation().pathname;
     const { xs } = useBreakpoint();
-    const { isDark } = useDark();
 
     return (
         <>
@@ -49,8 +48,8 @@ const Menu = () => {
                                 alignItems="center"
                                 className={currentPath === routeLink.path ? 'active-horizontal-menu-item' : ''}
                             >
-                                <Button sx={{ borderRadius: 8 }} size="large" component={Link} to={routeLink.path}>
-                                    <Typography color={theme.palette.fullUseMain[isDark ? 'light' : 'dark']}>{t(routeLink.title)}</Typography>
+                                <Button color="inherit" sx={{ borderRadius: 8 }} size="large" component={Link} to={routeLink.path}>
+                                    <Typography>{t(routeLink.title)}</Typography>
                                 </Button>
                             </Box>
                         );
@@ -80,7 +79,7 @@ const Menu = () => {
                                 component={Link}
                                 to={routeLink.path}
                                 className={(currentPath === routeLink.path ? 'active-vertical-menu-item' : '') + ' clear-default'}
-                                sx={{ m: 1, borderRadius: 2, transition: '.2s', '&:hover': { bgcolor: theme.palette.action.hover } }}
+                                sx={{ m: 1, borderRadius: 2, transition: '.4s', '&:hover': { bgcolor: theme.palette.action.hover } }}
                             >
                                 <IconButton sx={{ borderRadius: 2 }}>{routeLink.icon}</IconButton>
                                 <Typography ml={2} color={theme.palette.text.primary}>

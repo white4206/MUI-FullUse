@@ -1,6 +1,6 @@
 import { useDark } from '@/utils/hook';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { IconButton, Box, useScrollTrigger, useTheme, Tooltip } from '@mui/material';
+import { IconButton, Box, useScrollTrigger, useTheme, Tooltip, Fab } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 interface BackToTopProps {
@@ -29,9 +29,9 @@ const BackToTop = (props: BackToTopProps) => {
         trigger && (
             <Tooltip title={t('backToTop')} placement="left" enterDelay={500}>
                 <Box position="fixed" right={right} bottom={bottom}>
-                    <IconButton sx={{ backdropFilter: 'blur(8px)' }} className="back-to-top-button" color="primary" onClick={handleBackToTop}>
-                        <KeyboardArrowUpIcon sx={{ color: theme.palette.fullUseMain[isDark ? 'light' : 'dark'] }} />
-                    </IconButton>
+                    <Fab size="small" color="primary" onClick={handleBackToTop}>
+                        <KeyboardArrowUpIcon />
+                    </Fab>
                 </Box>
             </Tooltip>
         )

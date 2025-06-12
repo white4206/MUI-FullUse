@@ -49,32 +49,14 @@
 .dark::view-transition-old(root) {
     z-index: 100;
 }
-/* 回到顶部按钮 */
-.back-to-top-button {
-    border: 1px solid !important;
-    background-color: rgba(146, 134, 209, 0.2) !important;
-}
-.back-to-top-button:hover {
-    background-color: rgba(146, 134, 209, 0.6) !important;
-}
-.dark .back-to-top-button {
-    border: 1px solid !important;
-    background-color: rgba(146, 134, 209, 0.6) !important;
-}
-.dark .back-to-top-button:hover {
-    background-color: rgba(146, 134, 209, 0.2) !important;
-}
 
 /* 水平激活菜单项 */
 .active-horizontal-menu-item {
-    background-color: var(--full-use-theme-main-light) !important;
+    background-color: var(--full-use-theme-main) !important;
     border-radius: 32px;
 }
 .active-horizontal-menu-item .MuiTypography-root {
     color: var(--full-use-theme-text-main-dark);
-}
-.dark .active-horizontal-menu-item {
-    background-color: var(--full-use-theme-main-dark) !important;
 }
 .dark .active-horizontal-menu-item .MuiTypography-root {
     color: var(--full-use-theme-text-main-light);

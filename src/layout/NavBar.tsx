@@ -42,6 +42,7 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
                 bgcolor: theme.palette.appBarColor,
                 backdropFilter: 'blur(8px)',
             }}
+            variant="outlined"
         >
             <Toolbar>
                 {/* logo */}

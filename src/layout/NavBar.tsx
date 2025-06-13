@@ -67,7 +67,7 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
                 <Box display={{ md: 'block', xs: 'none' }}>
                     {/* 主题切换按钮 */}
                     {navBarButtons.theme === 'navBar' && (
-                        <Tooltip title={t('navBar.theme')} enterDelay={500}>
+                        <Tooltip title={t('navBar.theme')}>
                             <IconButton sx={{ borderRadius: 2 }} onClick={e => void toggleThemeWithAnimation(e)}>
                                 {isDark ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
                             </IconButton>

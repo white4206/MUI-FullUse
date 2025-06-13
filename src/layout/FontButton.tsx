@@ -37,7 +37,7 @@ const FontButton = () => {
     };
     return (
         <>
-            <Tooltip title={t('navBar.font')} enterDelay={500}>
+            <Tooltip title={t('navBar.font')}>
                 <IconButton sx={{ borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
                     <FontDownloadIcon />
                 </IconButton>

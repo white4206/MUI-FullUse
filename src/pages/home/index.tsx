@@ -1,7 +1,7 @@
 import { Box, Card, CardActionArea, CardContent, CardMedia, Container, Grid, IconButton, Paper, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-import { useBreakpoint, useDark } from '@/utils/hook';
+import { useBreakpoint } from '@/utils/hook';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import { useTranslation } from 'react-i18next';
 import SvgIcon from '@/components/SvgIcon';
@@ -33,7 +33,6 @@ const Home = () => {
     const theme = useTheme();
     const { xl, lg, md, sm } = useBreakpoint();
     const { t } = useTranslation();
-    const { isDark } = useDark();
     const swiperData = [
         { id: 1, url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg' },
         { id: 2, url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg' },
@@ -90,7 +89,7 @@ const Home = () => {
                                         <Typography gutterBottom fontWeight={600} variant="h6" component="div">
                                             <Stack direction="row" alignItems="center" p={2} pb={0}>
                                                 工具箱
-                                                <Tooltip title={t('toolbox.edit')} enterDelay={500} placement="right">
+                                                <Tooltip title={t('toolbox.edit')} placement="right">
                                                     <IconButton sx={{ borderRadius: 2, ml: 1, transition: '.4s', '&:hover': { transform: 'rotate(15deg)' } }}>
                                                         <HandymanIcon sx={{ fontSize: 14, color: theme.palette.fullUseMain.main }} />
                                                     </IconButton>

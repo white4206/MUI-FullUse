@@ -33,7 +33,7 @@ import { useTranslation } from 'react-i18next';
 import { useUserPreference } from '@/store';
 import useI18n from '@/i18n';
 import useFont from '@/font';
-import { FontTypographyList } from './FontButton';
+import { FontTypographyList } from '@/layout/FontButton';
 
 const SettingItemTitle = ({ props }: { props: { title: string; setting: string; canShow?: boolean } }) => {
     const { title, setting, canShow = true } = props;
@@ -45,16 +45,16 @@ const SettingItemTitle = ({ props }: { props: { title: string; setting: string; 
     return (
         <Divider textAlign="left" sx={{ mb: 1 }}>
             <Stack direction="row" alignItems="center">
-                <Typography fontSize={12} fontWeight={600} textTransform="uppercase" variant="subtitle2" color={theme.palette.text.secondary}>
+                <Typography textTransform="uppercase" variant="caption" color={theme.palette.text.secondary} fontWeight={500}>
                     {t(title)}
                 </Typography>
                 {canShow && (
-                    <Tooltip title={t(navBarButtons[setting] === 'navBar' ? 'setting.invisible' : 'setting.visible')} placement="right" enterDelay={500}>
+                    <Tooltip title={t(navBarButtons[setting] === 'navBar' ? 'setting.invisible' : 'setting.visible')} placement="right">
                         <IconButton size="small" onClick={() => toggleShowNavBarButton(setting)} sx={{ borderRadius: 1, ml: 0.5 }}>
                             {navBarButtons[setting] === 'navBar' ? (
-                                <VisibilityIcon sx={{ fontSize: 14, color: theme.palette.fullUseMain.main }} />
+                                <VisibilityIcon sx={{ fontSize: '0.875rem', color: theme.palette.fullUseMain.main }} />
                             ) : (
-                                <VisibilityOffIcon sx={{ fontSize: 14 }} />
+                                <VisibilityOffIcon sx={{ fontSize: '0.875rem' }} />
                             )}
                         </IconButton>
                     </Tooltip>
@@ -79,7 +79,7 @@ const SettingButton = () => {
 
     return (
         <>
-            <Tooltip title={t('navBar.setting')} enterDelay={500}>
+            <Tooltip title={t('navBar.setting')}>
                 <IconButton sx={{ borderRadius: 2 }} onClick={() => setOpen(true)}>
                     <SettingsIcon sx={{ color: theme.palette.fullUseMain.main }} />
                 </IconButton>
@@ -87,7 +87,9 @@ const SettingButton = () => {
             <SwipeableDrawer elevation={1} anchor="right" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
                 <Box width={xs ? 280 : 360}>
                     <Stack p={2} direction="row" justifyContent="space-between" alignItems="center">
-                        <Typography fontWeight={500}>{t('setting.title')}</Typography>
+                        <Typography variant="subtitle1" fontWeight={500}>
+                            {t('setting.title')}
+                        </Typography>
                         <IconButton onClick={() => setOpen(false)}>
                             <CloseIcon sx={{ color: theme.palette.fullUseMain.main }} />
                         </IconButton>
@@ -177,7 +179,7 @@ const SettingButton = () => {
                                         <Accordion key={font.id} elevation={3}>
                                             <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                                                 <Stack direction="row" alignItems="center">
-                                                    <Typography fontSize={14} sx={{ fontFamily: `${font.font} !important` }} component="span">
+                                                    <Typography variant="body2" sx={{ fontFamily: `${font.font} !important` }} component="span">
                                                         {font.name}
                                                     </Typography>
                                                     {font.default && (
@@ -211,9 +213,9 @@ const SettingButton = () => {
                         <Box mb={1}>
                             <SettingItemTitle props={{ title: 'setting.fullscreen.title', setting: 'fullscreen' }} />
                             <Stack direction="row" alignItems="center">
-                                <Typography fontSize={14}>{t('setting.fullscreen.exit')}</Typography>
+                                <Typography variant="body2">{t('setting.fullscreen.exit')}</Typography>
                                 <Switch checked={isFullscreen} onChange={() => toggleFullscreen()} />
-                                <Typography fontSize={14}>{t('setting.fullscreen.enter')}</Typography>
+                                <Typography variant="body2">{t('setting.fullscreen.enter')}</Typography>
                             </Stack>
                         </Box>
                     </Stack>

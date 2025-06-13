@@ -52,6 +52,13 @@ lightTheme = createTheme(lightTheme, {
         themeButtonBorderColor: lightTheme.palette.grey[300],
         navBarButtonBgColor: 'rgba(250,250,250)',
     },
+    components: {
+        MuiTooltip: {
+            defaultProps: {
+                enterDelay: 500,
+            },
+        },
+    },
 });
 let darkTheme = createTheme({
     palette: {
@@ -76,6 +83,13 @@ darkTheme = createTheme(darkTheme, {
         bgColor: '#0a0a0a',
         appBarColor: 'rgba(18,18,18,0.6)',
         themeButtonBorderColor: 'rgba(224,224,224,0.1)',
+    },
+    components: {
+        MuiTooltip: {
+            defaultProps: {
+                enterDelay: 500,
+            },
+        },
     },
 });
 export { lightTheme, darkTheme };

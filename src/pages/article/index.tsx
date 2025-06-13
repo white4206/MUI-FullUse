@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IconSelect from '@/components/IconSelect';
+import CustomInput from '@/components/CustomInput';
 
 const Article = () => {
     const handleSelectIcon = (icon: string) => {
@@ -27,6 +28,7 @@ const Article = () => {
                     <Button size="small">Learn More</Button>
                 </CardActions>
             </Card>
+            <CustomInput label="CustomInput" />
             <IconSelect sx={{ m: 2 }} onIconSelect={handleSelectIcon} />
         </>
     );

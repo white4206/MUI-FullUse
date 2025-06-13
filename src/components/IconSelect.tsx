@@ -74,7 +74,6 @@ const IconSelect = ({ size = 64, onIconSelect, ...cardProps }: IconSelectProps) 
                         value={search}
                         autoFocus
                         placeholder={t('iconSelect.placeholder')}
-                        size="medium"
                         label={t('iconSelect.label')}
                         fullWidth
                         slotProps={{

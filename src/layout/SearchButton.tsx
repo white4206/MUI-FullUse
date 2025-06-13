@@ -31,7 +31,7 @@ const SearchButton = () => {
                     >
                         <Button sx={{ m: 0, borderRadius: 3, textTransform: 'none' }}>
                             <SearchIcon />
-                            <Typography ml={0.5} mr={3} color={theme.palette.text.secondary} fontSize={14}>
+                            <Typography ml={0.5} mr={3} color={theme.palette.text.secondary} variant="body2">
                                 {t('navBar.search')}
                             </Typography>
                             <Chip size="small" label="Ctrl+K" sx={{ height: 'auto', fontSize: 12, fontWeight: 600, p: 0 }} />

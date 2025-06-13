@@ -1,6 +1,5 @@
-import { useDark } from '@/utils/hook';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { IconButton, Box, useScrollTrigger, useTheme, Tooltip, Fab } from '@mui/material';
+import { Box, useScrollTrigger, Tooltip, Fab } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 interface BackToTopProps {
@@ -12,12 +11,10 @@ interface BackToTopProps {
 
 const BackToTop = (props: BackToTopProps) => {
     const { target, visibilityHeight = 200, right = 32, bottom = 32 } = props;
-    const theme = useTheme();
     const { t } = useTranslation();
-    const { isDark } = useDark();
     const trigger = useScrollTrigger({
         threshold: visibilityHeight, // 滚动超过100px时trigger为true
-        disableHysteresis: true, // 立即响应，不延迟});
+        disableHysteresis: true, // 立即响应, 不延迟
     });
 
     const handleBackToTop = () => {
@@ -27,7 +24,7 @@ const BackToTop = (props: BackToTopProps) => {
 
     return (
         trigger && (
-            <Tooltip title={t('backToTop')} placement="left" enterDelay={500}>
+            <Tooltip title={t('backToTop')} placement="left">
                 <Box position="fixed" right={right} bottom={bottom}>
                     <Fab size="small" color="primary" onClick={handleBackToTop}>
                         <KeyboardArrowUpIcon />

@@ -9,7 +9,7 @@ const FullscreenButton = () => {
     const { t } = useTranslation();
 
     return (
-        <Tooltip title={t('navBar.fullscreen')} enterDelay={500}>
+        <Tooltip title={t('navBar.fullscreen')}>
             <IconButton sx={{ borderRadius: 2 }} onClick={() => toggleFullscreen()}>
                 {isFullscreen ? <FullscreenExitIcon></FullscreenExitIcon> : <FullscreenIcon />}
             </IconButton>

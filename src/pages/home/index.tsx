@@ -66,7 +66,7 @@ const Home = () => {
                                 })}
                             </Swiper>
                         </Grid>
-                        <Grid size={{ xs: 0, sm: 0, md: 0, lg: 4, xl: 4 }}>
+                        <Grid display={{ xs: 'none', lg: 'block' }} size={{ xs: 0, sm: 0, md: 0, lg: 4, xl: 4 }}>
                             <Stack height="100%" direction="column" justifyContent="space-between">
                                 <Card sx={{ borderRadius: 2 }} elevation={3}>
                                     <CardActionArea>

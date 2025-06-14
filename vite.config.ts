@@ -1,23 +1,29 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig, loadEnv } from 'vite';
 import path from 'path';
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import createVitePlugins from './vite';
 
-export default defineConfig({
-    plugins: [
-        react(),
-        createSvgIconsPlugin({
-            iconDirs: [path.resolve(process.cwd(), 'src/assets/icons/svg')],
-            symbolId: 'icon-[name]',
-        }),
-    ],
-    server: {
-        port: 80,
-        host: true,
-    },
-    resolve: {
-        alias: {
-            '@': path.resolve(__dirname, './src'),
+export default defineConfig(({ mode, command }) => {
+    const env = loadEnv(mode, process.cwd());
+    const { VITE_APP_ENV, VITE_APP_PROXY } = env;
+    return {
+        base: VITE_APP_ENV === 'production' ? '/' : '/',
+        plugins: createVitePlugins(env, command === 'build'),
+        server: {
+            port: 80,
+            host: true,
+            proxy: {
+                // https://cn.vitejs.dev/config/#server-proxy
+                '/dev-api': {
+                    target: VITE_APP_PROXY,
+                    changeOrigin: true,
+                    rewrite: p => p.replace(/^\/dev-api/, ''),
+                },
+            },
         },
-    },
+        resolve: {
+            alias: {
+                '@': path.resolve(__dirname, './src'),
+            },
+        },
+    };
 });

@@ -5,6 +5,9 @@ import { useBreakpoint } from '@/utils/hook';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import { useTranslation } from 'react-i18next';
 import SvgIcon from '@/components/SvgIcon';
+import { useEffect, useState } from 'react';
+import { getCarousel } from '@/api/common';
+import { mapUrl } from '@/utils/url';
 
 const ToolBoxItem = () => {
     const theme = useTheme();
@@ -33,12 +36,18 @@ const Home = () => {
     const theme = useTheme();
     const { xl, lg, md, sm } = useBreakpoint();
     const { t } = useTranslation();
-    const swiperData = [
-        { id: 1, url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg' },
-        { id: 2, url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg' },
-        { id: 3, url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg' },
-        { id: 4, url: 'https://mui.com/static/images/cards/contemplative-reptile.jpg' },
-    ];
+    const [swiperData, setSwiperData] = useState<Carousel[]>([]);
+    useEffect(() => {
+        const test = async () => {
+            const res = await getCarousel();
+            setSwiperData(
+                res.data.map(carousel => {
+                    return { ...carousel, image: mapUrl(carousel.image) };
+                })
+            );
+        };
+        void test();
+    }, []);
     return (
         <>
             <Box bgcolor={theme.palette.bgColor}>
@@ -59,7 +68,7 @@ const Home = () => {
                                                 sx={{ borderRadius: 2 }}
                                                 height={xl ? 500 : lg ? 450 : md ? 400 : sm ? 300 : 200}
                                                 component="img"
-                                                image={swiper.url}
+                                                image={swiper.image || undefined}
                                             />
                                         </SwiperSlide>
                                     );

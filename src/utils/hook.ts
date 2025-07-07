@@ -76,7 +76,7 @@ const useDark = () => {
 };
 
 const useFullScreen = (target = document.documentElement) => {
-    const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
     const targetRef = useRef<HTMLElement | null>(target);
 
     // 进入全屏

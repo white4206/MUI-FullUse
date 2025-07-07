@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface UserPreferenceState {
     themeMode: 'light' | 'dark' | 'auto';
@@ -20,46 +21,34 @@ const defaultNavBarButton = {
     fullscreen: 'navBar',
 };
 
-export const useUserPreference = create<UserPreferenceState>(set => ({
-    themeMode: (localStorage.getItem('themeMode') as 'light' | 'dark' | 'auto') || 'auto',
-    language: localStorage.getItem('i18n') || 'auto',
-    font: localStorage.getItem('font') || "'Roboto','Helvetica','Arial',sans-serif",
-    navBarButtons: JSON.parse(localStorage.getItem('navBarButtons') || JSON.stringify(defaultNavBarButton)) as Record<string, 'navBar' | 'setting'>,
-    setThemeMode: themeMode => {
-        localStorage.setItem('themeMode', themeMode);
-        set({ themeMode });
-    },
-    setLanguage: language => {
-        localStorage.setItem('i18n', language);
-        set({ language });
-    },
-    setFont: font => {
-        localStorage.setItem('font', font);
-        set({ font });
-    },
-    setNavBarButton: (key, value) => {
-        set(state => {
-            const navBarButtons = { ...state.navBarButtons, [key]: value };
-            localStorage.setItem('navBarButtons', JSON.stringify(navBarButtons));
-            return { navBarButtons };
-        });
-    },
-    toggleShowNavBarButton: key => {
-        set(state => {
-            const navBarButtons = { ...state.navBarButtons, [key]: state.navBarButtons[key] === 'navBar' ? 'setting' : 'navBar' } as Record<
-                string,
-                'navBar' | 'setting'
-            >;
-            localStorage.setItem('navBarButtons', JSON.stringify(navBarButtons));
-            return { navBarButtons };
-        });
-    },
-    loadFromStorage: () => {
-        set({
-            themeMode: (localStorage.getItem('themeMode') as 'light' | 'dark' | 'auto') || 'auto',
-            language: localStorage.getItem('i18n') || 'auto',
-            font: localStorage.getItem('font') || "'Roboto','Helvetica','Arial',sans-serif",
-            navBarButtons: JSON.parse(localStorage.getItem('navBarButtons') || JSON.stringify(defaultNavBarButton)) as Record<string, 'navBar' | 'setting'>,
-        });
-    },
-}));
+export const useUserPreference = create<UserPreferenceState>()(
+    persist(
+        (set, get) => ({
+            themeMode: 'auto',
+            language: 'auto',
+            font: "'Roboto','Helvetica','Arial',sans-serif",
+            navBarButtons: { ...defaultNavBarButton } as Record<string, 'navBar' | 'setting'>,
+            setThemeMode: themeMode => set({ themeMode }),
+            setLanguage: language => set({ language }),
+            setFont: font => set({ font }),
+            setNavBarButton: (key, value) =>
+                set(state => ({
+                    navBarButtons: { ...state.navBarButtons, [key]: value },
+                })),
+            toggleShowNavBarButton: key =>
+                set(state => ({
+                    navBarButtons: {
+                        ...state.navBarButtons,
+                        [key]: state.navBarButtons[key] === 'navBar' ? 'setting' : 'navBar',
+                    },
+                })),
+            loadFromStorage: () => {
+                // persist 会自动恢复，无需实现
+            },
+        }),
+        {
+            name: 'user-preference', // localStorage key
+            // 可以自定义存储方式，如 storage: createJSONStorage(() => sessionStorage)
+        }
+    )
+);

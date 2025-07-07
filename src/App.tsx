@@ -18,7 +18,7 @@ const Video = lazy(() => import('@/pages/video'));
 
 const App = () => {
     const { theme } = useDark();
-    const [navBarHeight, setNavBarHeight] = useState(0);
+    const [navBarHeight, setNavBarHeight] = useState<number>(0);
     const font = useUserPreference(state => state.font);
     const loadFromStorage = useUserPreference(state => state.loadFromStorage);
     const { changeFont } = useFont();

@@ -19,7 +19,7 @@ const defaultSxProps = { borderRadius: 2, width: 500 };
 const IconSelect = ({ size = 64, onIconSelect, ...cardProps }: IconSelectProps) => {
     const theme = useTheme();
     const { t } = useTranslation();
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState<string>('');
     const [iconList, setIconList] = useState<string[]>([]);
 
     // 加载本地所有静态svg图标

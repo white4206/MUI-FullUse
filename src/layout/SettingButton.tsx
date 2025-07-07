@@ -65,7 +65,7 @@ const SettingItemTitle = ({ props }: { props: { title: string; setting: string; 
 };
 
 const SettingButton = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
     const { xs } = useBreakpoint();
     const theme = useTheme();
     const { t } = useTranslation();

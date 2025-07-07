@@ -1,4 +1,4 @@
-import { IconButton, Menu, MenuItem, Stack, Typography, Tooltip, useTheme } from '@mui/material';
+import { IconButton, Menu, MenuItem, Stack, Typography, Tooltip } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import CallMadeIcon from '@mui/icons-material/CallMade';
 import useI18n from '@/i18n';
@@ -11,7 +11,6 @@ const I18nButton = () => {
     const i18nOpen = Boolean(anchorEl);
     const { languages, changeLanguage } = useI18n();
     const { t } = useTranslation();
-    const theme = useTheme();
 
     // 语言切换
     const handleChangeLanguage = (language: string) => {

@@ -10,6 +10,7 @@ import RouteProgress from '@/components/RouteProgress';
 import { useUserPreference } from '@/store/module/userPreference';
 import useFont from '@/font';
 import BackToTop from '@/components/BackToTop';
+import { FullUseProvider } from './context/FullUseContext';
 
 const Home = lazy(() => import('@/pages/home'));
 const Article = lazy(() => import('@/pages/article'));
@@ -37,18 +38,20 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <RouteProgress />
-            <NavBar props={{ setNavBarHeight }} />
-            <Box id="container" mt={`${navBarHeight}px`}>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/article" element={<Article />} />
-                    <Route path="/download" element={<Download />} />
-                    <Route path="/video" element={<Video />} />
-                </Routes>
-                <BackToTop />
-            </Box>
+            <FullUseProvider>
+                <CssBaseline />
+                <RouteProgress />
+                <NavBar props={{ setNavBarHeight }} />
+                <Box id="container" mt={`${navBarHeight}px`}>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/article" element={<Article />} />
+                        <Route path="/download" element={<Download />} />
+                        <Route path="/video" element={<Video />} />
+                    </Routes>
+                    <BackToTop />
+                </Box>
+            </FullUseProvider>
         </ThemeProvider>
     );
 };

@@ -16,7 +16,7 @@ export default {
             edit: 'Editing toolbox',
         },
         navBar: {
-            search: 'Search...',
+            search: 'Search',
             theme: 'Theme',
             language: 'Language',
             font: 'Font',

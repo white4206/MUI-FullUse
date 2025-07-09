@@ -1,4 +1,4 @@
-import { styled, InputBase, alpha, FormControl, InputLabel, type InputBaseProps } from '@mui/material';
+import { styled, InputBase, alpha, FormControl, InputLabel, type InputBaseProps, type SxProps } from '@mui/material';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
@@ -39,13 +39,14 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 interface CustomInput {
+    sx?: SxProps;
     inputBaseProps?: InputBaseProps;
     label?: string;
 }
 
 const CustomInputBase = (props: CustomInput) => {
     return (
-        <FormControl variant="standard">
+        <FormControl sx={props.sx} variant="standard">
             {props?.label && <InputLabel shrink>{props.label}</InputLabel>}
             <BootstrapInput {...props.inputBaseProps} />
         </FormControl>

@@ -9,3 +9,12 @@ export const getCarousel = (): Promise<ApiResponse<Carousel[]>> => {
         },
     });
 };
+export const getToolOption = (): Promise<ApiResponse<ToolOption[]>> => {
+    return request({
+        url: '/getToolOption',
+        method: 'get',
+        headers: {
+            isToken: false,
+        },
+    });
+};

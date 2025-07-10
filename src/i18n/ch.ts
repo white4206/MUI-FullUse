@@ -1,20 +1,33 @@
 export default {
     translation: {
-        iconSelect: {
-            title: '图标选择',
-            placeholder: '请输入图标名称',
-            label: '图标名称',
+        components: {
+            iconSelect: {
+                title: '图标选择',
+                placeholder: '请输入图标名称',
+                label: '图标名称',
+            },
+            backToTop: '滚动到顶部',
         },
         pages: {
-            home: '主页',
-            article: '文章',
-            download: '下载',
-            video: '视频',
+            home: {
+                title: '主页',
+                toolbox: {
+                    title: '工具箱',
+                    edit: {
+                        title: '编辑工具箱',
+                    },
+                },
+            },
+            article: {
+                title: '文章',
+            },
+            download: {
+                title: '下载',
+            },
+            video: {
+                title: '视频',
+            },
         },
-        home: {
-            toolbox: '工具箱',
-        },
-        backToTop: '滚动到顶部',
         toolbox: {
             edit: '编辑工具箱',
         },

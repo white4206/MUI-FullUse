@@ -12,10 +12,10 @@ import SvgIcon from '@/components/SvgIcon';
 
 const Menu = () => {
     const routeLinks = [
-        { id: 1, title: 'pages.home', path: '/', icon: <HomeIcon /> },
-        { id: 2, title: 'pages.article', path: '/article', icon: <ArticleIcon /> },
-        { id: 3, title: 'pages.download', path: '/download', icon: <DownloadIcon /> },
-        { id: 4, title: 'pages.video', path: '/video', icon: <VideoLibraryIcon /> },
+        { id: 1, title: 'pages.home.title', path: '/', icon: <HomeIcon /> },
+        { id: 2, title: 'pages.article.title', path: '/article', icon: <ArticleIcon /> },
+        { id: 3, title: 'pages.download.title', path: '/download', icon: <DownloadIcon /> },
+        { id: 4, title: 'pages.video.title', path: '/video', icon: <VideoLibraryIcon /> },
     ];
     const theme = useTheme();
     const [open, setOpen] = useState<boolean>(false);

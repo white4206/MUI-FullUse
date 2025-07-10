@@ -1,20 +1,33 @@
 export default {
     translation: {
-        iconSelect: {
-            title: 'Icon select',
-            placeholder: 'Please enter the name of the icon',
-            label: 'Icon name',
+        components: {
+            iconSelect: {
+                title: 'Icon select',
+                placeholder: 'Please enter the name of the icon',
+                label: 'Icon name',
+            },
+            backToTop: 'Scroll to the top',
         },
         pages: {
-            home: 'Home',
-            article: 'Article',
-            download: 'Download',
-            video: 'Video',
+            home: {
+                title: 'Home',
+                toolbox: {
+                    title: 'Toolbox',
+                    edit: {
+                        title: 'Edit Toolbox',
+                    },
+                },
+            },
+            article: {
+                title: 'Article',
+            },
+            download: {
+                title: 'Download',
+            },
+            video: {
+                title: 'Video',
+            },
         },
-        home: {
-            toolbox: 'Toolbox',
-        },
-        backToTop: 'Scroll to the top',
         toolbox: {
             edit: 'Editing toolbox',
         },

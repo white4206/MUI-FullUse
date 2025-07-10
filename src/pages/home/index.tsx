@@ -157,10 +157,13 @@ const Home = () => {
                                 <CardContent sx={{ p: '0 !important', bgcolor: theme.palette.toolboxBgColor }}>
                                     <Stack direction="row" alignItems="center" p={2} pb={1}>
                                         <Typography fontWeight={600} variant="h6">
-                                            {t('home.toolbox')}
+                                            {t('pages.home.toolbox.title')}
                                         </Typography>
-                                        <Tooltip title={t('toolbox.edit')} placement="right">
-                                            <IconButton sx={{ borderRadius: 2, ml: 1, transition: '.4s', '&:hover': { transform: 'rotate(15deg)' } }}>
+                                        <Tooltip title={t('pages.home.toolbox.edit.title')} placement="right">
+                                            <IconButton
+                                                onClick={() => {}}
+                                                sx={{ borderRadius: 2, ml: 1, transition: '.4s', '&:hover': { transform: 'rotate(15deg)' } }}
+                                            >
                                                 <HandymanIcon sx={{ fontSize: 14, color: theme.palette.fullUseMain.main }} />
                                             </IconButton>
                                         </Tooltip>

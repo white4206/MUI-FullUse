@@ -1,4 +1,4 @@
-import { useFullScreen } from '@/utils/hook';
+import { useFullScreen } from '@/utils/hooks';
 import { IconButton, Tooltip } from '@mui/material';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';

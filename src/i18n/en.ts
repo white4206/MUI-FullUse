@@ -11,6 +11,9 @@ export default {
             download: 'Download',
             video: 'Video',
         },
+        home: {
+            toolbox: 'Toolbox',
+        },
         backToTop: 'Scroll to the top',
         toolbox: {
             edit: 'Editing toolbox',

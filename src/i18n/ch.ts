@@ -11,6 +11,9 @@ export default {
             download: '下载',
             video: '视频',
         },
+        home: {
+            toolbox: '工具箱',
+        },
         backToTop: '滚动到顶部',
         toolbox: {
             edit: '编辑工具箱',

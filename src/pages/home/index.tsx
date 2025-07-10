@@ -22,12 +22,12 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import { useTranslation } from 'react-i18next';
 import SvgIcon from '@/components/SvgIcon';
 import { useEffect, useState } from 'react';
-import { getCarousel } from '@/api/common';
-import { mapUrl } from '@/utils/url';
+import { getCarousel, getToolOption } from '@/api/common';
+import { mapUrl, openUrl } from '@/utils/url';
 import { getHeadArticle } from '@/api/article';
 import React from 'react';
 
-const ToolBoxItem = () => {
+const ToolBoxItem = ({ data }: { data: ToolOption }) => {
     const theme = useTheme();
 
     return (
@@ -39,9 +39,10 @@ const ToolBoxItem = () => {
                 borderRadius={2}
                 p={1}
                 sx={{ transition: '.4s', cursor: 'pointer', '&:hover': { bgcolor: theme.palette.action.hover } }}
+                onClick={() => openUrl(data.path)}
             >
-                <SvgIcon iconName="logo" size="32px" />
-                <Typography variant="body2">工具</Typography>
+                <SvgIcon iconName={data.icon} size="32px" />
+                <Typography variant="body2">{data.name}</Typography>
             </Stack>
         </CardActionArea>
     );
@@ -56,6 +57,7 @@ const Home = () => {
     const [isHeadArticleLoading, setIsHeadArticleLoading] = useState<boolean>(true);
     const [headArticleData, setHeadArticleData] = useState<HeadArticle | null>(null);
     const [isToolOptionLoading, setIsToolOptionLoading] = useState<boolean>(true);
+    const [toolOptionData, setToolOptionData] = useState<ToolOption[] | null>(null);
 
     useEffect(() => {
         // * 获取轮播图数据
@@ -79,12 +81,20 @@ const Home = () => {
             setIsHeadArticleLoading(false);
         };
         void getHeadArticleData();
+        // * 获取工具项
+        const getToolOptionData = async () => {
+            const res = await getToolOption();
+            setToolOptionData(res.data);
+            setIsToolOptionLoading(false);
+        };
+        void getToolOptionData();
     }, []);
 
     return (
         <Box bgcolor={theme.palette.bgColor}>
             <Container maxWidth="xl" sx={{ p: 2, pl: { xl: 10, lg: 10 }, pr: { xl: 10, lg: 10 } }}>
                 <Grid justifyContent="center" container spacing={xl ? 8 : lg ? 6 : 0}>
+                    {/* 左侧轮播图 */}
                     <Grid size={{ xs: 12, sm: 11, md: 10, lg: 8, xl: 8 }} sx={{ position: 'relative' }}>
                         {isSwiperDataLoading ? (
                             <>
@@ -115,8 +125,10 @@ const Home = () => {
                             </Swiper>
                         )}
                     </Grid>
+                    {/* 右侧头文章+工具箱 */}
                     <Grid display={{ xs: 'none', lg: 'block' }} size={{ xs: 0, sm: 0, md: 0, lg: 4, xl: 4 }}>
                         <Stack height="100%" direction="column" justifyContent="space-between">
+                            {/* 头文章 */}
                             <Card sx={{ borderRadius: 4 }} elevation={3}>
                                 {isHeadArticleLoading ? (
                                     <>
@@ -140,11 +152,12 @@ const Home = () => {
                                     </CardActionArea>
                                 )}
                             </Card>
+                            {/* 工具箱 */}
                             <Card sx={{ borderRadius: 4 }} elevation={3}>
                                 <CardContent sx={{ p: '0 !important', bgcolor: theme.palette.toolboxBgColor }}>
                                     <Stack direction="row" alignItems="center" p={2} pb={1}>
                                         <Typography fontWeight={600} variant="h6">
-                                            工具箱
+                                            {t('home.toolbox')}
                                         </Typography>
                                         <Tooltip title={t('toolbox.edit')} placement="right">
                                             <IconButton sx={{ borderRadius: 2, ml: 1, transition: '.4s', '&:hover': { transform: 'rotate(15deg)' } }}>
@@ -168,8 +181,8 @@ const Home = () => {
                                             </Stack>
                                         ) : (
                                             <Stack direction="row" p={1} sx={{ overflowX: 'auto' }}>
-                                                {[1, 2, 3, 4, 5, 6, 7, 8].map(item => {
-                                                    return <ToolBoxItem key={item} />;
+                                                {toolOptionData?.map(item => {
+                                                    return <ToolBoxItem key={item.id} data={item} />;
                                                 })}
                                             </Stack>
                                         )}

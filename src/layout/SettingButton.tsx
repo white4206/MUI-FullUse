@@ -1,4 +1,4 @@
-import { useBreakpoint, useDark, useFullScreen } from '@/utils/hook';
+import { useBreakpoint, useDark, useFullScreen } from '@/utils/hooks';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';

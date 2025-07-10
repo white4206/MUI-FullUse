@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-import { useBreakpoint } from '@/utils/hook';
+import { useBreakpoint } from '@/utils/hooks';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import { useTranslation } from 'react-i18next';
 import SvgIcon from '@/components/SvgIcon';

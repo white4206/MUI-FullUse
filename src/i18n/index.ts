@@ -4,17 +4,19 @@ import en from '@/i18n/en';
 import ch from '@/i18n/ch';
 import { useUserPreference } from '@/store';
 
-const language =
-    localStorage.getItem('i18n') === 'auto'
+const language = useUserPreference.getState().language;
+
+const lng =
+    language === 'auto'
         ? navigator.language || navigator.languages[0] // 若i18n为auto则使用浏览器当前语言
-        : localStorage.getItem('i18n') || navigator.language || navigator.languages[0];
+        : language || navigator.language || navigator.languages[0];
 
 void i18n.use(initReactI18next).init({
     resources: {
         ch,
         en,
     },
-    lng: language || 'ch', // 默认语言
+    lng: lng || 'ch', // 默认语言
     fallbackLng: 'ch', // 回退默认语言
     interpolation: {
         escapeValue: false,

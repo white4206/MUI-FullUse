@@ -7,7 +7,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
 import DownloadIcon from '@mui/icons-material/Download';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
-import { useBreakpoint } from '@/utils/hook';
+import { useBreakpoint } from '@/utils/hooks';
 import SvgIcon from '@/components/SvgIcon';
 
 const Menu = () => {

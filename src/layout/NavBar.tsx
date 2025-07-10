@@ -10,7 +10,7 @@ import SettingButton from '@/layout/SettingButton';
 import NotificationButton from '@/layout/NotificationButton';
 import Menu from '@/layout/Menu';
 import { useUserPreference } from '@/store';
-import { useDark } from '@/utils/hook';
+import { useDark } from '@/utils/hooks';
 import { useTranslation } from 'react-i18next';
 import FullscreenButton from '@/layout/FullscreenButton';
 

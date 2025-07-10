@@ -11,7 +11,6 @@ interface UserPreferenceState {
     setFont: (font: string) => void;
     setNavBarButton: (key: string, value: 'navBar' | 'setting') => void;
     toggleShowNavBarButton: (key: string) => void;
-    loadFromStorage: () => void;
 }
 
 const defaultNavBarButton = {
@@ -42,9 +41,6 @@ export const useUserPreference = create<UserPreferenceState>()(
                         [key]: state.navBarButtons[key] === 'navBar' ? 'setting' : 'navBar',
                     },
                 })),
-            loadFromStorage: () => {
-                // persist 会自动恢复，无需实现
-            },
         }),
         {
             name: 'user-preference', // localStorage key

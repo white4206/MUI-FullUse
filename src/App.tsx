@@ -5,7 +5,7 @@ import { CssBaseline, Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useDark } from '@/utils/hook';
+import { useDark } from '@/utils/hooks';
 import RouteProgress from '@/components/RouteProgress';
 import { useUserPreference } from '@/store/module/userPreference';
 import useFont from '@/font';
@@ -21,15 +21,9 @@ const App = () => {
     const { theme } = useDark();
     const [navBarHeight, setNavBarHeight] = useState<number>(0);
     const font = useUserPreference(state => state.font);
-    const loadFromStorage = useUserPreference(state => state.loadFromStorage);
     const { changeFont } = useFont();
 
     console.log(theme);
-
-    // 加载用户首选项
-    useEffect(() => {
-        loadFromStorage();
-    }, [loadFromStorage]);
 
     // 页面加载时读取用户字体首选项
     useEffect(() => {

@@ -65,7 +65,7 @@ const IconSelect = ({ height = 500, width = 500, size = 128, onIconSelect, ...ca
                 <Stack direction="column" height="100%">
                     <Stack direction="row" justifyContent="center" alignItems="center">
                         <Typography textAlign="center" variant="h6">
-                            {t('iconSelect.title')}
+                            {t('components.iconSelect.title')}
                         </Typography>
                         <ImageSearchIcon sx={{ fontSize: '1rem', color: theme.palette.fullUseMain.main, ml: 1 }} />
                     </Stack>
@@ -74,8 +74,8 @@ const IconSelect = ({ height = 500, width = 500, size = 128, onIconSelect, ...ca
                             sx={{ bgcolor: theme.palette.bgColor }}
                             value={search}
                             autoFocus
-                            placeholder={t('iconSelect.placeholder')}
-                            label={t('iconSelect.label')}
+                            placeholder={t('components.iconSelect.placeholder')}
+                            label={t('components.iconSelect.label')}
                             fullWidth
                             slotProps={{
                                 input: {

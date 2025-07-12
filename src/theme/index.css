@@ -7,7 +7,7 @@
     font-display: swap;
 }
 :root {
-    --full-use-theme-text-main-dark: #ffffff;
+    --full-use-theme-text-main-dark: rgba(255, 255, 255);
     --full-use-theme-text-main-light: rgba(0, 0, 0, 0.87);
     --full-use-theme-icon-button-color-light: rgba(0, 0, 0, 0.54);
     --full-use-theme-main: #9286d1;
@@ -108,3 +108,20 @@
 }
 
 /* 动画css */
+@keyframes shake {
+    0% {
+        transform: translateY(0) rotate(1deg);
+    }
+    25% {
+        transform: translateY(1px) rotate(-1deg);
+    }
+    50% {
+        transform: translateY(0) rotate(1deg);
+    }
+    75% {
+        transform: translateY(-1px) rotate(-1deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0);
+    }
+}

@@ -5,7 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IconSelect from '@/components/IconSelect';
-import CustomInput from '@/components/CustomInput';
 import { useNotification } from '@/context/hooks';
 import { Box } from '@mui/material';
 
@@ -18,7 +17,7 @@ const Article = () => {
     return (
         <Box overflow="hidden">
             <Card sx={{ maxWidth: 345, m: 2 }}>
-                <CardMedia sx={{ height: 140 }} image="https://mui.com/static/images/cards/contemplative-reptile.jpg" title="green iguana" />
+                <CardMedia component="img" sx={{ height: 140 }} image="https://mui.com/static/images/cards/contemplative-reptile.jpg" title="green iguana" />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                         Lizard
@@ -32,8 +31,7 @@ const Article = () => {
                     <Button size="small">Learn More</Button>
                 </CardActions>
             </Card>
-            <CustomInput sx={{ m: 2 }} label="自定义输入框" />
-            <IconSelect sx={{ m: 2 }} onIconSelect={handleSelectIcon} />
+            <IconSelect onIconSelect={handleSelectIcon} />
             <Button sx={{ m: 2 }} onClick={() => notify({ content: '我是通知' })}>
                 通知
             </Button>

@@ -22,7 +22,6 @@ import {
     Stack,
     SwipeableDrawer,
     Switch,
-    TextField,
     Tooltip,
     Typography,
     useTheme,
@@ -34,6 +33,7 @@ import { useUserPreference } from '@/store';
 import useI18n from '@/i18n';
 import useFont from '@/font';
 import { FontTypographyList } from '@/layout/FontButton';
+import { CustomTextField } from '@/components/FUTextField';
 
 const SettingItemTitle = ({ props }: { props: { title: string; setting: string; canShow?: boolean } }) => {
     const { title, setting, canShow = true } = props;
@@ -49,8 +49,8 @@ const SettingItemTitle = ({ props }: { props: { title: string; setting: string; 
                     {t(title)}
                 </Typography>
                 {canShow && (
-                    <Tooltip title={t(navBarButtons[setting] === 'navBar' ? 'setting.invisible' : 'setting.visible')} placement="right">
-                        <IconButton size="small" onClick={() => toggleShowNavBarButton(setting)} sx={{ borderRadius: 1, ml: 0.5 }}>
+                    <Tooltip title={t(`setting.${navBarButtons[setting] === 'navBar' ? 'invisible' : 'visible'}`)} placement="right">
+                        <IconButton size="small" onClick={() => toggleShowNavBarButton(setting)} sx={{ borderRadius: 2, ml: 0.5 }}>
                             {navBarButtons[setting] === 'navBar' ? (
                                 <VisibilityIcon sx={{ fontSize: '0.875rem', color: theme.palette.fullUseMain.main }} />
                             ) : (
@@ -105,9 +105,9 @@ const SettingButton = () => {
                                     className={themeMode === 'light' ? 'active-theme-button' : ''}
                                     sx={{
                                         p: 1.5,
-                                        borderRadius: 3,
+                                        borderRadius: 4,
                                         fontSize: 14,
-                                        borderColor: theme.palette.themeButtonBorderColor,
+                                        borderColor: theme.palette.buttonBorderColor,
                                         '&:not(.active-theme-button):hover': { borderRightColor: 'transparent !important' },
                                     }}
                                 >
@@ -120,7 +120,7 @@ const SettingButton = () => {
                                     sx={{
                                         p: 1.5,
                                         fontSize: 14,
-                                        borderColor: theme.palette.themeButtonBorderColor,
+                                        borderColor: theme.palette.buttonBorderColor,
                                         '&:not(.active-theme-button):hover': { borderRightColor: 'transparent !important' },
                                         ml: '0 !important',
                                     }}
@@ -134,9 +134,9 @@ const SettingButton = () => {
                                     className={themeMode === 'dark' ? 'active-theme-button' : ''}
                                     sx={{
                                         p: 1.5,
-                                        borderRadius: 3,
+                                        borderRadius: 4,
                                         fontSize: 14,
-                                        borderColor: theme.palette.themeButtonBorderColor,
+                                        borderColor: theme.palette.buttonBorderColor,
                                         ml: '0 !important',
                                     }}
                                 >
@@ -148,13 +148,7 @@ const SettingButton = () => {
                         {/* 国际化切换 */}
                         <Box mb={1}>
                             <SettingItemTitle props={{ title: 'setting.i18n.title', setting: 'i18n' }} />
-                            <TextField
-                                select
-                                label={t('setting.i18n.language')}
-                                fullWidth
-                                value={language}
-                                sx={{ '& .MuiInputBase-root': { fontSize: '14px !important' } }}
-                            >
+                            <CustomTextField select fullWidth value={language} sx={{ '& .MuiInputBase-root': { fontSize: '14px !important' } }}>
                                 <MenuItem sx={{ fontSize: 14 }} value="auto" onClick={() => changeLanguage('auto')}>
                                     {t('setting.i18n.auto')}
                                 </MenuItem>
@@ -168,7 +162,7 @@ const SettingButton = () => {
                                         {language.label}
                                     </MenuItem>
                                 ))}
-                            </TextField>
+                            </CustomTextField>
                         </Box>
                         {/* 字体切换 */}
                         <Box mb={1}>
@@ -176,7 +170,14 @@ const SettingButton = () => {
                             <Box>
                                 {fonts.map(font => {
                                     return (
-                                        <Accordion key={font.id} elevation={3}>
+                                        <Accordion
+                                            key={font.id}
+                                            elevation={3}
+                                            sx={{
+                                                '&.MuiAccordion-rounded:first-of-type': { borderTopLeftRadius: 8, borderTopRightRadius: 8 },
+                                                '&.MuiAccordion-rounded:last-of-type': { borderBottomLeftRadius: 8, borderBottomRightRadius: 8 },
+                                            }}
+                                        >
                                             <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                                                 <Stack direction="row" alignItems="center">
                                                     <Typography variant="body2" sx={{ fontFamily: `${font.font} !important` }} component="span">

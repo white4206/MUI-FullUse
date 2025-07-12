@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, IconButton, InputAdornment, Paper, Stack, TextField, Tooltip, Typography, useTheme, type CardProps } from '@mui/material';
+import { CardActionArea, IconButton, InputAdornment, Paper, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 import SvgIcon from '@/components/SvgIcon';
 import { useTranslation } from 'react-i18next';
 import AppsIcon from '@mui/icons-material/Apps';
@@ -6,20 +6,23 @@ import SearchIcon from '@mui/icons-material/Search';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 import ClearIcon from '@mui/icons-material/Clear';
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { CustomTextField } from '@/components/FUTextField';
 
-type IconSelectProps = CardProps & {
-    height?: number;
-    width?: number;
-    size?: number;
+interface IconSelectProps {
+    iconAreaHeight?: number | string;
     onIconSelect: (icon: string) => void;
-};
+}
 
-const IconSelect = ({ height = 500, width = 500, size = 128, onIconSelect, ...cardProps }: IconSelectProps) => {
+const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => {
     const theme = useTheme();
     const { t } = useTranslation();
     const [search, setSearch] = useState<string>('');
+    const [isSearch, setIsSearch] = useState<boolean>(true);
+    const [isFocused, setIsFocused] = useState<boolean>(false);
     const [iconList, setIconList] = useState<string[]>([]);
+    const [select, setSelect] = useState<string>('');
+    const inputRef = useRef<HTMLElement>(null);
 
     // 加载本地所有静态svg图标
     const requireIcons = () => {
@@ -45,12 +48,16 @@ const IconSelect = ({ height = 500, width = 500, size = 128, onIconSelect, ...ca
 
     // 选择图标
     const handleSelectIcon = (icon: string) => {
+        setSelect(icon);
+        setIsSearch(false);
+        setIsFocused(false);
         onIconSelect(icon);
     };
 
     // 清空输入
     const handleClear = () => {
         setSearch('');
+        setIsFocused(false);
         setIconList(requireIcons());
     };
 
@@ -60,75 +67,115 @@ const IconSelect = ({ height = 500, width = 500, size = 128, onIconSelect, ...ca
     }, []);
 
     return (
-        <Card elevation={3} {...cardProps} sx={{ borderRadius: 2, width: width, height: height, ...(cardProps.sx || {}) }}>
-            <CardContent sx={{ height: '100%' }}>
-                <Stack direction="column" height="100%">
-                    <Stack direction="row" justifyContent="center" alignItems="center">
-                        <Typography textAlign="center" variant="h6">
-                            {t('components.iconSelect.title')}
-                        </Typography>
-                        <ImageSearchIcon sx={{ fontSize: '1rem', color: theme.palette.fullUseMain.main, ml: 1 }} />
-                    </Stack>
-                    <Box mt={2} mb={2}>
-                        <TextField
-                            sx={{ bgcolor: theme.palette.bgColor }}
-                            value={search}
-                            autoFocus
-                            placeholder={t('components.iconSelect.placeholder')}
-                            label={t('components.iconSelect.label')}
-                            fullWidth
-                            slotProps={{
-                                input: {
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <AppsIcon />
-                                        </InputAdornment>
-                                    ),
-                                    endAdornment: (
-                                        <>
-                                            {search && (
-                                                <IconButton onClick={handleClear}>
-                                                    <ClearIcon />
-                                                </IconButton>
-                                            )}
-                                            <InputAdornment position="end">{iconList.length ? <SearchIcon /> : <SearchOffIcon />}</InputAdornment>
-                                        </>
-                                    ),
-                                },
-                            }}
-                            onChange={e => handleFilterIcons(e)}
-                        />
-                    </Box>
-                    <Paper variant="outlined" sx={{ borderRadius: 2, p: 2, flex: 1, position: 'relative', overflowY: 'auto', bgcolor: theme.palette.bgColor }}>
-                        <Box display="grid" gridTemplateColumns={`repeat(auto-fill, minmax(${size}px, 1fr))`} gap={1}>
-                            {iconList.map(icon => {
-                                return (
-                                    <Stack
-                                        p={1}
-                                        spacing={1}
-                                        key={icon}
-                                        direction="row"
-                                        justifyContent="start"
-                                        alignItems="center"
-                                        borderRadius={2}
-                                        width={size}
-                                        sx={{ cursor: 'pointer', transition: '.4s', '&:hover': { bgcolor: theme.palette.action.hover } }}
-                                        onClick={() => handleSelectIcon(icon)}
-                                    >
-                                        <SvgIcon iconName={icon} size="24px" />
-                                        <Tooltip title={icon} placement="right">
-                                            <Typography variant="body1" overflow="hidden" textOverflow="ellipsis">
-                                                {icon}
-                                            </Typography>
+        <>
+            <Stack direction="row" justifyContent="center" alignItems="center" mt={1} mb={1}>
+                <Typography flexShrink={0} variant="subtitle1">
+                    {t('components.iconSelect.title')}
+                </Typography>
+                <Tooltip title={t(`components.iconSelect.${isSearch ? 'fold' : 'search'}`)} placement="bottom">
+                    <IconButton
+                        onClick={() => {
+                            setIsSearch(isSearch => !isSearch);
+                            setIsFocused(isFocused => (isFocused ? false : isFocused));
+                        }}
+                    >
+                        {select ? (
+                            <SvgIcon iconName={select} />
+                        ) : (
+                            <ImageSearchIcon sx={{ fontSize: '1rem', color: isSearch ? theme.palette.fullUseMain.main : undefined }} />
+                        )}
+                    </IconButton>
+                </Tooltip>
+                <CustomTextField
+                    inputRef={inputRef}
+                    size="small"
+                    sx={{
+                        width: isSearch ? '100%' : 0,
+                        transition: '.8s',
+                        '& .MuiInputBase-root': { p: isSearch ? undefined : 0 },
+                        '& fieldset': { display: isSearch ? undefined : 'none' },
+                    }}
+                    value={search}
+                    placeholder={t('components.iconSelect.placeholder')}
+                    fullWidth
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <AppsIcon sx={{ width: isSearch ? 'auto' : 0, transition: '.4s' }} />
+                                </InputAdornment>
+                            ),
+                            endAdornment: (
+                                <>
+                                    {search && (
+                                        <Tooltip title={t('components.iconSelect.clear')} placement="left">
+                                            <IconButton size="small" onClick={handleClear}>
+                                                <ClearIcon sx={{ width: isSearch ? 'auto' : 0, transition: '.4s' }} />
+                                            </IconButton>
                                         </Tooltip>
-                                    </Stack>
-                                );
-                            })}
-                        </Box>
-                    </Paper>
+                                    )}
+                                    <InputAdornment position="end">
+                                        {iconList.length ? (
+                                            <SearchIcon sx={{ width: isSearch ? 'auto' : 0, transition: '.4s' }} />
+                                        ) : (
+                                            <SearchOffIcon sx={{ width: isSearch ? 'auto' : 0, transition: '.4s' }} />
+                                        )}
+                                    </InputAdornment>
+                                </>
+                            ),
+                        },
+                    }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleFilterIcons(e)}
+                    onFocus={() => setIsFocused(true)}
+                />
+            </Stack>
+            <Paper
+                variant="outlined"
+                sx={{
+                    mb: isFocused ? 1 : 0,
+                    maxHeight: isFocused ? iconAreaHeight : 0,
+                    borderStyle: 'dashed',
+                    borderWidth: isFocused ? 2 : 0,
+                    borderColor: isFocused ? undefined : 'transparent',
+                    borderRadius: 2,
+                    p: 2,
+                    pt: isFocused ? 2 : 0,
+                    pb: isFocused ? 2 : 0,
+                    transition: 'margin .4s, padding .4s, max-height .4s, border-color .4s',
+                    position: 'relative',
+                    overflowY: 'auto',
+                    '::-webkit-scrollbar': { width: 0 },
+                }}
+            >
+                <Stack direction="row" flexWrap="wrap" gap={1}>
+                    {iconList.map(icon => {
+                        return (
+                            <CardActionArea sx={{ borderRadius: 2, width: 'auto' }} key={icon}>
+                                <Stack
+                                    p={1}
+                                    spacing={1}
+                                    direction="row"
+                                    justifyContent="start"
+                                    alignItems="center"
+                                    borderRadius={2}
+                                    sx={{
+                                        cursor: 'pointer',
+                                        transition: '.4s',
+                                        bgcolor: theme.palette.bgColor,
+                                    }}
+                                    onClick={() => handleSelectIcon(icon)}
+                                >
+                                    <SvgIcon iconName={icon} size="24px" />
+                                    <Typography variant="body2" overflow="hidden" textOverflow="ellipsis">
+                                        {icon}
+                                    </Typography>
+                                </Stack>
+                            </CardActionArea>
+                        );
+                    })}
                 </Stack>
-            </CardContent>
-        </Card>
+            </Paper>
+        </>
     );
 };
 

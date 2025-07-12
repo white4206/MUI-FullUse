@@ -3,8 +3,13 @@ export default {
         components: {
             iconSelect: {
                 title: '图标选择',
+                search: '搜索',
+                fold: '折叠',
                 placeholder: '请输入图标名称',
                 label: '图标名称',
+                clear: '清空输入',
+                name: '名称',
+                path: '路径',
             },
             backToTop: '滚动到顶部',
         },
@@ -15,6 +20,10 @@ export default {
                     title: '工具箱',
                     edit: {
                         title: '编辑工具箱',
+                        exit: '退出编辑',
+                        new: '新建工具项',
+                        confirm: '确认',
+                        cancel: '取消',
                     },
                 },
             },
@@ -27,9 +36,6 @@ export default {
             video: {
                 title: '视频',
             },
-        },
-        toolbox: {
-            edit: '编辑工具箱',
         },
         navBar: {
             search: '搜索',
@@ -52,7 +58,6 @@ export default {
             },
             i18n: {
                 title: '国际化',
-                language: '语言',
                 auto: '跟随系统',
             },
             font: {

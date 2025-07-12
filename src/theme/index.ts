@@ -6,18 +6,20 @@ declare module '@mui/material/styles' {
         fullUseMain: Palette['primary'];
         bgColor: string;
         appBarColor: string;
-        themeButtonBorderColor: string;
-        toolboxBgColor: string;
         navBarButtonBgColor: string;
+        inputBgColor: string;
+        buttonBorderColor: string;
+        toolboxBgColor: string;
     }
 
     interface PaletteOptions {
         fullUseMain?: PaletteOptions['primary'];
         bgColor?: string;
         appBarColor?: string;
-        themeButtonBorderColor?: string;
-        toolboxBgColor?: string;
         navBarButtonBgColor?: string;
+        inputBgColor?: string;
+        buttonBorderColor?: string;
+        toolboxBgColor?: string;
     }
 }
 
@@ -49,11 +51,12 @@ lightTheme = createTheme(lightTheme, {
             },
             name: 'fullUseMain',
         }),
-        bgColor: '#f2f3f5',
+        bgColor: 'rgba(242, 243, 245)',
         appBarColor: 'rgba(255,255,255,0.6)',
-        themeButtonBorderColor: lightTheme.palette.grey[300],
+        navBarButtonBgColor: 'rgba(242, 243, 245)',
+        inputBgColor: 'rgba(245, 245, 245)',
+        buttonBorderColor: 'rgba(224,224,224)',
         toolboxBgColor: 'rgba(255, 255, 255, 0.6)',
-        navBarButtonBgColor: '#f2f3f5',
     },
     components: {
         MuiTooltip: {
@@ -83,11 +86,12 @@ darkTheme = createTheme(darkTheme, {
             },
             name: 'fullUseMain',
         }),
-        bgColor: '#0a0a0a',
+        bgColor: 'rgba(10, 10, 10)',
         appBarColor: 'rgba(18,18,18,0.6)',
-        themeButtonBorderColor: 'rgba(224,224,224,0.1)',
+        navBarButtonBgColor: 'rgba(10, 10, 10)',
+        inputBgColor: 'rgba(18,18,18,0.6)',
+        buttonBorderColor: 'rgba(224,224,224,0.1)',
         toolboxBgColor: 'rgba(18,18,18,0.6)',
-        navBarButtonBgColor: '#0a0a0a',
     },
     components: {
         MuiTooltip: {

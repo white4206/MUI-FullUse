@@ -10,7 +10,7 @@ import RouteProgress from '@/components/RouteProgress';
 import { useUserPreference } from '@/store/module/userPreference';
 import useFont from '@/font';
 import BackToTop from '@/components/BackToTop';
-import { FullUseProvider } from './context/FullUseContext';
+import { FullUseProvider } from '@/context/FullUseContext';
 
 const Home = lazy(() => import('@/pages/home'));
 const Article = lazy(() => import('@/pages/article'));

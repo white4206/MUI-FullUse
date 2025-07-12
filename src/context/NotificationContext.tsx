@@ -9,7 +9,7 @@ interface NotificationContextProps {
 const NotificationContext = createContext<NotificationContextProps | null>(null);
 
 const NotificationProvider = ({ children }: { children: ReactNode }) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
     const [options, setOptions] = useState<NotifyOptions>({ content: '' });
 
     const notify = useCallback((opts: NotifyOptions) => {

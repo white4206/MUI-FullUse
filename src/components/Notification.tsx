@@ -1,4 +1,5 @@
-import { Alert, Snackbar, Zoom, type AlertColor, type AlertProps, type SnackbarOrigin, type SnackbarProps } from '@mui/material';
+import { Alert, Snackbar, Zoom } from '@mui/material';
+import type { AlertColor, AlertProps, SnackbarOrigin, SnackbarProps } from '@mui/material';
 
 interface NotificationProps {
     open: boolean;

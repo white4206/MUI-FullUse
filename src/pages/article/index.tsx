@@ -31,7 +31,7 @@ const Article = () => {
                     <Button size="small">Learn More</Button>
                 </CardActions>
             </Card>
-            <IconSelect sx={{ m: 2 }} onIconSelect={handleSelectIcon} />
+            <IconSelect onIconSelect={handleSelectIcon} />
             <Button sx={{ m: 2 }} onClick={() => notify({ content: '我是通知' })}>
                 通知
             </Button>

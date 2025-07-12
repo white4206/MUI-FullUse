@@ -4,70 +4,64 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { darkTheme, lightTheme } from '@/theme';
 import screenfull from 'screenfull';
 
+type ThemeMode = 'light' | 'dark' | 'auto';
+
 const useDark = () => {
     const themeMode = useUserPreference(state => state.themeMode);
     const setThemeMode = useUserPreference(state => state.setThemeMode);
-
-    // 跟随 themeMode 和系统主题
-    const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = themeMode === 'auto' ? isSystemDark : themeMode === 'dark';
-
+    // 使用 useMediaQuery 钩子实时跟踪系统主题变化
+    const isSystemDark = useMediaQuery('(prefers-color-scheme: dark)');
+    const isDark = useMemo(() => (themeMode === 'auto' ? isSystemDark : themeMode === 'dark'), [isSystemDark, themeMode]);
     // 响应式 theme
     const theme = useMemo(() => (isDark ? darkTheme : lightTheme), [isDark]);
 
-    // 监听系统主题变化（仅当 themeMode 为 auto 时）
-    useEffect(() => {
-        if (themeMode !== 'auto') return;
-        const media = window.matchMedia('(prefers-color-scheme: dark)');
-        const handler = () => setThemeMode('auto'); // 触发 zustand 状态更新
-        media.addEventListener('change', handler);
-        return () => media.removeEventListener('change', handler);
-    }, [themeMode, setThemeMode]);
-
     // 切换主题，支持传入目标主题
-    const toggleTheme = (target?: 'light' | 'dark' | 'auto') => {
-        if (target) {
-            setThemeMode(target);
-            return;
-        }
-        if (themeMode === 'auto') setThemeMode(isSystemDark ? 'light' : 'dark');
-        else if (themeMode === 'dark') setThemeMode('light');
-        else setThemeMode('dark');
-    };
+    const toggleTheme = useCallback(
+        (target?: ThemeMode) => {
+            if (target) {
+                setThemeMode(target);
+                return;
+            }
+            setThemeMode(themeMode === 'auto' ? (isSystemDark ? 'light' : 'dark') : themeMode === 'dark' ? 'light' : 'dark');
+        },
+        [isSystemDark, setThemeMode, themeMode]
+    );
 
-    // 切换主题 (动画)，支持传入目标主题
-    const toggleThemeWithAnimation = async (e: React.MouseEvent, target?: 'light' | 'dark' | 'auto') => {
-        // 若传入目标主题 判断目标主题是否为黑暗模式
-        const nextIsDark = target ? (target === 'dark' ? true : target === 'light' ? false : isSystemDark ? true : false) : !isDark;
-        // 若传入目标主题不为空且无变化则直接返回跳出
-        if (target && nextIsDark === isDark) {
-            setThemeMode(target);
-            return;
-        }
-
-        if (!document.startViewTransition) {
-            toggleTheme(target);
-        } else {
-            const transition = document.startViewTransition(() => {
+    // 切换主题 (动画), 支持传入目标主题
+    const toggleThemeWithAnimation = useCallback(
+        async (e: React.MouseEvent, target?: ThemeMode) => {
+            // 若传入目标主题 判断目标主题是否为黑暗模式
+            const nextIsDark = target ? (target === 'dark' ? true : target === 'light' ? false : isSystemDark ? true : false) : !isDark;
+            // 若传入目标主题无变化则直接返回跳出
+            if (nextIsDark === isDark) {
                 toggleTheme(target);
-            });
-            await transition.ready;
-            const { clientX, clientY } = e;
-            const radius = Math.hypot(Math.max(clientX, innerWidth - clientX), Math.max(clientY, innerHeight - clientY));
-            const clipPath = [`circle(0% at ${clientX}px ${clientY}px)`, `circle(${radius}px at ${clientX}px ${clientY}px)`];
-            document.documentElement.animate(
-                {
-                    clipPath: nextIsDark ? clipPath.reverse() : clipPath,
-                },
-                {
-                    duration: 500,
-                    pseudoElement: nextIsDark ? '::view-transition-old(root)' : '::view-transition-new(root)',
-                }
-            );
-        }
-    };
+                return;
+            }
+            if (!document.startViewTransition) {
+                toggleTheme(target);
+            } else {
+                const transition = document.startViewTransition(() => {
+                    toggleTheme(target);
+                });
+                await transition.ready;
+                const { clientX, clientY } = e;
+                const radius = Math.hypot(Math.max(clientX, innerWidth - clientX), Math.max(clientY, innerHeight - clientY));
+                const clipPath = [`circle(0% at ${clientX}px ${clientY}px)`, `circle(${radius}px at ${clientX}px ${clientY}px)`];
+                document.documentElement.animate(
+                    {
+                        clipPath: nextIsDark ? clipPath.reverse() : clipPath,
+                    },
+                    {
+                        duration: 500,
+                        pseudoElement: nextIsDark ? '::view-transition-old(root)' : '::view-transition-new(root)',
+                    }
+                );
+            }
+        },
+        [isDark, isSystemDark, toggleTheme]
+    );
 
-    // 切换 html 类
+    // 切换主题时添加对应的 html 类
     useEffect(() => {
         document.documentElement.classList.toggle('dark', isDark);
     }, [isDark]);

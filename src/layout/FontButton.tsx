@@ -25,7 +25,7 @@ const FontTypographyList = ({ font }: { font: string }) => {
 };
 
 const FontButton = () => {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const fontOpen = Boolean(anchorEl);
     const { fonts, changeFont } = useFont();
     const { t } = useTranslation();

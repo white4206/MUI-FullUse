@@ -1,6 +1,6 @@
 import { use } from 'react';
-import { FullUseContext } from './FullUseContext';
-import { NotificationContext } from './NotificationContext';
+import { FullUseContext } from '@/context/FullUseContext';
+import { NotificationContext } from '@/context/NotificationContext';
 
 // 全局参数
 const useFullUse = () => use(FullUseContext);

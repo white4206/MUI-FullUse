@@ -18,7 +18,7 @@ const SearchButton = () => {
         <Paper
             variant="outlined"
             sx={{
-                borderRadius: 3,
+                borderRadius: 4,
                 m: 1,
                 borderWidth: isExpand ? 2 : 0,
                 transition: 'border-color .4s',
@@ -29,7 +29,7 @@ const SearchButton = () => {
             <IconButton
                 sx={{
                     m: 0,
-                    borderRadius: isExpand ? 3 : 2,
+                    borderRadius: 2,
                     textTransform: 'none',
                     overflow: 'hidden',
                     minWidth: 'auto',

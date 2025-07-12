@@ -6,7 +6,7 @@ declare module '@mui/material/styles' {
         fullUseMain: Palette['primary'];
         bgColor: string;
         appBarColor: string;
-        themeButtonBorderColor: string;
+        buttonBorderColor: string;
         toolboxBgColor: string;
         navBarButtonBgColor: string;
     }
@@ -15,7 +15,7 @@ declare module '@mui/material/styles' {
         fullUseMain?: PaletteOptions['primary'];
         bgColor?: string;
         appBarColor?: string;
-        themeButtonBorderColor?: string;
+        buttonBorderColor?: string;
         toolboxBgColor?: string;
         navBarButtonBgColor?: string;
     }
@@ -51,7 +51,7 @@ lightTheme = createTheme(lightTheme, {
         }),
         bgColor: '#f2f3f5',
         appBarColor: 'rgba(255,255,255,0.6)',
-        themeButtonBorderColor: lightTheme.palette.grey[300],
+        buttonBorderColor: lightTheme.palette.grey[300],
         toolboxBgColor: 'rgba(255, 255, 255, 0.6)',
         navBarButtonBgColor: '#f2f3f5',
     },
@@ -85,7 +85,7 @@ darkTheme = createTheme(darkTheme, {
         }),
         bgColor: '#0a0a0a',
         appBarColor: 'rgba(18,18,18,0.6)',
-        themeButtonBorderColor: 'rgba(224,224,224,0.1)',
+        buttonBorderColor: 'rgba(224,224,224,0.1)',
         toolboxBgColor: 'rgba(18,18,18,0.6)',
         navBarButtonBgColor: '#0a0a0a',
     },

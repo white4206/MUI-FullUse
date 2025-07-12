@@ -1,56 +1,52 @@
-import { styled, InputBase, alpha, FormControl, InputLabel, type InputBaseProps, type SxProps } from '@mui/material';
+/**
+ * @deprecated Use FuTextField instead
+ * */
 
-const BootstrapInput = styled(InputBase)(({ theme }) => ({
+import { styled, InputBase, alpha, FormControl, InputLabel, type InputBaseProps, type SxProps, TextField } from '@mui/material';
+
+const BootstrapInput = styled(InputBase)(({ theme, fullWidth }) => ({
     'label + &': {
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(3.5),
     },
     '& .MuiInputBase-input': {
-        borderRadius: 4,
+        borderRadius: 16,
         position: 'relative',
-        backgroundColor: '#F3F6F9',
         border: '1px solid',
-        borderColor: '#E0E3E7',
-        fontSize: 16,
-        width: 'auto',
+        borderColor: theme.palette.buttonBorderColor,
+        fontSize: 14,
         padding: '10px 12px',
         transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow']),
-        // Use the system font instead of the default Roboto font.
-        fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-        ].join(','),
+        width: fullWidth ? '100%' : 'auto',
         '&:focus': {
-            boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+            boxShadow: `${alpha(theme.palette.primary.main, 0.5)} 0 0 0 0.2rem`,
             borderColor: theme.palette.primary.main,
         },
-        ...theme.applyStyles('dark', {
-            backgroundColor: '#1A2027',
-            borderColor: '#2D3843',
-        }),
+    },
+}));
+
+const BootstrapInputLabel = styled(InputLabel)(({ theme }) => ({
+    transform: 'none',
+    color: theme.palette.text.primary,
+    '&.Mui-focused': {
+        color: 'inherit',
     },
 }));
 
 interface CustomInput {
     sx?: SxProps;
-    inputBaseProps?: InputBaseProps;
     label?: string;
+    fullWidth?: boolean;
+    inputBaseProps?: InputBaseProps;
 }
 
-const CustomInputBase = (props: CustomInput) => {
+const CustomInput = (props: CustomInput) => {
+    const { sx, label, fullWidth, inputBaseProps } = props;
     return (
-        <FormControl sx={props.sx} variant="standard">
-            {props?.label && <InputLabel shrink>{props.label}</InputLabel>}
-            <BootstrapInput {...props.inputBaseProps} />
+        <FormControl sx={{ ...sx }} fullWidth={fullWidth} variant="standard">
+            {label && <BootstrapInputLabel shrink>{label}</BootstrapInputLabel>}
+            <BootstrapInput {...inputBaseProps} fullWidth sx={{ ...inputBaseProps?.sx }} />
         </FormControl>
     );
 };
 
-export default CustomInputBase;
+export default CustomInput;

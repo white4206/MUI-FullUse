@@ -108,3 +108,20 @@
 }
 
 /* 动画css */
+@keyframes shake {
+    0% {
+        transform: translateY(0) rotate(1deg);
+    }
+    25% {
+        transform: translateY(1px) rotate(-1deg);
+    }
+    50% {
+        transform: translateY(0) rotate(1deg);
+    }
+    75% {
+        transform: translateY(-1px) rotate(-1deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0);
+    }
+}

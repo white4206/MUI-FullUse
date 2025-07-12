@@ -2,9 +2,12 @@ export default {
     translation: {
         components: {
             iconSelect: {
-                title: 'Icon select',
+                title: 'Icon Select',
+                search: 'Search',
+                fold: 'Fold',
                 placeholder: 'Please enter the name of the icon',
-                label: 'Icon name',
+                label: 'Icon Name',
+                clear: 'Clear the input',
             },
             backToTop: 'Scroll to the top',
         },
@@ -15,6 +18,10 @@ export default {
                     title: 'Toolbox',
                     edit: {
                         title: 'Edit Toolbox',
+                        exit: 'Exit editing',
+                        new: 'Create a new tool option',
+                        confirm: 'Confirm',
+                        cancel: 'Cancel',
                     },
                 },
             },
@@ -27,9 +34,6 @@ export default {
             video: {
                 title: 'Video',
             },
-        },
-        toolbox: {
-            edit: 'Editing toolbox',
         },
         navBar: {
             search: 'Search',
@@ -52,8 +56,7 @@ export default {
             },
             i18n: {
                 title: 'Internationalization',
-                language: 'Language',
-                auto: 'Following system',
+                auto: 'Following System',
             },
             font: {
                 title: 'Font',

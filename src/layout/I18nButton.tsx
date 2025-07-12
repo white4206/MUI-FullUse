@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import SvgIcon from '@/components/SvgIcon';
 
 const I18nButton = () => {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const i18nOpen = Boolean(anchorEl);
     const { languages, changeLanguage } = useI18n();
     const { t } = useTranslation();

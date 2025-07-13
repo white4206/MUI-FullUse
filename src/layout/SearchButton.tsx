@@ -11,7 +11,7 @@ const SearchButton = () => {
     const [isExpand, setIsExpand] = useState<boolean>(false);
 
     return xs ? (
-        <IconButton sx={{ borderRadius: 2 }}>
+        <IconButton>
             <SearchIcon sx={{ color: theme.palette.fullUseMain.main }} />
         </IconButton>
     ) : (
@@ -28,8 +28,8 @@ const SearchButton = () => {
         >
             <IconButton
                 sx={{
+                    borderRadius: 4,
                     m: 0,
-                    borderRadius: 2,
                     textTransform: 'none',
                     overflow: 'hidden',
                     minWidth: 'auto',

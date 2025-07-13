@@ -1,4 +1,5 @@
-import { Box, Stack, styled, TextField, Typography, type StackProps, type TextFieldProps, type CSSProperties } from '@mui/material';
+import { Box, Stack, styled, TextField, Typography } from '@mui/material';
+import type { StackProps, TextFieldProps, CSSProperties } from '@mui/material';
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
     '& .MuiInputBase-root': { fontSize: '0.875rem', fontWeight: 500, backgroundColor: theme.palette.inputBgColor, borderRadius: 16 },

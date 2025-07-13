@@ -1,7 +1,6 @@
 import IconSelect from '@/components/IconSelect';
 import { openUrl } from '@/utils/url';
 import {
-    type SxProps,
     Box,
     CardActionArea,
     Stack,
@@ -18,6 +17,7 @@ import {
     Paper,
     Skeleton,
     useTheme,
+    type SxProps,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -26,7 +26,7 @@ import { getToolOption } from '@/api/common';
 import HardwareIcon from '@mui/icons-material/Hardware';
 import AddIcon from '@mui/icons-material/Add';
 import FuTextField from '@/components/FUTextField';
-import { DndContext, type DragEndEvent, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';

@@ -13,6 +13,7 @@ import { useUserPreference } from '@/store';
 import { useDark } from '@/utils/hooks';
 import { useTranslation } from 'react-i18next';
 import FullscreenButton from '@/layout/FullscreenButton';
+import { name } from '@/utils/constant';
 
 const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<number>> }) => {
     const appBarRef = useRef<HTMLElement>(null);
@@ -51,7 +52,7 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
                 </Link>
                 <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 2.5, ml: 1, mr: 0, display: { sm: 'block', xs: 'none' } }} />
                 <Typography display={{ sm: 'block', xs: 'none' }} p={1} color={theme.palette.text.primary}>
-                    MUI-FullUse
+                    {name}
                 </Typography>
                 {/* 导航 */}
                 <Menu />

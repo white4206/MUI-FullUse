@@ -1,12 +1,12 @@
 import { useBreakpoint, useDark, useFullScreen } from '@/utils/hooks';
-import SettingsIcon from '@mui/icons-material/Settings';
-import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
+import SettingsBrightnessTwoToneIcon from '@mui/icons-material/SettingsBrightnessTwoTone';
+import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
+import LightModeTwoToneIcon from '@mui/icons-material/LightModeTwoTone';
+import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
+import VisibilityOffTwoToneIcon from '@mui/icons-material/VisibilityOffTwoTone';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
+import CloseIcon from '@mui/icons-material/Close';
 import {
     Accordion,
     AccordionActions,
@@ -27,7 +27,6 @@ import {
     useTheme,
 } from '@mui/material';
 import { useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
 import { useUserPreference } from '@/store';
 import useI18n from '@/i18n';
@@ -50,11 +49,11 @@ const SettingItemTitle = ({ props }: { props: { title: string; setting: string; 
                 </Typography>
                 {canShow && (
                     <Tooltip title={t(`setting.${navBarButtons[setting] === 'navBar' ? 'invisible' : 'visible'}`)} placement="right">
-                        <IconButton size="small" onClick={() => toggleShowNavBarButton(setting)} sx={{ borderRadius: 2, ml: 0.5 }}>
+                        <IconButton size="small" onClick={() => toggleShowNavBarButton(setting)} sx={{ ml: 0.5 }}>
                             {navBarButtons[setting] === 'navBar' ? (
-                                <VisibilityIcon sx={{ fontSize: '0.875rem', color: theme.palette.fullUseMain.main }} />
+                                <VisibilityTwoToneIcon sx={{ fontSize: '0.875rem', color: theme.palette.fullUseMain.main }} />
                             ) : (
-                                <VisibilityOffIcon sx={{ fontSize: '0.875rem' }} />
+                                <VisibilityOffTwoToneIcon sx={{ fontSize: '0.875rem' }} />
                             )}
                         </IconButton>
                     </Tooltip>
@@ -80,8 +79,8 @@ const SettingButton = () => {
     return (
         <>
             <Tooltip title={t('navBar.setting')}>
-                <IconButton sx={{ borderRadius: 2 }} onClick={() => setOpen(true)}>
-                    <SettingsIcon sx={{ color: theme.palette.fullUseMain.main }} />
+                <IconButton onClick={() => setOpen(true)}>
+                    <SettingsTwoToneIcon sx={{ color: theme.palette.fullUseMain.main }} />
                 </IconButton>
             </Tooltip>
             <SwipeableDrawer elevation={1} anchor="right" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
@@ -111,7 +110,7 @@ const SettingButton = () => {
                                         '&:not(.active-theme-button):hover': { borderRightColor: 'transparent !important' },
                                     }}
                                 >
-                                    <LightModeIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
+                                    <LightModeTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
                                     {t('setting.theme.light')}
                                 </Button>
                                 <Button
@@ -125,7 +124,7 @@ const SettingButton = () => {
                                         ml: '0 !important',
                                     }}
                                 >
-                                    <SettingsBrightnessIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
+                                    <SettingsBrightnessTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
                                     {t('setting.theme.auto')}
                                 </Button>
 
@@ -140,7 +139,7 @@ const SettingButton = () => {
                                         ml: '0 !important',
                                     }}
                                 >
-                                    <DarkModeOutlinedIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
+                                    <DarkModeTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
                                     {t('setting.theme.dark')}
                                 </Button>
                             </ButtonGroup>

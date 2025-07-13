@@ -1,7 +1,7 @@
 import useFont from '@/font';
 import { IconButton, Menu, MenuItem, Box, Typography, Tooltip, type TypographyProps } from '@mui/material';
 import { useState } from 'react';
-import FontDownloadIcon from '@mui/icons-material/FontDownload';
+import FontDownloadTwoToneIcon from '@mui/icons-material/FontDownloadTwoTone';
 import { useTranslation } from 'react-i18next';
 
 const FontTypographyList = ({ font }: { font: string }) => {
@@ -38,8 +38,8 @@ const FontButton = () => {
     return (
         <>
             <Tooltip title={t('navBar.font')}>
-                <IconButton sx={{ borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
-                    <FontDownloadIcon />
+                <IconButton onClick={e => setAnchorEl(e.currentTarget)}>
+                    <FontDownloadTwoToneIcon />
                 </IconButton>
             </Tooltip>
             <Menu id="font-menu" anchorEl={anchorEl} open={fontOpen} onClose={() => setAnchorEl(null)}>

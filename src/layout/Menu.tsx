@@ -1,21 +1,21 @@
 import { Box, Button, Typography, useTheme, SwipeableDrawer, IconButton, Stack, Divider, Paper } from '@mui/material';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import MenuIcon from '@mui/icons-material/Menu';
+import WidgetsTwoToneIcon from '@mui/icons-material/WidgetsTwoTone';
 import { useTranslation } from 'react-i18next';
-import HomeIcon from '@mui/icons-material/Home';
-import ArticleIcon from '@mui/icons-material/Article';
-import DownloadIcon from '@mui/icons-material/Download';
-import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
+import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import ArticleTwoToneIcon from '@mui/icons-material/ArticleTwoTone';
+import DownloadTwoToneIcon from '@mui/icons-material/DownloadTwoTone';
+import VideoLibraryTwoToneIcon from '@mui/icons-material/VideoLibraryTwoTone';
 import { useBreakpoint } from '@/utils/hooks';
 import SvgIcon from '@/components/SvgIcon';
 
 const Menu = () => {
     const routeLinks = [
-        { id: 1, title: 'pages.home.title', path: '/', icon: <HomeIcon /> },
-        { id: 2, title: 'pages.article.title', path: '/article', icon: <ArticleIcon /> },
-        { id: 3, title: 'pages.download.title', path: '/download', icon: <DownloadIcon /> },
-        { id: 4, title: 'pages.video.title', path: '/video', icon: <VideoLibraryIcon /> },
+        { id: 1, title: 'pages.home.title', path: '/', icon: <HomeTwoToneIcon /> },
+        { id: 2, title: 'pages.article.title', path: '/article', icon: <ArticleTwoToneIcon /> },
+        { id: 3, title: 'pages.download.title', path: '/download', icon: <DownloadTwoToneIcon /> },
+        { id: 4, title: 'pages.video.title', path: '/video', icon: <VideoLibraryTwoToneIcon /> },
     ];
     const theme = useTheme();
     const [open, setOpen] = useState<boolean>(false);
@@ -56,8 +56,8 @@ const Menu = () => {
                     })}
                 </Stack>
             </Paper>
-            <IconButton sx={{ m: 0.5, borderRadius: 2, display: { lg: 'none', xs: 'flex' } }} onClick={() => setOpen(true)}>
-                <MenuIcon sx={{ color: theme.palette.fullUseMain.main }} />
+            <IconButton sx={{ m: 0.5, display: { lg: 'none', xs: 'flex' } }} onClick={() => setOpen(true)}>
+                <WidgetsTwoToneIcon sx={{ color: theme.palette.fullUseMain.main }} />
             </IconButton>
             <SwipeableDrawer elevation={1} anchor="left" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
                 <Stack direction="row" alignItems="center" p={2} width={xs ? 190 : 240}>
@@ -81,7 +81,7 @@ const Menu = () => {
                                 className={(currentPath === routeLink.path ? 'active-vertical-menu-item' : '') + ' clear-default'}
                                 sx={{ m: 1, borderRadius: 2, transition: '.4s', '&:hover': { bgcolor: theme.palette.action.hover } }}
                             >
-                                <IconButton sx={{ borderRadius: 2 }}>{routeLink.icon}</IconButton>
+                                <IconButton>{routeLink.icon}</IconButton>
                                 <Typography ml={2} color={theme.palette.text.primary}>
                                     {t(routeLink.title)}
                                 </Typography>

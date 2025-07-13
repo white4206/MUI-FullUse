@@ -1,5 +1,5 @@
 import { IconButton, Badge, Tooltip } from '@mui/material';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsTwoToneIcon from '@mui/icons-material/NotificationsTwoTone';
 import { useTranslation } from 'react-i18next';
 
 const NotificationButton = () => {
@@ -7,9 +7,9 @@ const NotificationButton = () => {
 
     return (
         <Tooltip title={t('navBar.notification')}>
-            <IconButton sx={{ borderRadius: 2 }}>
+            <IconButton>
                 <Badge variant="dot" badgeContent={4} color="error">
-                    <NotificationsIcon />
+                    <NotificationsTwoToneIcon />
                 </Badge>
             </IconButton>
         </Tooltip>

@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, useTheme, Divider, Link, Tooltip } from '@mui/material';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
+import LightModeTwoToneIcon from '@mui/icons-material/LightModeTwoTone';
 import logo from '@/assets/icons/svg/logo.svg';
 import { useRef, useLayoutEffect, type Dispatch, type SetStateAction } from 'react';
 import I18nButton from '@/layout/I18nButton';
@@ -60,20 +60,20 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
                 <SearchButton />
                 {/* 功能按钮 */}
                 <Box display={{ md: 'block', xs: 'none' }}>
+                    {/* 国际化切换 */}
+                    {navBarButtons.i18n === 'navBar' && <I18nButton />}
+                    {/* 全屏切换 */}
+                    {navBarButtons.fullscreen === 'navBar' && <FullscreenButton />}
+                    {/* 字体切换 */}
+                    {navBarButtons.font === 'navBar' && <FontButton />}
                     {/* 主题切换按钮 */}
                     {navBarButtons.theme === 'navBar' && (
                         <Tooltip title={t('navBar.theme')}>
-                            <IconButton sx={{ borderRadius: 2 }} onClick={e => void toggleThemeWithAnimation(e)}>
-                                {isDark ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
+                            <IconButton onClick={e => void toggleThemeWithAnimation(e)}>
+                                {isDark ? <LightModeTwoToneIcon /> : <DarkModeTwoToneIcon />}
                             </IconButton>
                         </Tooltip>
                     )}
-                    {/* 国际化切换 */}
-                    {navBarButtons.i18n === 'navBar' && <I18nButton />}
-                    {/* 字体切换 */}
-                    {navBarButtons.font === 'navBar' && <FontButton />}
-                    {/* 全屏切换 */}
-                    {navBarButtons.fullscreen === 'navBar' && <FullscreenButton />}
                 </Box>
                 {/* 消息通知 */}
                 <NotificationButton />

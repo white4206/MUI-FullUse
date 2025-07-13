@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, type Theme } from '@mui/material/styles';
 
 // 增加调色板参数，加入fullUseMain主题色
 declare module '@mui/material/styles' {
@@ -64,6 +64,13 @@ lightTheme = createTheme(lightTheme, {
                 enterDelay: 500,
             },
         },
+        MuiIconButton: {
+            styleOverrides: {
+                root: ({ theme }: { theme: Theme }) => ({
+                    borderRadius: 8,
+                }),
+            },
+        },
     },
 });
 let darkTheme = createTheme({
@@ -97,6 +104,13 @@ darkTheme = createTheme(darkTheme, {
         MuiTooltip: {
             defaultProps: {
                 enterDelay: 500,
+            },
+        },
+        MuiIconButton: {
+            styleOverrides: {
+                root: ({ theme }: { theme: Theme }) => ({
+                    borderRadius: 8,
+                }),
             },
         },
     },

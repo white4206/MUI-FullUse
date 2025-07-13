@@ -21,7 +21,7 @@ const I18nButton = () => {
     return (
         <>
             <Tooltip title={t('navBar.i18n')}>
-                <IconButton sx={{ borderRadius: 2 }} onClick={e => setAnchorEl(e.currentTarget)}>
+                <IconButton onClick={e => setAnchorEl(e.currentTarget)}>
                     <TranslateIcon />
                 </IconButton>
             </Tooltip>

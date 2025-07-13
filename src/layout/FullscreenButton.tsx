@@ -10,9 +10,7 @@ const FullscreenButton = () => {
 
     return (
         <Tooltip title={t('navBar.fullscreen')}>
-            <IconButton sx={{ borderRadius: 2 }} onClick={() => toggleFullscreen()}>
-                {isFullscreen ? <FullscreenExitIcon></FullscreenExitIcon> : <FullscreenIcon />}
-            </IconButton>
+            <IconButton onClick={() => toggleFullscreen()}>{isFullscreen ? <FullscreenExitIcon></FullscreenExitIcon> : <FullscreenIcon />}</IconButton>
         </Tooltip>
     );
 };

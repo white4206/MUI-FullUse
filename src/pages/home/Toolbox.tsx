@@ -23,7 +23,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SvgIcon from '@/components/SvgIcon';
 import { getToolOption } from '@/api/common';
-import HardwareIcon from '@mui/icons-material/Hardware';
+import HardwareTwoToneIcon from '@mui/icons-material/HardwareTwoTone';
 import AddIcon from '@mui/icons-material/Add';
 import FuTextField from '@/components/FUTextField';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core';
@@ -248,9 +248,9 @@ const Toolbox = () => {
                         <Tooltip title={t(`pages.home.toolbox.edit.${editMode ? 'exit' : 'title'}`)} placement="right">
                             <IconButton
                                 onClick={() => setEditMode(editMode => !editMode)}
-                                sx={{ borderRadius: 2, ml: 1, transition: '.4s', transform: editMode ? 'rotate(15deg)' : undefined }}
+                                sx={{ ml: 0.5, transition: '.4s', transform: editMode ? 'rotate(15deg)' : undefined }}
                             >
-                                <HardwareIcon sx={{ fontSize: '1rem', color: editMode ? theme.palette.fullUseMain.main : undefined }} />
+                                <HardwareTwoToneIcon sx={{ fontSize: '1rem', color: editMode ? theme.palette.fullUseMain.main : undefined }} />
                             </IconButton>
                         </Tooltip>
                     </Stack>

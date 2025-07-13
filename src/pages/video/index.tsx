@@ -12,12 +12,12 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { styled } from '@mui/material/styles';
 import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
-import PauseRounded from '@mui/icons-material/PauseRounded';
-import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
-import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
-import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
-import VolumeUpRounded from '@mui/icons-material/VolumeUpRounded';
-import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
+import PauseRoundedIcon from '@mui/icons-material/PauseRounded';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
+import FastForwardRoundedIcon from '@mui/icons-material/FastForwardRounded';
+import FastRewindRoundedIcon from '@mui/icons-material/FastRewindRounded';
+import VolumeUpRoundedIcon from '@mui/icons-material/VolumeUpRounded';
+import VolumeDownRoundedIcon from '@mui/icons-material/VolumeDownRounded';
 
 const WallPaper = styled('div')({
     position: 'absolute',
@@ -175,13 +175,13 @@ const MusicPlayerSlider = () => {
                     })}
                 >
                     <IconButton aria-label="previous song">
-                        <FastRewindRounded fontSize="large" />
+                        <FastRewindRoundedIcon fontSize="large" />
                     </IconButton>
                     <IconButton aria-label={paused ? 'play' : 'pause'} onClick={() => setPaused(!paused)}>
-                        {paused ? <PlayArrowRounded sx={{ fontSize: '3rem' }} /> : <PauseRounded sx={{ fontSize: '3rem' }} />}
+                        {paused ? <PlayArrowRoundedIcon sx={{ fontSize: '3rem' }} /> : <PauseRoundedIcon sx={{ fontSize: '3rem' }} />}
                     </IconButton>
                     <IconButton aria-label="next song">
-                        <FastForwardRounded fontSize="large" />
+                        <FastForwardRoundedIcon fontSize="large" />
                     </IconButton>
                 </Box>
                 <Stack
@@ -199,7 +199,7 @@ const MusicPlayerSlider = () => {
                     })}
                     alignItems="center"
                 >
-                    <VolumeDownRounded />
+                    <VolumeDownRoundedIcon />
                     <Slider
                         aria-label="Volume"
                         defaultValue={30}
@@ -224,7 +224,7 @@ const MusicPlayerSlider = () => {
                             }),
                         })}
                     />
-                    <VolumeUpRounded />
+                    <VolumeUpRoundedIcon />
                 </Stack>
             </Widget>
             <WallPaper />

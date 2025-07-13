@@ -9,6 +9,7 @@ import DownloadTwoToneIcon from '@mui/icons-material/DownloadTwoTone';
 import VideoLibraryTwoToneIcon from '@mui/icons-material/VideoLibraryTwoTone';
 import { useBreakpoint } from '@/utils/hooks';
 import SvgIcon from '@/components/SvgIcon';
+import { name } from '@/utils/constant';
 
 const Menu = () => {
     const routeLinks = [
@@ -65,7 +66,7 @@ const Menu = () => {
                     <SvgIcon iconName="logo" size="32px" />
                     <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 1, ml: 1, mr: 0 }} />
                     <Typography p={1} color={theme.palette.text.primary}>
-                        MUI-FullUse
+                        {name}
                     </Typography>
                 </Stack>
                 <Divider />

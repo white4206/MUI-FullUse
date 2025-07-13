@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 import ClearIcon from '@mui/icons-material/Clear';
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
+import ImageSearchTwoToneIcon from '@mui/icons-material/ImageSearchTwoTone';
 import { useEffect, useRef, useState } from 'react';
 import { CustomTextField } from '@/components/FUTextField';
 
@@ -74,6 +75,7 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                 </Typography>
                 <Tooltip title={t(`components.iconSelect.${isSearch ? 'fold' : 'search'}`)} placement="bottom">
                     <IconButton
+                        sx={{ ml: 0.5, mr: 0.5 }}
                         onClick={() => {
                             setIsSearch(isSearch => !isSearch);
                             setIsFocused(isFocused => (isFocused ? false : isFocused));
@@ -81,8 +83,10 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                     >
                         {select ? (
                             <SvgIcon iconName={select} />
+                        ) : isSearch ? (
+                            <ImageSearchTwoToneIcon sx={{ fontSize: '1rem', color: isSearch ? theme.palette.fullUseMain.main : undefined }} />
                         ) : (
-                            <ImageSearchIcon sx={{ fontSize: '1rem', color: isSearch ? theme.palette.fullUseMain.main : undefined }} />
+                            <ImageSearchIcon sx={{ fontSize: '1rem' }} />
                         )}
                     </IconButton>
                 </Tooltip>

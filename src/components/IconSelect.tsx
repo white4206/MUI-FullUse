@@ -152,31 +152,29 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                 }}
             >
                 <Stack direction="row" flexWrap="wrap" gap={1}>
-                    {iconList.map(icon => {
-                        return (
-                            <CardActionArea sx={{ borderRadius: 2, width: 'auto' }} key={icon}>
-                                <Stack
-                                    p={1}
-                                    spacing={1}
-                                    direction="row"
-                                    justifyContent="start"
-                                    alignItems="center"
-                                    borderRadius={2}
-                                    sx={{
-                                        cursor: 'pointer',
-                                        transition: '.4s',
-                                        bgcolor: theme.palette.bgColor,
-                                    }}
-                                    onClick={() => handleSelectIcon(icon)}
-                                >
-                                    <SvgIcon iconName={icon} size="24px" />
-                                    <Typography variant="body2" overflow="hidden" textOverflow="ellipsis">
-                                        {icon}
-                                    </Typography>
-                                </Stack>
-                            </CardActionArea>
-                        );
-                    })}
+                    {iconList.map(icon => (
+                        <CardActionArea sx={{ borderRadius: 2, width: 'auto' }} key={icon}>
+                            <Stack
+                                p={1}
+                                spacing={1}
+                                direction="row"
+                                justifyContent="start"
+                                alignItems="center"
+                                borderRadius={2}
+                                sx={{
+                                    cursor: 'pointer',
+                                    transition: '.4s',
+                                    bgcolor: theme.palette.bgColor,
+                                }}
+                                onClick={() => handleSelectIcon(icon)}
+                            >
+                                <SvgIcon iconName={icon} size="24px" />
+                                <Typography variant="body2" overflow="hidden" textOverflow="ellipsis">
+                                    {icon}
+                                </Typography>
+                            </Stack>
+                        </CardActionArea>
+                    ))}
                 </Stack>
             </Paper>
         </>

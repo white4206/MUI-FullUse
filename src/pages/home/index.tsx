@@ -7,6 +7,7 @@ import { getCarousel } from '@/api/common';
 import { mapUrl } from '@/utils/url';
 import { getHeadArticle } from '@/api/article';
 import Toolbox from '@/pages/home/Toolbox';
+import RelatedLinkCard from '@/pages/home/RelatedLinkCard';
 import { defaultCarousel } from '@/utils/constant';
 
 const Home = () => {
@@ -114,7 +115,9 @@ const Home = () => {
             <Container maxWidth="xl" sx={{ p: 2, pl: { xl: 10, lg: 10 }, pr: { xl: 10, lg: 10 } }}>
                 <Grid justifyContent="center" container spacing={xl ? 8 : lg ? 6 : 0}>
                     <Grid size={{ xs: 12, sm: 11, md: 10, lg: 8, xl: 8 }} sx={{ position: 'relative' }}></Grid>
-                    <Grid display={{ xs: 'none', lg: 'block' }} size={{ xs: 0, sm: 0, md: 0, lg: 4, xl: 4 }}></Grid>
+                    <Grid display={{ xs: 'none', lg: 'block' }} size={{ xs: 0, sm: 0, md: 0, lg: 4, xl: 4 }}>
+                        <RelatedLinkCard />
+                    </Grid>
                 </Grid>
             </Container>
         </>

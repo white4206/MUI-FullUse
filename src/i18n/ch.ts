@@ -26,6 +26,10 @@ export default {
                         cancel: '取消',
                     },
                 },
+                relatedLinkCard: {
+                    title: '相关链接',
+                    expand: '展开/收起',
+                },
             },
             article: {
                 title: '文章',

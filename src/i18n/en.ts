@@ -22,9 +22,14 @@ export default {
                         title: 'Edit Toolbox',
                         exit: 'Exit editing',
                         new: 'Create a new tool option',
+                        dragSort: 'Drag sort',
                         confirm: 'Confirm',
                         cancel: 'Cancel',
                     },
+                },
+                relatedLinkCard: {
+                    title: 'Related Link',
+                    expand: 'Expand/Collapse',
                 },
             },
             article: {

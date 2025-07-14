@@ -8,18 +8,16 @@ const FontTypographyList = ({ font }: { font: string }) => {
     const { fontTypographyList } = useFont();
     return (
         <>
-            {fontTypographyList.map(typography => {
-                return (
-                    <Typography
-                        key={typography.id}
-                        sx={{ fontFamily: `${font} !important`, ...typography.sx }}
-                        variant={typography.variant as TypographyProps['variant']}
-                        gutterBottom
-                    >
-                        {typography.content}
-                    </Typography>
-                );
-            })}
+            {fontTypographyList.map(typography => (
+                <Typography
+                    key={typography.id}
+                    sx={{ fontFamily: `${font} !important`, ...typography.sx }}
+                    variant={typography.variant as TypographyProps['variant']}
+                    gutterBottom
+                >
+                    {typography.content}
+                </Typography>
+            ))}
         </>
     );
 };
@@ -43,18 +41,16 @@ const FontButton = () => {
                 </IconButton>
             </Tooltip>
             <Menu id="font-menu" anchorEl={anchorEl} open={fontOpen} onClose={() => setAnchorEl(null)}>
-                {fonts.map(font => {
-                    return (
-                        <MenuItem key={font.id} onClick={() => handleChangeFont(font.font)} sx={{ whiteSpace: 'inherit' }}>
-                            <Box sx={{ width: '100%', maxWidth: 520 }}>
-                                <Typography sx={{ fontFamily: `${font.font} !important`, color: 'teal' }} variant="h3" gutterBottom>
-                                    {font.name}
-                                </Typography>
-                                <FontTypographyList font={font.font} />
-                            </Box>
-                        </MenuItem>
-                    );
-                })}
+                {fonts.map(font => (
+                    <MenuItem key={font.id} onClick={() => handleChangeFont(font.font)} sx={{ whiteSpace: 'inherit' }}>
+                        <Box sx={{ width: '100%', maxWidth: 520 }}>
+                            <Typography sx={{ fontFamily: `${font.font} !important`, color: 'teal' }} variant="h3" gutterBottom>
+                                {font.name}
+                            </Typography>
+                            <FontTypographyList font={font.font} />
+                        </Box>
+                    </MenuItem>
+                ))}
             </Menu>
         </>
     );

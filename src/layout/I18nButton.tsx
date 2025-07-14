@@ -26,19 +26,17 @@ const I18nButton = () => {
                 </IconButton>
             </Tooltip>
             <Menu anchorEl={anchorEl} open={i18nOpen} onClose={() => setAnchorEl(null)}>
-                {languages.map(language => {
-                    return (
-                        <MenuItem key={language.id} onClick={() => handleChangeLanguage(language.language)}>
-                            <Stack sx={{ width: 128 }} flex={1} direction="row" justifyContent="space-between" alignItems="center">
-                                <Stack direction="row" justifyContent="space-between" alignItems="center">
-                                    <Typography variant="body2">{language.label}</Typography>
-                                    <CallMadeIcon sx={{ fontSize: '0.75rem' }} />
-                                </Stack>
-                                <SvgIcon iconName={language.language} />
+                {languages.map(language => (
+                    <MenuItem key={language.id} onClick={() => handleChangeLanguage(language.language)}>
+                        <Stack sx={{ width: 128 }} flex={1} direction="row" justifyContent="space-between" alignItems="center">
+                            <Stack direction="row" justifyContent="space-between" alignItems="center">
+                                <Typography variant="body2">{language.label}</Typography>
+                                <CallMadeIcon sx={{ fontSize: '0.75rem' }} />
                             </Stack>
-                        </MenuItem>
-                    );
-                })}
+                            <SvgIcon iconName={language.language} />
+                        </Stack>
+                    </MenuItem>
+                ))}
             </Menu>
         </>
     );

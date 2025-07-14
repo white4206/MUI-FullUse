@@ -37,24 +37,22 @@ const Menu = () => {
                 }}
             >
                 <Stack direction="row" alignItems="center">
-                    {routeLinks.map(routeLink => {
-                        return (
-                            <Box
-                                mt={0.5}
-                                mb={0.5}
-                                ml={1}
-                                mr={1}
-                                display="flex"
-                                key={routeLink.id}
-                                alignItems="center"
-                                className={currentPath === routeLink.path ? 'active-horizontal-menu-item' : ''}
-                            >
-                                <Button color="inherit" sx={{ borderRadius: 8 }} size="large" component={Link} to={routeLink.path}>
-                                    <Typography>{t(routeLink.title)}</Typography>
-                                </Button>
-                            </Box>
-                        );
-                    })}
+                    {routeLinks.map(routeLink => (
+                        <Box
+                            mt={0.5}
+                            mb={0.5}
+                            ml={1}
+                            mr={1}
+                            display="flex"
+                            key={routeLink.id}
+                            alignItems="center"
+                            className={currentPath === routeLink.path ? 'active-horizontal-menu-item' : ''}
+                        >
+                            <Button color="inherit" sx={{ borderRadius: 8 }} size="large" component={Link} to={routeLink.path}>
+                                <Typography>{t(routeLink.title)}</Typography>
+                            </Button>
+                        </Box>
+                    ))}
                 </Stack>
             </Paper>
             <IconButton sx={{ m: 0.5, display: { lg: 'none', xs: 'flex' } }} onClick={() => setOpen(true)}>
@@ -71,24 +69,22 @@ const Menu = () => {
                 </Stack>
                 <Divider />
                 <Box>
-                    {routeLinks.map(routeLink => {
-                        return (
-                            <Stack
-                                direction="row"
-                                alignItems="center"
-                                key={routeLink.id}
-                                component={Link}
-                                to={routeLink.path}
-                                className={(currentPath === routeLink.path ? 'active-vertical-menu-item' : '') + ' clear-default'}
-                                sx={{ m: 1, borderRadius: 2, transition: '.4s', '&:hover': { bgcolor: theme.palette.action.hover } }}
-                            >
-                                <IconButton>{routeLink.icon}</IconButton>
-                                <Typography ml={2} color={theme.palette.text.primary}>
-                                    {t(routeLink.title)}
-                                </Typography>
-                            </Stack>
-                        );
-                    })}
+                    {routeLinks.map(routeLink => (
+                        <Stack
+                            direction="row"
+                            alignItems="center"
+                            key={routeLink.id}
+                            component={Link}
+                            to={routeLink.path}
+                            className={(currentPath === routeLink.path ? 'active-vertical-menu-item' : '') + ' clear-default'}
+                            sx={{ m: 1, borderRadius: 2, transition: '.4s', '&:hover': { bgcolor: theme.palette.action.hover } }}
+                        >
+                            <IconButton>{routeLink.icon}</IconButton>
+                            <Typography ml={2} color={theme.palette.text.primary}>
+                                {t(routeLink.title)}
+                            </Typography>
+                        </Stack>
+                    ))}
                 </Box>
             </SwipeableDrawer>
         </>

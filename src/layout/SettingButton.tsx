@@ -167,46 +167,44 @@ const SettingButton = () => {
                         <Box mb={1}>
                             <SettingItemTitle props={{ title: 'setting.font.title', setting: 'font' }} />
                             <Box>
-                                {fonts.map(font => {
-                                    return (
-                                        <Accordion
-                                            key={font.id}
-                                            elevation={3}
-                                            sx={{
-                                                '&.MuiAccordion-rounded:first-of-type': { borderTopLeftRadius: 8, borderTopRightRadius: 8 },
-                                                '&.MuiAccordion-rounded:last-of-type': { borderBottomLeftRadius: 8, borderBottomRightRadius: 8 },
-                                            }}
-                                        >
-                                            <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-                                                <Stack direction="row" alignItems="center">
-                                                    <Typography variant="body2" sx={{ fontFamily: `${font.font} !important` }} component="span">
-                                                        {font.name}
-                                                    </Typography>
-                                                    {font.default && (
-                                                        <Chip sx={{ ml: 1, fontSize: 12 }} size="small" color="fullUseMain" label={t('setting.font.default')} />
-                                                    )}
-                                                    {currentFont === font.font && (
-                                                        <Chip
-                                                            sx={{ ml: 1, fontSize: 12 }}
-                                                            variant="outlined"
-                                                            size="small"
-                                                            color="fullUseMain"
-                                                            label={t('setting.font.current')}
-                                                        />
-                                                    )}
-                                                </Stack>
-                                            </AccordionSummary>
-                                            <AccordionDetails>
-                                                <Box sx={{ height: 120, overflow: 'auto' }}>
-                                                    <FontTypographyList font={font.font} />
-                                                </Box>
-                                            </AccordionDetails>
-                                            <AccordionActions>
-                                                <Button onClick={() => changeFont(font.font)}>{t('setting.font.apply')}</Button>
-                                            </AccordionActions>
-                                        </Accordion>
-                                    );
-                                })}
+                                {fonts.map(font => (
+                                    <Accordion
+                                        key={font.id}
+                                        elevation={3}
+                                        sx={{
+                                            '&.MuiAccordion-rounded:first-of-type': { borderTopLeftRadius: 8, borderTopRightRadius: 8 },
+                                            '&.MuiAccordion-rounded:last-of-type': { borderBottomLeftRadius: 8, borderBottomRightRadius: 8 },
+                                        }}
+                                    >
+                                        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+                                            <Stack direction="row" alignItems="center">
+                                                <Typography variant="body2" sx={{ fontFamily: `${font.font} !important` }} component="span">
+                                                    {font.name}
+                                                </Typography>
+                                                {font.default && (
+                                                    <Chip sx={{ ml: 1, fontSize: 12 }} size="small" color="fullUseMain" label={t('setting.font.default')} />
+                                                )}
+                                                {currentFont === font.font && (
+                                                    <Chip
+                                                        sx={{ ml: 1, fontSize: 12 }}
+                                                        variant="outlined"
+                                                        size="small"
+                                                        color="fullUseMain"
+                                                        label={t('setting.font.current')}
+                                                    />
+                                                )}
+                                            </Stack>
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                            <Box sx={{ height: 120, overflow: 'auto' }}>
+                                                <FontTypographyList font={font.font} />
+                                            </Box>
+                                        </AccordionDetails>
+                                        <AccordionActions>
+                                            <Button onClick={() => changeFont(font.font)}>{t('setting.font.apply')}</Button>
+                                        </AccordionActions>
+                                    </Accordion>
+                                ))}
                             </Box>
                         </Box>
                         {/* 全屏切换 */}

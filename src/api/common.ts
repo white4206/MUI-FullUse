@@ -18,3 +18,12 @@ export const getToolOption = (): Promise<ApiResponse<ToolOption[]>> => {
         },
     });
 };
+export const getRelatedLink = (): Promise<ApiResponse<RelatedLink[]>> => {
+    return request({
+        url: '/getRelatedLink',
+        method: 'get',
+        headers: {
+            isToken: false,
+        },
+    });
+};

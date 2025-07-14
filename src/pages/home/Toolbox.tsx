@@ -182,7 +182,7 @@ const Toolbox = () => {
     };
 
     useEffect(() => {
-        // * 获取工具项
+        // *Axios 获取工具项
         const getToolOptionData = async () => {
             const res = await getToolOption();
             setToolOptionData(res.data);
@@ -282,41 +282,37 @@ const Toolbox = () => {
                 <Paper sx={{ borderRadius: 4 }} elevation={3}>
                     {isLoading ? (
                         <Stack direction="row" justifyContent="space-around" p={1}>
-                            {[1, 2, 3, 4].map(item => {
-                                return (
-                                    <React.Fragment key={item}>
-                                        <Stack direction="column" alignItems="center" spacing={1} p={1} m={1}>
-                                            <Skeleton height={32} width={32} sx={{ borderRadius: 2 }} variant="rounded" />
-                                            <Skeleton height={12} width={32} variant="rounded" />
-                                        </Stack>
-                                    </React.Fragment>
-                                );
-                            })}
+                            {[1, 2, 3, 4].map(item => (
+                                <React.Fragment key={item}>
+                                    <Stack direction="column" alignItems="center" spacing={1} p={1} m={1}>
+                                        <Skeleton height={32} width={32} sx={{ borderRadius: 2 }} variant="rounded" />
+                                        <Skeleton height={12} width={32} variant="rounded" />
+                                    </Stack>
+                                </React.Fragment>
+                            ))}
                         </Stack>
                     ) : (
                         <Stack direction="row" p={1} ref={setScrollContainer} sx={{ overflowX: 'auto', '::-webkit-scrollbar': { height: 0 } }}>
                             {editMode && <NewToolOption onNewToolOption={() => setNewToolOptionOpen(true)} />}
                             <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                                 <SortableContext items={toolOptionData.map(tool => tool.id)}>
-                                    {toolOptionData.map(item => {
-                                        return (
-                                            <ToolboxItem
-                                                key={item.id}
-                                                data={item}
-                                                editMode={editMode}
-                                                sx={{
-                                                    '& .MuiButtonBase-root': {
-                                                        border: '2px dashed',
-                                                        borderColor: editMode ? theme.palette.buttonBorderColor : 'transparent',
-                                                        animation: editMode ? 'shake 0.4s ease infinite' : undefined,
-                                                    },
-                                                    '& :hover': {
-                                                        animation: 'none',
-                                                    },
-                                                }}
-                                            />
-                                        );
-                                    })}
+                                    {toolOptionData.map(item => (
+                                        <ToolboxItem
+                                            key={item.id}
+                                            data={item}
+                                            editMode={editMode}
+                                            sx={{
+                                                '& .MuiButtonBase-root': {
+                                                    border: '2px dashed',
+                                                    borderColor: editMode ? theme.palette.buttonBorderColor : 'transparent',
+                                                    animation: editMode ? 'shake 0.4s ease infinite' : undefined,
+                                                },
+                                                '& :hover': {
+                                                    animation: 'none',
+                                                },
+                                            }}
+                                        />
+                                    ))}
                                 </SortableContext>
                             </DndContext>
                         </Stack>

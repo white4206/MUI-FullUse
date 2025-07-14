@@ -7,6 +7,7 @@ import { getCarousel } from '@/api/common';
 import { mapUrl } from '@/utils/url';
 import { getHeadArticle } from '@/api/article';
 import Toolbox from '@/pages/home/Toolbox';
+import { defaultCarousel } from '@/utils/constant';
 
 const Home = () => {
     const theme = useTheme();
@@ -20,11 +21,7 @@ const Home = () => {
         // * 获取轮播图数据
         const getCarouselData = async () => {
             const res = await getCarousel();
-            setSwiperData(
-                res.data.map(carousel => {
-                    return { ...carousel, image: mapUrl(carousel.image) };
-                })
-            );
+            setSwiperData(res.data.map(carousel => ({ ...carousel, image: mapUrl(carousel.image) || defaultCarousel })));
             setIsSwiperDataLoading(false);
         };
         void getCarouselData();
@@ -62,17 +59,16 @@ const Home = () => {
                                     autoplay={{ pauseOnMouseEnter: true }}
                                     loop
                                 >
-                                    {swiperData.map(swiper => {
-                                        return (
-                                            <SwiperSlide key={swiper.id}>
-                                                <CardMedia
-                                                    height={xl ? 500 : lg ? 450 : md ? 400 : sm ? 300 : 200}
-                                                    component="img"
-                                                    image={swiper.image || undefined}
-                                                />
-                                            </SwiperSlide>
-                                        );
-                                    })}
+                                    {swiperData.map(swiper => (
+                                        <SwiperSlide key={swiper.id}>
+                                            <CardMedia
+                                                height={xl ? 500 : lg ? 450 : md ? 400 : sm ? 300 : 200}
+                                                component="img"
+                                                image={swiper.image || undefined}
+                                                alt={swiper.title}
+                                            />
+                                        </SwiperSlide>
+                                    ))}
                                 </Swiper>
                             )}
                         </Grid>
@@ -95,6 +91,7 @@ const Home = () => {
                                                 component="img"
                                                 sx={{ height: { xl: 180, lg: 130 }, borderRadius: 4 }}
                                                 image={headArticleData?.cover || undefined}
+                                                alt={headArticleData?.title}
                                             />
                                             <CardContent>
                                                 <Typography className="text-ellipsis-2" gutterBottom variant="subtitle1" fontWeight={500}>

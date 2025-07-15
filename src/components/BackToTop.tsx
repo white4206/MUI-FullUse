@@ -24,7 +24,7 @@ const BackToTop = (props: BackToTopProps) => {
 
     return (
         trigger && (
-            <Tooltip title={t('components.backToTop')} placement="left">
+            <Tooltip title={t('components.backToTop')}>
                 <Box position="fixed" right={right} bottom={bottom}>
                     <Fab size="small" color="primary" onClick={handleBackToTop}>
                         <KeyboardArrowUpIcon />

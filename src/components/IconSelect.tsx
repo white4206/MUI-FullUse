@@ -73,7 +73,7 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                 <Typography flexShrink={0} variant="subtitle1">
                     {t('components.iconSelect.title')}
                 </Typography>
-                <Tooltip title={t(`components.iconSelect.${isSearch ? 'fold' : 'search'}`)} placement="bottom">
+                <Tooltip title={t(`components.iconSelect.${isSearch ? 'fold' : 'search'}`)} placement="right">
                     <IconButton
                         sx={{ ml: 0.5, mr: 0.5 }}
                         onClick={() => {
@@ -112,11 +112,9 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                             endAdornment: (
                                 <>
                                     {search && (
-                                        <Tooltip title={t('components.iconSelect.clear')} placement="left">
-                                            <IconButton size="small" onClick={handleClear}>
-                                                <ClearIcon sx={{ width: isSearch ? 'auto' : 0, transition: '.4s' }} />
-                                            </IconButton>
-                                        </Tooltip>
+                                        <IconButton size="small" onClick={handleClear}>
+                                            <ClearIcon sx={{ width: isSearch ? 'auto' : 0, transition: '.4s' }} />
+                                        </IconButton>
                                     )}
                                     <InputAdornment position="end">
                                         {iconList.length ? (

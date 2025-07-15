@@ -6,12 +6,10 @@ export default {
                 search: 'Search',
                 fold: 'Fold',
                 placeholder: 'Please enter the name of the icon',
-                label: 'Icon Name',
-                clear: 'Clear the input',
                 name: 'Name',
                 path: 'Path',
             },
-            backToTop: 'Scroll to the top',
+            backToTop: 'Back to the top',
         },
         pages: {
             home: {
@@ -21,8 +19,8 @@ export default {
                     edit: {
                         title: 'Edit Toolbox',
                         exit: 'Exit editing',
+                        dragSort: '可拖动排序',
                         new: 'Create a new tool option',
-                        dragSort: 'Drag sort',
                         confirm: 'Confirm',
                         cancel: 'Cancel',
                     },

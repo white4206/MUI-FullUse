@@ -31,38 +31,37 @@ import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } 
 import { CSS } from '@dnd-kit/utilities';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 // 新建工具项
 const NewToolOption = ({ onNewToolOption }: { onNewToolOption?: () => void }) => {
     const theme = useTheme();
-    const { t } = useTranslation();
 
     return (
         <Box flex="0 0 25%" p={0.5}>
-            <Tooltip title={t('pages.home.toolbox.edit.new')} placement="bottom">
-                <CardActionArea
-                    sx={{ height: '100%', borderRadius: 2, border: `2px dashed ${theme.palette.buttonBorderColor}` }}
-                    onClick={() => onNewToolOption && onNewToolOption()}
+            <CardActionArea
+                sx={{ height: '100%', borderRadius: 2, border: `2px dashed ${theme.palette.buttonBorderColor}` }}
+                onClick={() => onNewToolOption && onNewToolOption()}
+            >
+                <Stack
+                    height="100%"
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    borderRadius={2}
+                    p={1}
+                    sx={{ transition: '.4s', cursor: 'pointer', '&:hover': { bgcolor: theme.palette.action.hover } }}
                 >
-                    <Stack
-                        height="100%"
-                        direction="column"
-                        alignItems="center"
-                        justifyContent="center"
-                        borderRadius={2}
-                        p={1}
-                        sx={{ transition: '.4s', cursor: 'pointer', '&:hover': { bgcolor: theme.palette.action.hover } }}
-                    >
-                        <AddIcon sx={{ height: '32px', width: '32px', color: theme.palette.text.secondary }} />
-                    </Stack>
-                </CardActionArea>
-            </Tooltip>
+                    <AddIcon sx={{ height: '32px', width: '32px', color: theme.palette.text.secondary }} />
+                </Stack>
+            </CardActionArea>
         </Box>
     );
 };
 
 const ToolboxItem = ({ sx, editMode, data }: { sx?: SxProps; editMode: boolean; data: ToolOption }) => {
     const theme = useTheme();
+    const { t } = useTranslation();
     // 使用 useSortable 钩子使项目可拖拽
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: data.id, disabled: !editMode });
 
@@ -99,17 +98,19 @@ const ToolboxItem = ({ sx, editMode, data }: { sx?: SxProps; editMode: boolean; 
                 >
                     {/* 拖拽手柄图标 - 仅在编辑模式下显示 */}
                     {editMode && (
-                        <Box
-                            sx={{
-                                position: 'absolute',
-                                top: 4,
-                                right: 4,
-                                opacity: 0.5,
-                                '&:hover': { opacity: 1 },
-                            }}
-                        >
-                            <SvgIcon iconName="dragHandle" size="1rem" />
-                        </Box>
+                        <Tooltip title={t('pages.home.toolbox.edit.dragSort')}>
+                            <Box
+                                sx={{
+                                    position: 'absolute',
+                                    top: 4,
+                                    right: 4,
+                                    opacity: 0.5,
+                                    '&:hover': { opacity: 1 },
+                                }}
+                            >
+                                <DragIndicatorIcon sx={{ fontSize: '1rem' }} />
+                            </Box>
+                        </Tooltip>
                     )}
                     <SvgIcon iconName={data.icon} size="32px" />
                     <Typography noWrap variant="body2">

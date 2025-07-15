@@ -6,10 +6,8 @@ export default {
                 search: '搜索',
                 fold: '折叠',
                 placeholder: '请输入图标名称',
-                label: '图标名称',
-                clear: '清空输入',
             },
-            backToTop: '滚动到顶部',
+            backToTop: '回到顶部',
         },
         pages: {
             home: {
@@ -19,6 +17,7 @@ export default {
                     edit: {
                         title: '编辑工具箱',
                         exit: '退出编辑',
+                        dragSort: '可拖动排序',
                         new: '新建工具项',
                         confirm: '确认',
                         cancel: '取消',

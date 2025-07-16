@@ -52,7 +52,7 @@ const NewToolOption = ({ onNewToolOption }: { onNewToolOption?: () => void }) =>
                     p={1}
                     sx={{ transition: '.4s', cursor: 'pointer', '&:hover': { bgcolor: theme.palette.action.hover } }}
                 >
-                    <AddIcon sx={{ height: '32px', width: '32px', color: theme.palette.text.secondary }} />
+                    <AddIcon sx={{ fontSize: 32, color: theme.palette.text.secondary }} />
                 </Stack>
             </CardActionArea>
         </Box>

@@ -196,7 +196,7 @@ const SettingButton = () => {
                                             </Stack>
                                         </AccordionSummary>
                                         <AccordionDetails>
-                                            <Box sx={{ height: 120, overflow: 'auto' }}>
+                                            <Box height={120} overflow="auto">
                                                 <FontTypographyList font={font.font} />
                                             </Box>
                                         </AccordionDetails>

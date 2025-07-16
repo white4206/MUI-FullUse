@@ -48,7 +48,7 @@ const Home = () => {
                             {isSwiperDataLoading ? (
                                 <>
                                     <Skeleton sx={{ borderRadius: 4 }} variant="rounded" height={xl ? 500 : lg ? 450 : md ? 400 : sm ? 300 : 200} />
-                                    <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }}>
+                                    <Box position="absolute" top="50%" left="50%" sx={{ transform: 'translate(-50%,-50%)' }}>
                                         <CircularProgress color="primary" />
                                     </Box>
                                 </>

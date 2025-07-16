@@ -61,7 +61,7 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
                 </Typography>
                 {/* 导航 */}
                 <Menu />
-                <Box sx={{ flexGrow: 1 }}></Box>
+                <Box flexGrow={1}></Box>
                 {/* 搜索 */}
                 <SearchButton />
                 {/* 功能按钮 */}

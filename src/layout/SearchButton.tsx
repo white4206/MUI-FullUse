@@ -1,18 +1,17 @@
 import { useBreakpoint } from '@/utils/hooks';
-import { IconButton, Paper, Typography, Chip, useTheme } from '@mui/material';
+import { IconButton, Paper, Typography, Chip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 
 const SearchButton = () => {
-    const theme = useTheme();
     const { xs } = useBreakpoint();
     const { t } = useTranslation();
     const [isExpand, setIsExpand] = useState<boolean>(false);
 
     return xs ? (
         <IconButton>
-            <SearchIcon sx={{ color: theme.palette.fullUseMain.main }} />
+            <SearchIcon sx={{ color: 'primary.main' }} />
         </IconButton>
     ) : (
         <Paper
@@ -22,8 +21,8 @@ const SearchButton = () => {
                 m: 1,
                 borderWidth: isExpand ? 2 : 0,
                 transition: 'border-color .4s',
-                '&:hover': { borderColor: theme.palette.fullUseMain.main },
-                bgcolor: isExpand ? theme.palette.navBarButtonBgColor : undefined,
+                '&:hover': { borderColor: 'primary.main' },
+                bgcolor: isExpand ? 'navBarButtonBgColor' : undefined,
             }}
         >
             <IconButton
@@ -40,8 +39,8 @@ const SearchButton = () => {
                 }}
                 onClick={() => setIsExpand(expand => !expand)}
             >
-                <SearchIcon sx={{ color: theme.palette.primary.main }} />
-                <Typography flexShrink={0} ml={1} mr={3} color={theme.palette.text.secondary} variant="body2">
+                <SearchIcon sx={{ color: 'primary.main' }} />
+                <Typography flexShrink={0} ml={1} mr={3} color={'text.secondary'} variant="body2">
                     {t('navBar.search')}
                 </Typography>
                 <Chip size="small" label="Ctrl+K" sx={{ height: 'auto', fontSize: 12, fontWeight: 600, p: 0 }} />

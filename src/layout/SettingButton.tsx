@@ -24,7 +24,6 @@ import {
     Switch,
     Tooltip,
     Typography,
-    useTheme,
 } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -36,7 +35,6 @@ import { CustomTextField } from '@/components/FUTextField';
 
 const SettingItemTitle = ({ props }: { props: { title: string; setting: string; canShow?: boolean } }) => {
     const { title, setting, canShow = true } = props;
-    const theme = useTheme();
     const { t } = useTranslation();
     const navBarButtons = useUserPreference(state => state.navBarButtons);
     const toggleShowNavBarButton = useUserPreference(state => state.toggleShowNavBarButton);
@@ -44,14 +42,14 @@ const SettingItemTitle = ({ props }: { props: { title: string; setting: string; 
     return (
         <Divider textAlign="left" sx={{ mb: 1 }}>
             <Stack direction="row" alignItems="center">
-                <Typography textTransform="uppercase" variant="caption" color={theme.palette.text.secondary} fontWeight={500}>
+                <Typography textTransform="uppercase" variant="caption" color={'text.secondary'} fontWeight={500}>
                     {t(title)}
                 </Typography>
                 {canShow && (
                     <Tooltip title={t(`setting.${navBarButtons[setting] === 'navBar' ? 'invisible' : 'visible'}`)} placement="right">
                         <IconButton size="small" onClick={() => toggleShowNavBarButton(setting)} sx={{ ml: 0.5 }}>
                             {navBarButtons[setting] === 'navBar' ? (
-                                <VisibilityTwoToneIcon sx={{ fontSize: '0.875rem', color: theme.palette.fullUseMain.main }} />
+                                <VisibilityTwoToneIcon sx={{ fontSize: '0.875rem', color: 'primary.main' }} />
                             ) : (
                                 <VisibilityOffTwoToneIcon sx={{ fontSize: '0.875rem' }} />
                             )}
@@ -66,7 +64,6 @@ const SettingItemTitle = ({ props }: { props: { title: string; setting: string; 
 const SettingButton = () => {
     const [open, setOpen] = useState<boolean>(false);
     const { xs } = useBreakpoint();
-    const theme = useTheme();
     const { t } = useTranslation();
     const { toggleThemeWithAnimation } = useDark();
     const themeMode = useUserPreference(state => state.themeMode);
@@ -80,7 +77,7 @@ const SettingButton = () => {
         <>
             <Tooltip title={t('navBar.setting')}>
                 <IconButton onClick={() => setOpen(true)}>
-                    <SettingsTwoToneIcon sx={{ color: theme.palette.fullUseMain.main }} />
+                    <SettingsTwoToneIcon sx={{ color: 'primary.main' }} />
                 </IconButton>
             </Tooltip>
             <SwipeableDrawer elevation={1} anchor="right" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
@@ -90,7 +87,7 @@ const SettingButton = () => {
                             {t('setting.title')}
                         </Typography>
                         <IconButton onClick={() => setOpen(false)}>
-                            <CloseIcon sx={{ color: theme.palette.fullUseMain.main }} />
+                            <CloseIcon sx={{ color: 'primary.main' }} />
                         </IconButton>
                     </Stack>
                     <Divider />
@@ -106,7 +103,7 @@ const SettingButton = () => {
                                         p: 1.5,
                                         borderRadius: 4,
                                         fontSize: 14,
-                                        borderColor: theme.palette.buttonBorderColor,
+                                        borderColor: 'buttonBorderColor',
                                         '&:not(.active-theme-button):hover': { borderRightColor: 'transparent !important' },
                                     }}
                                 >
@@ -119,7 +116,7 @@ const SettingButton = () => {
                                     sx={{
                                         p: 1.5,
                                         fontSize: 14,
-                                        borderColor: theme.palette.buttonBorderColor,
+                                        borderColor: 'buttonBorderColor',
                                         '&:not(.active-theme-button):hover': { borderRightColor: 'transparent !important' },
                                         ml: '0 !important',
                                     }}
@@ -135,7 +132,7 @@ const SettingButton = () => {
                                         p: 1.5,
                                         borderRadius: 4,
                                         fontSize: 14,
-                                        borderColor: theme.palette.buttonBorderColor,
+                                        borderColor: 'buttonBorderColor',
                                         ml: '0 !important',
                                     }}
                                 >
@@ -196,7 +193,7 @@ const SettingButton = () => {
                                             </Stack>
                                         </AccordionSummary>
                                         <AccordionDetails>
-                                            <Box sx={{ height: 120, overflow: 'auto' }}>
+                                            <Box height={120} overflow="auto">
                                                 <FontTypographyList font={font.font} />
                                             </Box>
                                         </AccordionDetails>

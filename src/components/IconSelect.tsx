@@ -1,4 +1,4 @@
-import { CardActionArea, IconButton, InputAdornment, Paper, Stack, Tooltip, Typography, useTheme } from '@mui/material';
+import { CardActionArea, IconButton, InputAdornment, Paper, Stack, Tooltip, Typography } from '@mui/material';
 import SvgIcon from '@/components/SvgIcon';
 import { useTranslation } from 'react-i18next';
 import AppsIcon from '@mui/icons-material/Apps';
@@ -16,7 +16,6 @@ interface IconSelectProps {
 }
 
 const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => {
-    const theme = useTheme();
     const { t } = useTranslation();
     const [search, setSearch] = useState<string>('');
     const [isSearch, setIsSearch] = useState<boolean>(true);
@@ -84,7 +83,7 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                         {select ? (
                             <SvgIcon iconName={select} />
                         ) : isSearch ? (
-                            <ImageSearchTwoToneIcon sx={{ fontSize: '1rem', color: isSearch ? theme.palette.fullUseMain.main : undefined }} />
+                            <ImageSearchTwoToneIcon sx={{ fontSize: '1rem', color: isSearch ? 'primary.main' : undefined }} />
                         ) : (
                             <ImageSearchIcon sx={{ fontSize: '1rem' }} />
                         )}
@@ -162,7 +161,7 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                                 sx={{
                                     cursor: 'pointer',
                                     transition: '.4s',
-                                    bgcolor: theme.palette.bgColor,
+                                    bgcolor: 'bgColor',
                                 }}
                                 onClick={() => handleSelectIcon(icon)}
                             >

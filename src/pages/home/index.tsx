@@ -1,4 +1,4 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, CircularProgress, Container, Grid, Skeleton, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Card, CardActionArea, CardContent, CardMedia, CircularProgress, Container, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { useBreakpoint } from '@/utils/hooks';
@@ -11,7 +11,6 @@ import RelatedLinkCard from '@/pages/home/RelatedLinkCard';
 import { defaultCarousel } from '@/utils/constant';
 
 const Home = () => {
-    const theme = useTheme();
     const { xl, lg, md, sm } = useBreakpoint();
     const [isSwiperDataLoading, setIsSwiperDataLoading] = useState<boolean>(true);
     const [swiperData, setSwiperData] = useState<Carousel[]>([]);
@@ -40,7 +39,7 @@ const Home = () => {
 
     return (
         <>
-            <Box bgcolor={theme.palette.bgColor}>
+            <Box bgcolor="bgColor">
                 <Container maxWidth="xl" sx={{ p: 2, pl: { xl: 10, lg: 10 }, pr: { xl: 10, lg: 10 } }}>
                     <Grid justifyContent="center" container spacing={xl ? 8 : lg ? 6 : 0}>
                         {/* 左侧轮播图 */}
@@ -48,7 +47,7 @@ const Home = () => {
                             {isSwiperDataLoading ? (
                                 <>
                                     <Skeleton sx={{ borderRadius: 4 }} variant="rounded" height={xl ? 500 : lg ? 450 : md ? 400 : sm ? 300 : 200} />
-                                    <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }}>
+                                    <Box position="absolute" top="50%" left="50%" sx={{ transform: 'translate(-50%,-50%)' }}>
                                         <CircularProgress color="primary" />
                                     </Box>
                                 </>
@@ -98,7 +97,7 @@ const Home = () => {
                                                 <Typography className="text-ellipsis-2" gutterBottom variant="subtitle1" fontWeight={500}>
                                                     {headArticleData?.title}
                                                 </Typography>
-                                                <Typography variant="body2" sx={{ color: theme.palette.text.secondary }} className="text-ellipsis-2">
+                                                <Typography variant="body2" sx={{ color: 'text.secondary' }} className="text-ellipsis-2">
                                                     {headArticleData?.abstractText}
                                                 </Typography>
                                             </CardContent>

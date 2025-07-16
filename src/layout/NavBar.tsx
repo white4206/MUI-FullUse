@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, useTheme, Divider, Link, Tooltip } from '@mui/material';
+import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, Divider, Link, Tooltip } from '@mui/material';
 import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 import LightModeTwoToneIcon from '@mui/icons-material/LightModeTwoTone';
 import logo from '@/assets/icons/svg/logo.svg';
@@ -17,7 +17,6 @@ import { name } from '@/utils/constant';
 
 const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<number>> }) => {
     const appBarRef = useRef<HTMLElement>(null);
-    const theme = useTheme();
     const navBarButtons = useUserPreference(state => state.navBarButtons);
     const { isDark, toggleThemeWithAnimation } = useDark();
     const { t } = useTranslation();
@@ -40,7 +39,7 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
         <AppBar
             ref={appBarRef}
             sx={{
-                bgcolor: theme.palette.appBarColor,
+                bgcolor: 'appBarColor',
                 backdropFilter: 'blur(8px)',
             }}
             variant="outlined"
@@ -51,12 +50,12 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
                     <CardMedia component="img" sx={{ width: 32, transition: '.4s', '&:hover': { transform: 'rotate(180deg)' } }} image={logo} alt="logo" />
                 </Link>
                 <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 2.5, ml: 1, mr: 0, display: { sm: 'block', xs: 'none' } }} />
-                <Typography display={{ sm: 'block', xs: 'none' }} p={1} color={theme.palette.text.primary}>
+                <Typography display={{ sm: 'block', xs: 'none' }} p={1} color={'text.primary'}>
                     {name}
                 </Typography>
                 {/* 导航 */}
                 <Menu />
-                <Box sx={{ flexGrow: 1 }}></Box>
+                <Box flexGrow={1}></Box>
                 {/* 搜索 */}
                 <SearchButton />
                 {/* 功能按钮 */}

@@ -16,7 +16,6 @@ import {
     IconButton,
     Paper,
     Skeleton,
-    useTheme,
     type SxProps,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
@@ -35,12 +34,10 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 // 新建工具项
 const NewToolOption = ({ onNewToolOption }: { onNewToolOption?: () => void }) => {
-    const theme = useTheme();
-
     return (
         <Box flex="0 0 25%" p={0.5}>
             <CardActionArea
-                sx={{ height: '100%', borderRadius: 2, border: `2px dashed ${theme.palette.buttonBorderColor}` }}
+                sx={{ height: '100%', borderRadius: 2, borderWidth: 2, borderStyle: 'dashed', borderColor: 'buttonBorderColor' }}
                 onClick={() => onNewToolOption && onNewToolOption()}
             >
                 <Stack
@@ -50,9 +47,9 @@ const NewToolOption = ({ onNewToolOption }: { onNewToolOption?: () => void }) =>
                     justifyContent="center"
                     borderRadius={2}
                     p={1}
-                    sx={{ transition: '.4s', cursor: 'pointer', '&:hover': { bgcolor: theme.palette.action.hover } }}
+                    sx={{ transition: '.4s', cursor: 'pointer', '&:hover': { bgcolor: 'action.hover' } }}
                 >
-                    <AddIcon sx={{ height: '32px', width: '32px', color: theme.palette.text.secondary }} />
+                    <AddIcon sx={{ fontSize: 32, color: 'text.secondary' }} />
                 </Stack>
             </CardActionArea>
         </Box>
@@ -60,7 +57,6 @@ const NewToolOption = ({ onNewToolOption }: { onNewToolOption?: () => void }) =>
 };
 
 const ToolboxItem = ({ sx, editMode, data }: { sx?: SxProps; editMode: boolean; data: ToolOption }) => {
-    const theme = useTheme();
     const { t } = useTranslation();
     // 使用 useSortable 钩子使项目可拖拽
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: data.id, disabled: !editMode });
@@ -92,8 +88,8 @@ const ToolboxItem = ({ sx, editMode, data }: { sx?: SxProps; editMode: boolean; 
                     p={1}
                     sx={{
                         transition: '.4s',
-                        bgcolor: isDragging ? theme.palette.action.selected : 'inherit',
-                        '&:hover': { bgcolor: theme.palette.action.hover },
+                        bgcolor: isDragging ? 'action.selected' : 'inherit',
+                        '&:hover': { bgcolor: 'action.hover' },
                     }}
                 >
                     {/* 拖拽手柄图标 - 仅在编辑模式下显示 */}
@@ -143,7 +139,6 @@ const NewToolOptionDialog = ({ open, setOpen }: { open: boolean; setOpen: (open:
 
 const Toolbox = () => {
     const { t } = useTranslation();
-    const theme = useTheme();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [toolOptionData, setToolOptionData] = useState<ToolOption[]>([]);
     const [newToolOptionOpen, setNewToolOptionOpen] = useState<boolean>(false);
@@ -240,7 +235,7 @@ const Toolbox = () => {
 
     return (
         <Card sx={{ borderRadius: 4 }} elevation={3}>
-            <CardContent sx={{ p: '0 !important', bgcolor: theme.palette.toolboxBgColor }}>
+            <CardContent sx={{ p: '0 !important', bgcolor: 'toolboxBgColor' }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" p={2} pb={1}>
                     <Stack direction="row" alignItems="center">
                         <Typography fontWeight={600} variant="h6">
@@ -251,29 +246,25 @@ const Toolbox = () => {
                                 onClick={() => setEditMode(editMode => !editMode)}
                                 sx={{ ml: 0.5, transition: '.4s', transform: editMode ? 'rotate(15deg)' : undefined }}
                             >
-                                <HardwareTwoToneIcon sx={{ fontSize: '1rem', color: editMode ? theme.palette.fullUseMain.main : undefined }} />
+                                <HardwareTwoToneIcon sx={{ fontSize: '1rem', color: editMode ? 'primary.main' : undefined }} />
                             </IconButton>
                         </Tooltip>
                     </Stack>
                     {scrollContainer && scrollContainer.clientWidth < scrollContainer.scrollWidth && (
-                        <Stack direction="row" alignItems="center" borderRadius={4} bgcolor={theme.palette.navBarButtonBgColor}>
+                        <Stack direction="row" alignItems="center" borderRadius={4} bgcolor="navBarButtonBgColor">
                             <IconButton
                                 disabled={!canScrollLeft}
                                 onClick={() => toggleScroll(-itemWidth)}
                                 sx={{ borderRadius: 4, height: '1.5rem', width: '1.5rem' }}
                             >
-                                <KeyboardArrowLeftIcon
-                                    sx={{ fontSize: '1.25rem', color: canScrollLeft ? theme.palette.primary.main : theme.palette.text.disabled }}
-                                />
+                                <KeyboardArrowLeftIcon sx={{ fontSize: '1.25rem', color: canScrollLeft ? 'primary.main' : 'text.disabled' }} />
                             </IconButton>
                             <IconButton
                                 disabled={!canScrollRight}
                                 onClick={() => toggleScroll(itemWidth)}
                                 sx={{ borderRadius: 4, height: '1.5rem', width: '1.5rem' }}
                             >
-                                <KeyboardArrowRightIcon
-                                    sx={{ fontSize: '1.25rem', color: canScrollRight ? theme.palette.primary.main : theme.palette.text.disabled }}
-                                />
+                                <KeyboardArrowRightIcon sx={{ fontSize: '1.25rem', color: canScrollRight ? 'primary.main' : 'text.disabled' }} />
                             </IconButton>
                         </Stack>
                     )}
@@ -304,8 +295,9 @@ const Toolbox = () => {
                                             editMode={editMode}
                                             sx={{
                                                 '& .MuiButtonBase-root': {
-                                                    border: '2px dashed',
-                                                    borderColor: editMode ? theme.palette.buttonBorderColor : 'transparent',
+                                                    borderWidth: 2,
+                                                    borderStyle: ' dashed',
+                                                    borderColor: editMode ? 'buttonBorderColor' : 'transparent',
                                                     animation: editMode ? 'shake 0.4s ease infinite' : undefined,
                                                 },
                                                 '& :hover': {

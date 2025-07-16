@@ -14,6 +14,7 @@ import { useDark } from '@/utils/hooks';
 import { useTranslation } from 'react-i18next';
 import FullscreenButton from '@/layout/FullscreenButton';
 import { name } from '@/utils/constant';
+import LoginUser from './LoginUser';
 
 interface NavBarProps {
     setNavBarHeight: (clientHeight: number) => void;
@@ -63,6 +64,8 @@ const NavBar = ({ props }: { props: NavBarProps }) => {
                 <Box flexGrow={1}></Box>
                 {/* 搜索 */}
                 <SearchButton />
+                {/* 登录用户 */}
+                <LoginUser />
                 {/* 功能按钮 */}
                 <Box display={{ md: 'block', xs: 'none' }}>
                     {/* 国际化切换 */}

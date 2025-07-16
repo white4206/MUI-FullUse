@@ -1,4 +1,4 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, CircularProgress, Container, Grid, Skeleton, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Card, CardActionArea, CardContent, CardMedia, CircularProgress, Container, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { useBreakpoint } from '@/utils/hooks';
@@ -11,7 +11,6 @@ import RelatedLinkCard from '@/pages/home/RelatedLinkCard';
 import { defaultCarousel } from '@/utils/constant';
 
 const Home = () => {
-    const theme = useTheme();
     const { xl, lg, md, sm } = useBreakpoint();
     const [isSwiperDataLoading, setIsSwiperDataLoading] = useState<boolean>(true);
     const [swiperData, setSwiperData] = useState<Carousel[]>([]);
@@ -40,7 +39,7 @@ const Home = () => {
 
     return (
         <>
-            <Box bgcolor={theme.palette.bgColor}>
+            <Box bgcolor="bgColor">
                 <Container maxWidth="xl" sx={{ p: 2, pl: { xl: 10, lg: 10 }, pr: { xl: 10, lg: 10 } }}>
                     <Grid justifyContent="center" container spacing={xl ? 8 : lg ? 6 : 0}>
                         {/* 左侧轮播图 */}
@@ -104,7 +103,7 @@ const Home = () => {
                                                 >
                                                     {headArticleData?.title}
                                                 </Typography>
-                                                <Typography variant="body2" sx={{ color: theme.palette.text.secondary }} className="text-ellipsis-2">
+                                                <Typography variant="body2" sx={{ color: 'text.secondary' }} className="text-ellipsis-2">
                                                     {headArticleData?.abstractText}
                                                 </Typography>
                                             </CardContent>

@@ -1,4 +1,4 @@
-import { Box, Button, Typography, useTheme, SwipeableDrawer, IconButton, Stack, Divider, Paper } from '@mui/material';
+import { Box, Button, Typography, SwipeableDrawer, IconButton, Stack, Divider, Paper } from '@mui/material';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import WidgetsTwoToneIcon from '@mui/icons-material/WidgetsTwoTone';
@@ -18,7 +18,6 @@ const Menu = () => {
         { id: 3, title: 'pages.download.title', path: '/download', icon: <DownloadTwoToneIcon /> },
         { id: 4, title: 'pages.video.title', path: '/video', icon: <VideoLibraryTwoToneIcon /> },
     ];
-    const theme = useTheme();
     const [open, setOpen] = useState<boolean>(false);
     const { t } = useTranslation();
     const currentPath = useLocation().pathname;
@@ -33,7 +32,7 @@ const Menu = () => {
                     borderRadius: 8,
                     ml: 1,
                     mr: 1,
-                    bgcolor: theme.palette.navBarButtonBgColor,
+                    bgcolor: 'navBarButtonBgColor',
                 }}
             >
                 <Stack direction="row" alignItems="center">
@@ -56,14 +55,14 @@ const Menu = () => {
                 </Stack>
             </Paper>
             <IconButton sx={{ m: 0.5, display: { lg: 'none', xs: 'flex' } }} onClick={() => setOpen(true)}>
-                <WidgetsTwoToneIcon sx={{ color: theme.palette.fullUseMain.main }} />
+                <WidgetsTwoToneIcon sx={{ color: 'primary.main' }} />
             </IconButton>
             <SwipeableDrawer elevation={1} anchor="left" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
                 <Stack direction="row" alignItems="center" p={2} width={xs ? 190 : 240}>
                     {/* logo */}
                     <SvgIcon iconName="logo" size="32px" />
                     <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 1, ml: 1, mr: 0 }} />
-                    <Typography p={1} color={theme.palette.text.primary}>
+                    <Typography p={1} color={'text.primary'}>
                         {name}
                     </Typography>
                 </Stack>
@@ -77,10 +76,10 @@ const Menu = () => {
                             component={Link}
                             to={routeLink.path}
                             className={(currentPath === routeLink.path ? 'active-vertical-menu-item' : '') + ' clear-default'}
-                            sx={{ m: 1, borderRadius: 2, transition: '.4s', '&:hover': { bgcolor: theme.palette.action.hover } }}
+                            sx={{ m: 1, borderRadius: 2, transition: '.4s', '&:hover': { bgcolor: 'action.hover' } }}
                         >
                             <IconButton>{routeLink.icon}</IconButton>
-                            <Typography ml={2} color={theme.palette.text.primary}>
+                            <Typography ml={2} color={'text.primary'}>
                                 {t(routeLink.title)}
                             </Typography>
                         </Stack>

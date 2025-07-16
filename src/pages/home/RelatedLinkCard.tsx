@@ -6,7 +6,6 @@ import {
     ListItemText,
     Collapse,
     CardMedia,
-    useTheme,
     IconButton,
     Stack,
     Breadcrumbs,
@@ -28,7 +27,6 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SvgIcon from '@/components/SvgIcon';
 
 const RelatedLinkCard = () => {
-    const theme = useTheme();
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [relatedLinkData, setRelatedLinkData] = useState<(RelatedLink & { hasSub: boolean; open: boolean })[]>([]);
@@ -95,16 +93,16 @@ const RelatedLinkCard = () => {
                                     //有子链接的显示展开图标
                                     link.subLinks && link.subLinks.length > 0 ? (
                                         link.open ? (
-                                            <ExpandLessIcon sx={{ color: theme.palette.text.secondary }} />
+                                            <ExpandLessIcon sx={{ color: 'text.secondary' }} />
                                         ) : (
-                                            <ExpandMoreIcon sx={{ color: theme.palette.text.secondary }} />
+                                            <ExpandMoreIcon sx={{ color: 'text.secondary' }} />
                                         )
                                     ) : link.sideIcon ? (
                                         // 无子链接设置侧边图标的显示侧边图标
                                         <SvgIcon iconName={link.sideIcon} />
                                     ) : (
                                         // 否则显示默认链接图标
-                                        <LinkIcon sx={{ color: theme.palette.primary.main }} />
+                                        <LinkIcon sx={{ color: 'primary.main' }} />
                                     )
                                 }
                             </ListItemButton>
@@ -125,7 +123,7 @@ const RelatedLinkCard = () => {
                                                         <Link
                                                             underline="hover"
                                                             fontSize={14}
-                                                            color={theme.palette.text.secondary}
+                                                            color={'text.secondary'}
                                                             href="https://github.com/white4206"
                                                             target="_blank"
                                                             rel="noreferrer noopener"
@@ -135,7 +133,7 @@ const RelatedLinkCard = () => {
                                                         <Link
                                                             underline="hover"
                                                             fontSize={14}
-                                                            color={theme.palette.text.primary}
+                                                            color={'text.primary'}
                                                             href="https://github.com/white4206/MUI-FullUse"
                                                             target="_blank"
                                                             rel="noreferrer noopener"
@@ -144,11 +142,7 @@ const RelatedLinkCard = () => {
                                                         </Link>
                                                     </Breadcrumbs>
                                                 </ListItemText>
-                                                {subLink.sideIcon ? (
-                                                    <SvgIcon iconName={subLink.sideIcon} />
-                                                ) : (
-                                                    <CommitIcon sx={{ color: theme.palette.primary.main }} />
-                                                )}
+                                                {subLink.sideIcon ? <SvgIcon iconName={subLink.sideIcon} /> : <CommitIcon sx={{ color: 'primary.main' }} />}
                                             </ListItemButton>
                                         ))}
                                 </List>

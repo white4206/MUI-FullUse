@@ -64,7 +64,6 @@ const LoginUser = () => {
                     pointerEvents: 'none', // 防止Popover拦截鼠标事件 -> 实现鼠标在popover的内容以外的元素(主要是遮罩层)里会触发外层盒子的onMouseLeave事件
                     '& .MuiPopover-paper': {
                         maxHeight: 'none',
-                        borderRadius: 4,
                         pointerEvents: 'auto', // 允许Popover内容接收鼠标事件 -> 实现鼠标在popover的内容里不会触发外层盒子的onMouseLeave事件
                     },
                 }}

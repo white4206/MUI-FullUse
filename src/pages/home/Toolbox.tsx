@@ -122,7 +122,7 @@ const NewToolOptionDialog = ({ open, setOpen }: { open: boolean; setOpen: (open:
     const { t } = useTranslation();
 
     return (
-        <Dialog maxWidth="xs" sx={{ '& .MuiDialog-paper': { borderRadius: 4 } }} open={open} onClose={() => setOpen(false)}>
+        <Dialog maxWidth="xs" open={open} onClose={() => setOpen(false)}>
             <DialogTitle>{t('pages.home.toolbox.edit.new')}</DialogTitle>
             <DialogContent>
                 <IconSelect onIconSelect={icon => console.log(icon)} />
@@ -234,7 +234,7 @@ const Toolbox = () => {
     }, [scrollContainer, toolOptionData, editMode]); // 依赖项
 
     return (
-        <Card sx={{ borderRadius: 4 }} elevation={3}>
+        <Card elevation={3}>
             <CardContent sx={{ p: '0 !important', bgcolor: 'toolboxBgColor' }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" p={2} pb={1}>
                     <Stack direction="row" alignItems="center">

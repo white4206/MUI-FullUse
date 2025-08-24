@@ -1,13 +1,5 @@
-import { Box, Stack, styled, TextField, Typography } from '@mui/material';
+import { Box, Stack, TextField, Typography } from '@mui/material';
 import type { StackProps, TextFieldProps, CSSProperties } from '@mui/material';
-
-const CustomTextField = styled(TextField)(({ theme }) => ({
-    '& .MuiInputBase-root': { fontSize: '0.875rem', fontWeight: 500, backgroundColor: theme.palette.inputBgColor, borderRadius: 16 },
-    '& .MuiInputBase-root .MuiOutlinedInput-notchedOutline': { transition: '.4s' },
-    '& .MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline': { borderWidth: 2, borderColor: theme.palette.primary.main },
-    '& fieldset': { borderWidth: 2, borderRadius: 16, borderColor: 'transparent' },
-    marginBottom: '0 !important',
-}));
 
 interface FuTextFieldProps {
     labelPosition?: 'left' | 'top';
@@ -54,10 +46,9 @@ const FuTextField = (props: FuTextFieldProps & TextFieldProps) => {
                     </Box>
                 )}
             </Stack>
-            <CustomTextField size="small" {...rest} />
+            <TextField size="small" {...rest} />
         </Stack>
     );
 };
 
-export { CustomTextField };
 export default FuTextField;

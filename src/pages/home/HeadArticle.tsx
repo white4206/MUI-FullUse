@@ -23,7 +23,7 @@ const HeadArticle = () => {
     }, []);
 
     return (
-        <Card sx={{ borderRadius: 4 }} elevation={3}>
+        <Card elevation={3}>
             {isLoading ? (
                 <>
                     <Skeleton height={xl ? 180 : 130} sx={{ borderRadius: 4 }} variant="rounded" />

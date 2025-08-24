@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import en from '@/i18n/en';
-import ch from '@/i18n/ch';
+import zh_CN from '@/i18n/zh-CN';
 import { useUserPreference } from '@/store';
 
 const language = useUserPreference.getState().language;
@@ -13,11 +13,11 @@ const lng =
 
 void i18n.use(initReactI18next).init({
     resources: {
-        ch,
+        'zh-CN': zh_CN,
         en,
     },
-    lng: lng || 'ch', // 默认语言
-    fallbackLng: 'ch', // 回退默认语言
+    lng: lng || 'zh-CN', // 默认语言
+    fallbackLng: 'zh-CN', // 回退默认语言
     interpolation: {
         escapeValue: false,
     },
@@ -25,13 +25,14 @@ void i18n.use(initReactI18next).init({
 
 const useI18n = () => {
     const languages = [
-        { id: 1, language: 'ch', label: '简体中文' },
+        { id: 1, language: 'zh-CN', label: '简体中文' },
         { id: 2, language: 'en', label: 'English' },
     ];
     const setLanguage = useUserPreference(state => state.setLanguage);
 
     const changeLanguage = (language: string) => {
         void i18n.changeLanguage(language);
+        console.log(navigator.languages[0], navigator.language);
         // 若切换语言为浏览器当前语言则跟随浏览器变化
         if ((navigator.language || navigator.languages[0]) === language || language === 'auto') setLanguage('auto');
         else setLanguage(language);

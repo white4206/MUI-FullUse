@@ -41,7 +41,7 @@ export default {
             },
         },
         navBar: {
-            search: 'Search',
+            search: 'Quick search',
             theme: 'Theme',
             language: 'Language',
             font: 'Font',

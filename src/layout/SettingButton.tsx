@@ -40,16 +40,21 @@ const SettingItemTitle = ({ props }: { props: { title: string; setting: string; 
     const toggleShowNavBarButton = useUserPreference(state => state.toggleShowNavBarButton);
 
     return (
-        <Divider textAlign="left" sx={{ mb: 1 }}>
+        <Divider textAlign="left" sx={{ mb: 1, borderStyle: 'dashed' }}>
             <Stack direction="row" alignItems="center">
-                <Typography textTransform="uppercase" variant="caption" color={'text.secondary'} fontWeight={500}>
+                <Typography textTransform="uppercase" variant="caption" color="text.secondary" fontWeight={500}>
                     {t(title)}
                 </Typography>
                 {canShow && (
                     <Tooltip title={t(`setting.${navBarButtons[setting] === 'navBar' ? 'invisible' : 'visible'}`)} placement="right">
-                        <IconButton size="small" onClick={() => toggleShowNavBarButton(setting)} sx={{ ml: 0.5 }}>
+                        <IconButton
+                            color={navBarButtons[setting] === 'navBar' ? 'primary' : undefined}
+                            size="small"
+                            onClick={() => toggleShowNavBarButton(setting)}
+                            sx={{ ml: 0.5 }}
+                        >
                             {navBarButtons[setting] === 'navBar' ? (
-                                <VisibilityTwoToneIcon sx={{ fontSize: '0.875rem', color: 'primary.main' }} />
+                                <VisibilityTwoToneIcon sx={{ fontSize: '0.875rem' }} />
                             ) : (
                                 <VisibilityOffTwoToneIcon sx={{ fontSize: '0.875rem' }} />
                             )}
@@ -76,51 +81,65 @@ const SettingButton = () => {
     return (
         <>
             <Tooltip title={t('navBar.setting')}>
-                <IconButton onClick={() => setOpen(true)}>
-                    <SettingsTwoToneIcon sx={{ color: 'primary.main' }} />
+                <IconButton color="primary" onClick={() => setOpen(true)}>
+                    <SettingsTwoToneIcon />
                 </IconButton>
             </Tooltip>
-            <SwipeableDrawer elevation={1} anchor="right" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
+            <SwipeableDrawer
+                elevation={1}
+                anchor="right"
+                open={open}
+                onOpen={() => setOpen(true)}
+                onClose={() => setOpen(false)}
+                sx={{
+                    '& .MuiDrawer-paper': {
+                        borderTopLeftRadius: 16,
+                        borderBottomLeftRadius: 16,
+                    },
+                }}
+            >
                 <Box width={xs ? 280 : 360}>
                     <Stack p={2} direction="row" justifyContent="space-between" alignItems="center">
                         <Typography variant="subtitle1" fontWeight={500}>
                             {t('setting.title')}
                         </Typography>
-                        <IconButton onClick={() => setOpen(false)}>
-                            <CloseIcon sx={{ color: 'primary.main' }} />
+                        <IconButton color="primary" onClick={() => setOpen(false)}>
+                            <CloseIcon />
                         </IconButton>
                     </Stack>
-                    <Divider />
-                    <Stack p={2}>
+                    <Stack p={2} pt={0}>
                         {/* 主题切换 */}
                         <Box mb={1}>
                             <SettingItemTitle props={{ title: 'setting.theme.title', setting: 'theme' }} />
-                            <ButtonGroup fullWidth size="large" color="inherit" sx={{ textTransform: 'none' }}>
+                            <ButtonGroup
+                                fullWidth
+                                size="large"
+                                color="inherit"
+                                sx={{
+                                    '& .MuiButton-root': {
+                                        ml: 0,
+                                        p: 1.5,
+                                        fontSize: 14,
+                                        borderWidth: 2,
+                                        borderColor: 'buttonBorderColor',
+                                    },
+                                    '& .MuiButton-root:hover': {
+                                        borderColor: 'buttonBorderColor',
+                                    },
+                                    '& .MuiButton-root:not(:first-of-type)': {
+                                        ml: -0.25,
+                                    },
+                                }}
+                            >
                                 <Button
                                     onClick={e => void toggleThemeWithAnimation(e, 'light')}
                                     className={themeMode === 'light' ? 'active-theme-button' : ''}
-                                    sx={{
-                                        p: 1.5,
-                                        borderRadius: 4,
-                                        fontSize: 14,
-                                        borderColor: 'buttonBorderColor',
-                                        '&:not(.active-theme-button):hover': { borderRightColor: 'transparent !important' },
-                                    }}
+                                    sx={{ borderRadius: 4 }}
                                 >
                                     <LightModeTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
                                     {t('setting.theme.light')}
                                 </Button>
-                                <Button
-                                    onClick={e => void toggleThemeWithAnimation(e, 'auto')}
-                                    className={themeMode === 'auto' ? 'active-theme-button' : ''}
-                                    sx={{
-                                        p: 1.5,
-                                        fontSize: 14,
-                                        borderColor: 'buttonBorderColor',
-                                        '&:not(.active-theme-button):hover': { borderRightColor: 'transparent !important' },
-                                        ml: '0 !important',
-                                    }}
-                                >
+                                <Button onClick={e => void toggleThemeWithAnimation(e, 'auto')} className={themeMode === 'auto' ? 'active-theme-button' : ''}>
                                     <SettingsBrightnessTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
                                     {t('setting.theme.auto')}
                                 </Button>
@@ -128,13 +147,7 @@ const SettingButton = () => {
                                 <Button
                                     onClick={e => void toggleThemeWithAnimation(e, 'dark')}
                                     className={themeMode === 'dark' ? 'active-theme-button' : ''}
-                                    sx={{
-                                        p: 1.5,
-                                        borderRadius: 4,
-                                        fontSize: 14,
-                                        borderColor: 'buttonBorderColor',
-                                        ml: '0 !important',
-                                    }}
+                                    sx={{ borderRadius: 4 }}
                                 >
                                     <DarkModeTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
                                     {t('setting.theme.dark')}

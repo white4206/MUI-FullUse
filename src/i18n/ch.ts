@@ -41,7 +41,7 @@ export default {
             },
         },
         navBar: {
-            search: '搜索',
+            search: '快速搜索',
             theme: '主题',
             i18n: '国际化',
             font: '字体',

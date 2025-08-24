@@ -1,11 +1,9 @@
 import { getHeadArticle } from '@/api/article';
-import { useBreakpoint } from '@/utils/hooks';
 import { mapUrl } from '@/utils/url';
 import { Card, Skeleton, CardContent, CardActionArea, CardMedia, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 
 const HeadArticle = () => {
-    const { xl } = useBreakpoint();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [headArticleData, setHeadArticleData] = useState<HeadArticle | null>(null);
 
@@ -26,25 +24,20 @@ const HeadArticle = () => {
         <Card elevation={3}>
             {isLoading ? (
                 <>
-                    <Skeleton height={xl ? 180 : 130} sx={{ borderRadius: 4 }} variant="rounded" />
+                    <Skeleton height={160} sx={{ borderRadius: 4 }} variant="rounded" />
                     <CardContent>
-                        <Skeleton height={16} sx={{ mb: 1, width: '70%' }} variant="rounded" />
-                        <Skeleton height={16} sx={{ mb: 1 }} variant="rounded" />
+                        <Skeleton height={24} sx={{ mb: 1, width: '70%' }} variant="rounded" />
+                        <Skeleton height={24} sx={{ mb: 1 }} variant="rounded" />
                     </CardContent>
                 </>
             ) : (
                 <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        sx={{ height: { xl: 180, lg: 130 }, borderRadius: 4 }}
-                        image={headArticleData?.cover || undefined}
-                        alt={headArticleData?.title}
-                    />
+                    <CardMedia component="img" sx={{ height: 160, borderRadius: 4 }} image={headArticleData?.cover || undefined} alt={headArticleData?.title} />
                     <CardContent>
                         <Typography className="text-ellipsis-2" gutterBottom variant="subtitle1" fontWeight={500}>
                             {headArticleData?.title}
                         </Typography>
-                        <Typography variant="body2" sx={{ color: 'text.secondary' }} className="text-ellipsis-2">
+                        <Typography variant="body2" color="text.secondary" className="text-ellipsis-2">
                             {headArticleData?.abstractText}
                         </Typography>
                     </CardContent>

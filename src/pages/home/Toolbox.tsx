@@ -125,7 +125,7 @@ const NewToolOptionDialog = ({ open, setOpen }: { open: boolean; setOpen: (open:
         <Dialog maxWidth="xs" open={open} onClose={() => setOpen(false)}>
             <DialogTitle>{t('pages.home.toolbox.edit.new')}</DialogTitle>
             <DialogContent>
-                <IconSelect onIconSelect={icon => console.log(icon)} />
+                <IconSelect size="small" onIconSelect={icon => console.log(icon)} />
                 <FuTextField sx={{ mb: 1 }} labelPosition="top" label={t('pages.home.toolbox.edit.name')} fullWidth />
                 <FuTextField sx={{ mb: 1 }} labelPosition="top" label={t('pages.home.toolbox.edit.path')} fullWidth />
             </DialogContent>
@@ -243,28 +243,31 @@ const Toolbox = () => {
                         </Typography>
                         <Tooltip title={t(`pages.home.toolbox.edit.${editMode ? 'exit' : 'title'}`)} placement="right">
                             <IconButton
+                                color={editMode ? 'primary' : undefined}
                                 onClick={() => setEditMode(editMode => !editMode)}
                                 sx={{ ml: 0.5, transition: '.4s', transform: editMode ? 'rotate(15deg)' : undefined }}
                             >
-                                <HardwareTwoToneIcon sx={{ fontSize: '1rem', color: editMode ? 'primary.main' : undefined }} />
+                                <HardwareTwoToneIcon sx={{ fontSize: '1rem' }} />
                             </IconButton>
                         </Tooltip>
                     </Stack>
                     {scrollContainer && scrollContainer.clientWidth < scrollContainer.scrollWidth && (
                         <Stack direction="row" alignItems="center" borderRadius={4} bgcolor="navBarButtonBgColor">
                             <IconButton
+                                color="primary"
                                 disabled={!canScrollLeft}
                                 onClick={() => toggleScroll(-itemWidth)}
                                 sx={{ borderRadius: 4, height: '1.5rem', width: '1.5rem' }}
                             >
-                                <KeyboardArrowLeftIcon sx={{ fontSize: '1.25rem', color: canScrollLeft ? 'primary.main' : 'text.disabled' }} />
+                                <KeyboardArrowLeftIcon sx={{ fontSize: '1.25rem' }} />
                             </IconButton>
                             <IconButton
+                                color="primary"
                                 disabled={!canScrollRight}
                                 onClick={() => toggleScroll(itemWidth)}
                                 sx={{ borderRadius: 4, height: '1.5rem', width: '1.5rem' }}
                             >
-                                <KeyboardArrowRightIcon sx={{ fontSize: '1.25rem', color: canScrollRight ? 'primary.main' : 'text.disabled' }} />
+                                <KeyboardArrowRightIcon sx={{ fontSize: '1.25rem' }} />
                             </IconButton>
                         </Stack>
                     )}

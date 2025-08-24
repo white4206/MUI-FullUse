@@ -18,7 +18,7 @@ const Menu = () => {
         { id: 4, title: 'pages.video', path: '/video', icon: <VideoLibraryIcon /> },
     ];
     const theme = useTheme();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
     const { t } = useTranslation();
     const currentPath = useLocation().pathname;
     const { xs } = useBreakpoint();

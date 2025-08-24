@@ -69,19 +69,17 @@
 /* 垂直激活菜单项 */
 .active-vertical-menu-item {
     background-color: var(--full-use-theme-main) !important;
-    border-top-right-radius: 16px !important;
-    border-bottom-right-radius: 16px !important;
-}
-.active-vertical-menu-item button {
-    background-color: var(--full-use-theme-main-light) !important;
     border-top-right-radius: 32px !important;
     border-bottom-right-radius: 32px !important;
+}
+.active-vertical-menu-item .icon {
+    background-color: var(--full-use-theme-main-light) !important;
     color: var(--full-use-theme-text-main-dark);
 }
 .active-vertical-menu-item .MuiTypography-root {
     color: var(--full-use-theme-text-main-dark);
 }
-.dark .active-vertical-menu-item button {
+.dark .active-vertical-menu-item .icon {
     background-color: var(--full-use-theme-main-dark) !important;
     color: var(--full-use-theme-icon-button-color-light);
 }
@@ -94,6 +92,7 @@
     border-color: var(--full-use-theme-main-light) !important;
     color: var(--full-use-theme-main-dark) !important;
     background-color: var(--full-use-theme-main-10) !important;
+    z-index: 1;
 }
 .active-theme-button:hover {
     background-color: var(--full-use-theme-main-20) !important;
@@ -102,6 +101,7 @@
     border-color: var(--full-use-theme-main-dark) !important;
     color: var(--full-use-theme-main-light) !important;
     background-color: var(--full-use-theme-main-20) !important;
+    z-index: 1;
 }
 .dark .active-theme-button:hover {
     background-color: var(--full-use-theme-main-10) !important;

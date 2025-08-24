@@ -127,7 +127,7 @@ const RelatedLinkCard = () => {
                                                             <Link
                                                                 underline="hover"
                                                                 fontSize={14}
-                                                                color={'text.secondary'}
+                                                                color="text.secondary"
                                                                 href="https://github.com/white4206"
                                                                 target="_blank"
                                                                 rel="noreferrer noopener"
@@ -137,7 +137,7 @@ const RelatedLinkCard = () => {
                                                             <Link
                                                                 underline="hover"
                                                                 fontSize={14}
-                                                                color={'text.primary'}
+                                                                color="text.primary"
                                                                 href="https://github.com/white4206/MUI-FullUse"
                                                                 target="_blank"
                                                                 rel="noreferrer noopener"

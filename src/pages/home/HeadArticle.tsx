@@ -28,8 +28,8 @@ const HeadArticle = () => {
                 <>
                     <Skeleton height={xl ? 180 : 130} sx={{ borderRadius: 4 }} variant="rounded" />
                     <CardContent>
-                        <Skeleton height={16} sx={{ mb: 1, width: '70%' }} variant="rounded" />
-                        <Skeleton height={16} sx={{ mb: 1 }} variant="rounded" />
+                        <Skeleton height={24} sx={{ mb: 1, width: '70%' }} variant="rounded" />
+                        <Skeleton height={24} sx={{ mb: 1 }} variant="rounded" />
                     </CardContent>
                 </>
             ) : (

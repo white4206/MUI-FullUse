@@ -12,9 +12,12 @@ import { useEffect, useRef, useState } from 'react';
 interface IconSelectProps {
     iconAreaHeight?: number | string;
     onIconSelect: (icon: string) => void;
+    size?: 'small' | 'large';
 }
 
-const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => {
+const IconSelect = ({ iconAreaHeight = 300, onIconSelect, size = 'large' }: IconSelectProps) => {
+    const buttonSize = size === 'large' ? 'large' : 'medium';
+    const fieldSize = size === 'large' ? 'medium' : 'small';
     const { t } = useTranslation();
     const [search, setSearch] = useState<string>('');
     const [isSearch, setIsSearch] = useState<boolean>(true);
@@ -74,15 +77,17 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                 <Tooltip title={t(`components.iconSelect.${isSearch ? 'fold' : 'search'}`)} placement="right">
                     <IconButton
                         sx={{ ml: 0.5, mr: 0.5 }}
+                        size={buttonSize}
+                        color={isSearch ? 'primary' : undefined}
                         onClick={() => {
                             setIsSearch(isSearch => !isSearch);
                             setIsFocused(isFocused => (isFocused ? false : isFocused));
                         }}
                     >
                         {select ? (
-                            <SvgIcon iconName={select} />
+                            <SvgIcon iconName={select} size="1rem" />
                         ) : isSearch ? (
-                            <ImageSearchTwoToneIcon sx={{ fontSize: '1rem', color: isSearch ? 'primary.main' : undefined }} />
+                            <ImageSearchTwoToneIcon sx={{ fontSize: '1rem' }} />
                         ) : (
                             <ImageSearchIcon sx={{ fontSize: '1rem' }} />
                         )}
@@ -90,7 +95,7 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                 </Tooltip>
                 <TextField
                     inputRef={inputRef}
-                    size="small"
+                    size={fieldSize}
                     sx={{
                         width: isSearch ? '100%' : 0,
                         transition: '.8s',
@@ -110,7 +115,7 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                             endAdornment: (
                                 <>
                                     {search && (
-                                        <IconButton size="small" onClick={handleClear}>
+                                        <IconButton size={buttonSize} onClick={handleClear}>
                                             <ClearIcon sx={{ width: isSearch ? 'auto' : 0, transition: '.4s' }} />
                                         </IconButton>
                                     )}
@@ -137,7 +142,7 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                     borderStyle: 'dashed',
                     borderWidth: isFocused ? 2 : 0,
                     borderColor: isFocused ? undefined : 'transparent',
-                    borderRadius: 2,
+                    borderRadius: 4,
                     p: 2,
                     pt: isFocused ? 2 : 0,
                     pb: isFocused ? 2 : 0,

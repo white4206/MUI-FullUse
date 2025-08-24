@@ -26,7 +26,7 @@ const Menu = () => {
     return (
         <>
             <Paper
-                variant="outlined"
+                elevation={0}
                 sx={{
                     display: { lg: 'flex', xs: 'none' },
                     borderRadius: 8,
@@ -47,27 +47,38 @@ const Menu = () => {
                             alignItems="center"
                             className={currentPath === routeLink.path ? 'active-horizontal-menu-item' : ''}
                         >
-                            <Button color="inherit" sx={{ borderRadius: 8 }} size="large" component={Link} to={routeLink.path}>
+                            <Button color="primary" sx={{ borderRadius: 8, color: 'menuFontColor' }} size="large" component={Link} to={routeLink.path}>
                                 <Typography>{t(routeLink.title)}</Typography>
                             </Button>
                         </Box>
                     ))}
                 </Stack>
             </Paper>
-            <IconButton sx={{ m: 0.5, display: { lg: 'none', xs: 'flex' } }} onClick={() => setOpen(true)}>
-                <WidgetsTwoToneIcon sx={{ color: 'primary.main' }} />
+            <IconButton color="primary" sx={{ m: 0.5, display: { lg: 'none', xs: 'flex' } }} onClick={() => setOpen(true)}>
+                <WidgetsTwoToneIcon />
             </IconButton>
-            <SwipeableDrawer elevation={1} anchor="left" open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
+            <SwipeableDrawer
+                elevation={1}
+                anchor="left"
+                open={open}
+                onOpen={() => setOpen(true)}
+                onClose={() => setOpen(false)}
+                sx={{
+                    '& .MuiDrawer-paper': {
+                        borderTopRightRadius: 16,
+                        borderBottomRightRadius: 16,
+                    },
+                }}
+            >
                 <Stack direction="row" alignItems="center" p={2} width={xs ? 190 : 240}>
                     {/* logo */}
                     <SvgIcon iconName="logo" size="32px" />
                     <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 1, ml: 1, mr: 0 }} />
-                    <Typography p={1} color={'text.primary'}>
+                    <Typography p={1} color="text.primary">
                         {name}
                     </Typography>
                 </Stack>
-                <Divider />
-                <Box>
+                <Box p={1}>
                     {routeLinks.map(routeLink => (
                         <Stack
                             direction="row"
@@ -76,10 +87,12 @@ const Menu = () => {
                             component={Link}
                             to={routeLink.path}
                             className={(currentPath === routeLink.path ? 'active-vertical-menu-item' : '') + ' clear-default'}
-                            sx={{ m: 1, borderRadius: 2, transition: '.4s', '&:hover': { bgcolor: 'action.hover' } }}
+                            borderRadius={4}
                         >
-                            <IconButton>{routeLink.icon}</IconButton>
-                            <Typography ml={2} color={'text.primary'}>
+                            <Stack className="icon" p={1} fontSize="1.5rem" borderRadius="16px 32px 32px 16px">
+                                {routeLink.icon}
+                            </Stack>
+                            <Typography ml={2} color="text.primary">
                                 {t(routeLink.title)}
                             </Typography>
                         </Stack>

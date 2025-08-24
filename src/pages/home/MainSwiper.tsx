@@ -24,7 +24,7 @@ const MainSwiper = () => {
 
     return isLoading ? (
         <>
-            <Skeleton sx={{ borderRadius: 4 }} variant="rounded" height={xl ? 500 : lg ? 450 : md ? 400 : sm ? 300 : 200} />
+            <Skeleton sx={{ borderRadius: 4 }} variant="rounded" height={xl ? 480 : lg ? 480 : md ? 480 : sm ? 320 : 160} />
             <Box position="absolute" top="50%" left="50%" sx={{ transform: 'translate(-50%,-50%)' }}>
                 <CircularProgress color="primary" />
             </Box>
@@ -39,7 +39,7 @@ const MainSwiper = () => {
         >
             {swiperData.map(swiper => (
                 <SwiperSlide key={swiper.id}>
-                    <CardMedia height={xl ? 500 : lg ? 450 : md ? 400 : sm ? 300 : 200} component="img" image={swiper.image || undefined} alt={swiper.title} />
+                    <CardMedia height={xl ? 480 : lg ? 480 : md ? 480 : sm ? 320 : 160} component="img" image={swiper.image || undefined} alt={swiper.title} />
                 </SwiperSlide>
             ))}
         </Swiper>

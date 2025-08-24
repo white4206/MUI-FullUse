@@ -43,7 +43,7 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
                 bgcolor: 'appBarColor',
                 backdropFilter: 'blur(8px)',
             }}
-            variant="outlined"
+            elevation={0}
         >
             <Toolbar>
                 {/* logo */}
@@ -51,7 +51,7 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
                     <CardMedia component="img" sx={{ width: 32, transition: '.4s', '&:hover': { transform: 'rotate(180deg)' } }} image={logo} alt="logo" />
                 </Link>
                 <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 2.5, ml: 1, mr: 0, display: { sm: 'block', xs: 'none' } }} />
-                <Typography display={{ sm: 'block', xs: 'none' }} p={1} color={'text.primary'}>
+                <Typography display={{ sm: 'block', xs: 'none' }} p={1} color="text.primary">
                     {name}
                 </Typography>
                 {/* 导航 */}

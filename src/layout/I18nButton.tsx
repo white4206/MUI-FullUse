@@ -27,7 +27,7 @@ const I18nButton = () => {
             </Tooltip>
             <Menu anchorEl={anchorEl} open={i18nOpen} onClose={() => setAnchorEl(null)}>
                 {languages.map(language => (
-                    <MenuItem key={language.id} onClick={() => handleChangeLanguage(language.language)}>
+                    <MenuItem key={language.id} onClick={() => handleChangeLanguage(language.language)} sx={{ m: '0 8px', borderRadius: 2 }}>
                         <Stack sx={{ width: 128 }} flex={1} direction="row" justifyContent="space-between" alignItems="center">
                             <Stack direction="row" justifyContent="space-between" alignItems="center">
                                 <Typography variant="body2">{language.label}</Typography>

@@ -6,6 +6,7 @@
         url('@/assets/fonts/AlimamaFangYuanTiVF-Thin.ttf') format('ttf');
     font-display: swap;
 }
+
 :root {
     --full-use-theme-text-main-dark: rgba(255, 255, 255);
     --full-use-theme-text-main-light: rgba(0, 0, 0, 0.87);
@@ -16,32 +17,42 @@
     --full-use-theme-main-dark: #665d92;
     --full-use-theme-main-light: #a79eda;
     --full-use-user-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    --full-use-scroll-bar-background-color: #e6e8eb;
-    --full-use-scroll-bar-background-color-dark: #424243;
+    --full-use-scroll-bar-background-color: #00000030;
+    --full-use-scroll-bar-background-color-dark: #ffffff30;
+    --full-use-scroll-bar-hover-background-color: #0000004d;
+    --full-use-scroll-bar-hover-background-color-dark: #ffffff4d;
     --swiper-navigation-color: var(--full-use-theme-main);
     --swiper-pagination-color: var(--full-use-theme-main);
     interpolate-size: allow-keywords;
 }
+
 * {
     font-family: var(--full-use-user-font-family) !important;
 }
 
-/* 滚动条宽高 */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-::-webkit-scrollbar-corner {
-    background-color: transparent;
-}
-
 /* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
 ::-webkit-scrollbar-thumb {
     background-color: var(--full-use-scroll-bar-background-color);
-    border-radius: 8px;
+    border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    background-color: var(--full-use-scroll-bar-hover-background-color);
 }
 .dark ::-webkit-scrollbar-thumb {
     background-color: var(--full-use-scroll-bar-background-color-dark);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--full-use-scroll-bar-hover-background-color-dark);
+}
+
+/* 滚动轨道 */
+::-webkit-scrollbar-track {
+    border-radius: 2px;
 }
 
 /* 主题切换动画 */
@@ -69,19 +80,17 @@
 /* 垂直激活菜单项 */
 .active-vertical-menu-item {
     background-color: var(--full-use-theme-main) !important;
-    border-top-right-radius: 16px !important;
-    border-bottom-right-radius: 16px !important;
-}
-.active-vertical-menu-item button {
-    background-color: var(--full-use-theme-main-light) !important;
     border-top-right-radius: 32px !important;
     border-bottom-right-radius: 32px !important;
+}
+.active-vertical-menu-item .icon {
+    background-color: var(--full-use-theme-main-light) !important;
     color: var(--full-use-theme-text-main-dark);
 }
 .active-vertical-menu-item .MuiTypography-root {
     color: var(--full-use-theme-text-main-dark);
 }
-.dark .active-vertical-menu-item button {
+.dark .active-vertical-menu-item .icon {
     background-color: var(--full-use-theme-main-dark) !important;
     color: var(--full-use-theme-icon-button-color-light);
 }
@@ -94,6 +103,7 @@
     border-color: var(--full-use-theme-main-light) !important;
     color: var(--full-use-theme-main-dark) !important;
     background-color: var(--full-use-theme-main-10) !important;
+    z-index: 1;
 }
 .active-theme-button:hover {
     background-color: var(--full-use-theme-main-20) !important;

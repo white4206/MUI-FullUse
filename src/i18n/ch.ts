@@ -16,7 +16,7 @@ export default {
             edit: '编辑工具箱',
         },
         navBar: {
-            search: '搜索...',
+            search: '搜索',
             theme: '主题',
             i18n: '国际化',
             font: '字体',

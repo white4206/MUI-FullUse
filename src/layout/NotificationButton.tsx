@@ -6,15 +6,13 @@ const NotificationButton = () => {
     const { t } = useTranslation();
 
     return (
-        <>
-            <Tooltip title={t('navBar.notification')}>
-                <IconButton sx={{ borderRadius: 2 }}>
-                    <Badge variant="dot" badgeContent={4} color="error">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-            </Tooltip>
-        </>
+        <Tooltip title={t('navBar.notification')}>
+            <IconButton sx={{ borderRadius: 2 }}>
+                <Badge variant="dot" badgeContent={4} color="error">
+                    <NotificationsIcon />
+                </Badge>
+            </IconButton>
+        </Tooltip>
     );
 };
 

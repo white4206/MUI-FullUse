@@ -11,17 +11,21 @@
     --full-use-theme-text-main-light: rgba(0, 0, 0, 0.87);
     --full-use-theme-icon-button-color-light: rgba(0, 0, 0, 0.54);
     --full-use-theme-main: #9286d1;
-    --full-use-theme-main-dark: rgb(102, 93, 146);
-    --full-use-theme-main-light: rgb(167, 158, 218);
+    --full-use-theme-main-10: rgba(146, 134, 209, 0.1);
+    --full-use-theme-main-20: rgba(146, 134, 209, 0.2);
+    --full-use-theme-main-dark: #665d92;
+    --full-use-theme-main-light: #a79eda;
     --full-use-user-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     --full-use-scroll-bar-background-color: #e6e8eb;
     --full-use-scroll-bar-background-color-dark: #424243;
     --swiper-navigation-color: var(--full-use-theme-main);
     --swiper-pagination-color: var(--full-use-theme-main);
+    interpolate-size: allow-keywords;
 }
 * {
     font-family: var(--full-use-user-font-family) !important;
 }
+
 /* 滚动条宽高 */
 ::-webkit-scrollbar {
     width: 8px;
@@ -30,22 +34,22 @@
 ::-webkit-scrollbar-corner {
     background-color: transparent;
 }
+
 /* 滚动条样式 */
 ::-webkit-scrollbar-thumb {
     background-color: var(--full-use-scroll-bar-background-color);
     border-radius: 8px;
 }
-
 .dark ::-webkit-scrollbar-thumb {
     background-color: var(--full-use-scroll-bar-background-color-dark);
 }
+
 /* 主题切换动画 */
 ::view-transition-new(root),
 ::view-transition-old(root) {
     /* 关闭默认动画，否则影响自定义动画的执行 */
     animation: none;
 }
-
 .dark::view-transition-old(root) {
     z-index: 100;
 }
@@ -89,16 +93,18 @@
 .active-theme-button {
     border-color: var(--full-use-theme-main-light) !important;
     color: var(--full-use-theme-main-dark) !important;
-    background-color: rgba(146, 134, 209, 0.1) !important;
+    background-color: var(--full-use-theme-main-10) !important;
 }
 .active-theme-button:hover {
-    background-color: rgba(146, 134, 209, 0.2) !important;
+    background-color: var(--full-use-theme-main-20) !important;
 }
 .dark .active-theme-button {
     border-color: var(--full-use-theme-main-dark) !important;
     color: var(--full-use-theme-main-light) !important;
-    background-color: rgba(146, 134, 209, 0.2) !important;
+    background-color: var(--full-use-theme-main-20) !important;
 }
 .dark .active-theme-button:hover {
-    background-color: rgba(146, 134, 209, 0.1) !important;
+    background-color: var(--full-use-theme-main-10) !important;
 }
+
+/* 动画css */

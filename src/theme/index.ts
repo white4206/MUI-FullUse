@@ -7,6 +7,7 @@ declare module '@mui/material/styles' {
         bgColor: string;
         appBarColor: string;
         themeButtonBorderColor: string;
+        toolboxBgColor: string;
         navBarButtonBgColor: string;
     }
 
@@ -15,6 +16,7 @@ declare module '@mui/material/styles' {
         bgColor?: string;
         appBarColor?: string;
         themeButtonBorderColor?: string;
+        toolboxBgColor?: string;
         navBarButtonBgColor?: string;
     }
 }
@@ -50,7 +52,8 @@ lightTheme = createTheme(lightTheme, {
         bgColor: '#f2f3f5',
         appBarColor: 'rgba(255,255,255,0.6)',
         themeButtonBorderColor: lightTheme.palette.grey[300],
-        navBarButtonBgColor: 'rgba(250,250,250)',
+        toolboxBgColor: 'rgba(255, 255, 255, 0.6)',
+        navBarButtonBgColor: '#f2f3f5',
     },
     components: {
         MuiTooltip: {
@@ -83,6 +86,8 @@ darkTheme = createTheme(darkTheme, {
         bgColor: '#0a0a0a',
         appBarColor: 'rgba(18,18,18,0.6)',
         themeButtonBorderColor: 'rgba(224,224,224,0.1)',
+        toolboxBgColor: 'rgba(18,18,18,0.6)',
+        navBarButtonBgColor: '#0a0a0a',
     },
     components: {
         MuiTooltip: {

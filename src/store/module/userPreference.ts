@@ -17,6 +17,7 @@ const defaultNavBarButton = {
     theme: 'navBar',
     i18n: 'navBar',
     font: 'setting',
+    fullscreen: 'navBar',
 };
 
 export const useUserPreference = create<UserPreferenceState>(set => ({

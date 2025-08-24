@@ -12,6 +12,7 @@ export default {
             language: 'Language',
             font: 'Font',
             notification: 'Notification',
+            fullscreen: 'Fullscreen',
             setting: 'Setting',
         },
         setting: {
@@ -33,6 +34,11 @@ export default {
                 title: 'Font',
                 default: 'Default',
                 apply: 'Apply',
+            },
+            fullscreen: {
+                title: 'Fullscreen',
+                exit: 'Exit',
+                enter: 'Enter',
             },
         },
     },

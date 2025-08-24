@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import type { Theme } from '@mui/material';
 
 // 增加调色板参数，加入fullUseMain主题色
 declare module '@mui/material/styles' {
@@ -23,19 +24,7 @@ declare module '@mui/material/styles' {
     }
 }
 
-// 更新badge,Chip的颜色选项，使其包含fullUseMain主题色选项
-declare module '@mui/material/Badge' {
-    interface BadgePropsColorOverrides {
-        fullUseMain: true;
-    }
-}
-declare module '@mui/material/Chip' {
-    interface ChipPropsColorOverrides {
-        fullUseMain: true;
-    }
-}
-
-let lightTheme = createTheme({});
+let lightTheme = createTheme({ palette: { mode: 'light' } });
 lightTheme = createTheme(lightTheme, {
     // 用augmentColor创建的自定义主题色
     palette: {
@@ -71,13 +60,66 @@ lightTheme = createTheme(lightTheme, {
                 }),
             },
         },
+        MuiButton: {
+            styleOverrides: {
+                root: () => ({
+                    borderRadius: 8,
+                }),
+            },
+        },
+        MuiPopover: {
+            styleOverrides: {
+                root: () => ({
+                    '& .MuiPopover-paper': {
+                        borderRadius: 16,
+                    },
+                }),
+            },
+        },
+        MuiDialog: {
+            styleOverrides: {
+                root: () => ({
+                    '& .MuiDialog-paper': { borderRadius: 16 },
+                }),
+            },
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: () => ({
+                    borderRadius: 16,
+                }),
+            },
+        },
+        MuiTextField: {
+            defaultProps: {
+                variant: 'outlined',
+                InputProps: {
+                    notched: false, // 关闭MUI默认的为Label预留的border缺口
+                },
+            },
+            styleOverrides: {
+                root: ({ theme }: { theme: Theme }) => ({
+                    marginBottom: 0,
+                    '& .MuiInputBase-root': {
+                        borderRadius: 16,
+                        backgroundColor: theme.palette.inputBgColor,
+                        fontSize: '0.875rem',
+                    },
+                    '& .MuiInputBase-root .MuiOutlinedInput-notchedOutline': {
+                        transition: 'border-color .4s',
+                        borderWidth: 2,
+                        borderColor: 'transparent',
+                    },
+                    '& .MuiInputBase-root:not(.Mui-disabled):hover .MuiOutlinedInput-notchedOutline, & .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+                        {
+                            borderColor: theme.palette.primary.main,
+                        },
+                }),
+            },
+        },
     },
 });
-let darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-});
+let darkTheme = createTheme({ palette: { mode: 'dark' } });
 darkTheme = createTheme(darkTheme, {
     // 用augmentColor创建的自定义主题色
     palette: {
@@ -110,6 +152,71 @@ darkTheme = createTheme(darkTheme, {
             styleOverrides: {
                 root: () => ({
                     borderRadius: 8,
+                }),
+            },
+        },
+        MuiButton: {
+            styleOverrides: {
+                root: () => ({
+                    borderRadius: 8,
+                }),
+            },
+        },
+        MuiAccordion: {
+            styleOverrides: {
+                root: () => ({
+                    '&.MuiAccordion-rounded:first-of-type': { borderTopLeftRadius: 16, borderTopRightRadius: 16 },
+                    '&.MuiAccordion-rounded:last-of-type': { borderBottomLeftRadius: 16, borderBottomRightRadius: 16 },
+                }),
+            },
+        },
+        MuiPopover: {
+            styleOverrides: {
+                root: () => ({
+                    '& .MuiPopover-paper': {
+                        borderRadius: 16,
+                    },
+                }),
+            },
+        },
+        MuiDialog: {
+            styleOverrides: {
+                root: () => ({
+                    '& .MuiDialog-paper': { borderRadius: 16 },
+                }),
+            },
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: () => ({
+                    borderRadius: 16,
+                }),
+            },
+        },
+        MuiTextField: {
+            defaultProps: {
+                variant: 'outlined',
+                InputProps: {
+                    notched: false, // 关闭MUI默认的为Label预留的border缺口
+                },
+            },
+            styleOverrides: {
+                root: ({ theme }: { theme: Theme }) => ({
+                    marginBottom: 0,
+                    '& .MuiInputBase-root': {
+                        borderRadius: 16,
+                        backgroundColor: theme.palette.inputBgColor,
+                        fontSize: '0.875rem',
+                    },
+                    '& .MuiInputBase-root .MuiOutlinedInput-notchedOutline': {
+                        transition: 'border-color .4s',
+                        borderWidth: 0,
+                    },
+                    '& .MuiInputBase-root:not(.Mui-disabled):hover .MuiOutlinedInput-notchedOutline, & .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+                        {
+                            borderWidth: 2,
+                            borderColor: theme.palette.primary.main,
+                        },
                 }),
             },
         },

@@ -24,6 +24,7 @@ import {
     Switch,
     Tooltip,
     Typography,
+    TextField,
 } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -31,7 +32,6 @@ import { useUserPreference } from '@/store';
 import useI18n from '@/i18n';
 import useFont from '@/font';
 import { FontTypographyList } from '@/layout/FontButton';
-import { CustomTextField } from '@/components/FUTextField';
 
 const SettingItemTitle = ({ props }: { props: { title: string; setting: string; canShow?: boolean } }) => {
     const { title, setting, canShow = true } = props;
@@ -144,7 +144,7 @@ const SettingButton = () => {
                         {/* 国际化切换 */}
                         <Box mb={1}>
                             <SettingItemTitle props={{ title: 'setting.i18n.title', setting: 'i18n' }} />
-                            <CustomTextField select fullWidth value={language} sx={{ '& .MuiInputBase-root': { fontSize: '14px !important' } }}>
+                            <TextField select fullWidth value={language} sx={{ '& .MuiInputBase-root': { fontSize: '14px !important' } }}>
                                 <MenuItem sx={{ fontSize: 14 }} value="auto" onClick={() => changeLanguage('auto')}>
                                     {t('setting.i18n.auto')}
                                 </MenuItem>
@@ -158,35 +158,28 @@ const SettingButton = () => {
                                         {language.label}
                                     </MenuItem>
                                 ))}
-                            </CustomTextField>
+                            </TextField>
                         </Box>
                         {/* 字体切换 */}
                         <Box mb={1}>
                             <SettingItemTitle props={{ title: 'setting.font.title', setting: 'font' }} />
                             <Box>
                                 {fonts.map(font => (
-                                    <Accordion
-                                        key={font.id}
-                                        elevation={3}
-                                        sx={{
-                                            '&.MuiAccordion-rounded:first-of-type': { borderTopLeftRadius: 8, borderTopRightRadius: 8 },
-                                            '&.MuiAccordion-rounded:last-of-type': { borderBottomLeftRadius: 8, borderBottomRightRadius: 8 },
-                                        }}
-                                    >
+                                    <Accordion key={font.id} elevation={3}>
                                         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
                                             <Stack direction="row" alignItems="center">
                                                 <Typography variant="body2" sx={{ fontFamily: `${font.font} !important` }} component="span">
                                                     {font.name}
                                                 </Typography>
                                                 {font.default && (
-                                                    <Chip sx={{ ml: 1, fontSize: 12 }} size="small" color="fullUseMain" label={t('setting.font.default')} />
+                                                    <Chip sx={{ ml: 1, fontSize: 12 }} size="small" color="primary" label={t('setting.font.default')} />
                                                 )}
                                                 {currentFont === font.font && (
                                                     <Chip
                                                         sx={{ ml: 1, fontSize: 12 }}
                                                         variant="outlined"
                                                         size="small"
-                                                        color="fullUseMain"
+                                                        color="primary"
                                                         label={t('setting.font.current')}
                                                     />
                                                 )}

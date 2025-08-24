@@ -6,11 +6,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IconSelect from '@/components/IconSelect';
 import CustomInput from '@/components/CustomInput';
+import { useNotification } from '@/context/hooks';
 
 const Article = () => {
     const handleSelectIcon = (icon: string) => {
         console.log(icon);
     };
+    const notify = useNotification();
+
     return (
         <>
             <Card sx={{ maxWidth: 345 }}>
@@ -30,6 +33,7 @@ const Article = () => {
             </Card>
             <CustomInput label="CustomInput" />
             <IconSelect sx={{ m: 2 }} onIconSelect={handleSelectIcon} />
+            <Button onClick={() => notify({ content: '我是通知' })}>通知</Button>
         </>
     );
 };

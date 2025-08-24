@@ -19,7 +19,7 @@ interface SideCardProps {
 const SideCard = (props: SideCardProps) => {
     const { avatar, title, subheader, headerAction, children, actions, cardProps, cardHeaderProps, cardMediaProps, cardContentProps, cardActionsProps } = props;
     return (
-        <Card elevation={3} sx={{ borderRadius: 4 }} {...cardProps}>
+        <Card elevation={3} {...cardProps}>
             <CardHeader
                 avatar={avatar}
                 title={title}

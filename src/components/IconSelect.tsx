@@ -1,4 +1,4 @@
-import { CardActionArea, IconButton, InputAdornment, Paper, Stack, Tooltip, Typography } from '@mui/material';
+import { CardActionArea, IconButton, InputAdornment, Paper, Stack, Tooltip, Typography, TextField } from '@mui/material';
 import SvgIcon from '@/components/SvgIcon';
 import { useTranslation } from 'react-i18next';
 import AppsIcon from '@mui/icons-material/Apps';
@@ -8,7 +8,6 @@ import ClearIcon from '@mui/icons-material/Clear';
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 import ImageSearchTwoToneIcon from '@mui/icons-material/ImageSearchTwoTone';
 import { useEffect, useRef, useState } from 'react';
-import { CustomTextField } from '@/components/FUTextField';
 
 interface IconSelectProps {
     iconAreaHeight?: number | string;
@@ -89,7 +88,7 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect }: IconSelectProps) => 
                         )}
                     </IconButton>
                 </Tooltip>
-                <CustomTextField
+                <TextField
                     inputRef={inputRef}
                     size="small"
                     sx={{

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { darkTheme, lightTheme } from '@/theme';
 import screenfull from 'screenfull';
+import { debounce } from 'lodash';
 
 type ThemeMode = 'light' | 'dark' | 'auto';
 
@@ -131,4 +132,11 @@ const useBreakpoint = () => {
     const xl = useMediaQuery(theme => theme.breakpoints.up('xl'));
     return { xs, sm, md, lg, xl };
 };
-export { useDark, useFullScreen, useBreakpoint };
+
+const useDebounce = <T extends (...args: any[]) => any>(callback: T, delay: number) => {
+    const debouncedCallback = useCallback(debounce(callback, delay), [callback, delay]);
+
+    return debouncedCallback;
+};
+
+export { useDark, useFullScreen, useBreakpoint, useDebounce };

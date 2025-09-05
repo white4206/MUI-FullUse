@@ -4,6 +4,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { darkTheme, lightTheme } from '@/theme';
 import screenfull from 'screenfull';
 import { debounce } from 'lodash';
+import 'numeral/locales';
+import numeral from 'numeral';
 
 type ThemeMode = 'light' | 'dark' | 'auto';
 
@@ -139,4 +141,46 @@ const useDebounce = <T extends (...args: any[]) => any>(callback: T, delay: numb
     return debouncedCallback;
 };
 
-export { useDark, useFullScreen, useBreakpoint, useDebounce };
+const useNumeral = () => {
+    const { language } = useUserPreference();
+    numeral.zeroFormat('N/A');
+    numeral.defaultFormat('0,0.0a');
+
+    useEffect(() => {
+        // languages.forEach(language => {
+        //     if (language.language === 'en') return;
+        //     numeral.register('locale', language.language, {
+        //         delimiters: {
+        //             thousands: ' ',
+        //             decimal: ',',
+        //         },
+        //         abbreviations: {
+        //             thousand: 'k',
+        //             million: 'm',
+        //             billion: 'b',
+        //             trillion: 't',
+        //         },
+        //         ordinal: function (number) {
+        //             return number === 1 ? 'er' : 'ème';
+        //         },
+        //         currency: {
+        //             symbol: '€',
+        //         },
+        //     });
+        // });
+    }, []);
+
+    useEffect(() => {
+        const languageLocaleMap: Record<string, string> = {
+            'zh-CN': 'chs',
+            en: 'en',
+        };
+        const currentLanguage = language === 'auto' ? navigator.language || navigator.languages[0] : language;
+        const currentLocale = languageLocaleMap[currentLanguage] || 'en';
+        numeral.locale(currentLocale);
+    }, [language]);
+
+    return numeral;
+};
+
+export { useDark, useFullScreen, useBreakpoint, useDebounce, useNumeral };

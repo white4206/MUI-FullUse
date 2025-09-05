@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, Divider, Link, Tooltip } from '@mui/material';
+import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, Divider, Tooltip, CardActionArea } from '@mui/material';
 import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 import LightModeTwoToneIcon from '@mui/icons-material/LightModeTwoTone';
 import logo from '@/assets/icons/svg/logo.svg';
@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import FullscreenButton from '@/layout/FullscreenButton';
 import LoginUser from './LoginUser';
 import config from '@/config';
+import FULink from '@/components/FULink';
 
 const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<number>> }) => {
     const appBarRef = useRef<HTMLElement>(null);
@@ -47,9 +48,9 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
         >
             <Toolbar>
                 {/* logo */}
-                <Link href="http://resource.whitecc.top" target="_blank" rel="noreferrer noopener">
-                    <CardMedia component="img" sx={{ width: 32, transition: '.4s', '&:hover': { transform: 'rotate(180deg)' } }} image={logo} alt="logo" />
-                </Link>
+                <CardActionArea component={FULink} to="http://resource.whitecc.top" target="_blank" sx={{ width: 32 }}>
+                    <CardMedia component="img" sx={{ transition: '.4s', '&:hover': { transform: 'rotate(180deg)' } }} image={logo} alt="logo" />
+                </CardActionArea>
                 <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 2.5, ml: 1, mr: 0, display: { sm: 'block', xs: 'none' } }} />
                 <Typography display={{ sm: 'block', xs: 'none' }} p={1} color="text.primary">
                     {config.name}

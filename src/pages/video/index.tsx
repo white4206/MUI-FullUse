@@ -255,7 +255,7 @@ const Video = () => {
                         <IconButton aria-label="next">{theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}</IconButton>
                     </Box>
                 </Box>
-                <CardMedia component="img" sx={{ width: 151 }} image="https://mui.com/static/images/cards/live-from-space.jpg" />
+                <CardMedia component="img" sx={{ width: 151 }} src="https://mui.com/static/images/cards/live-from-space.jpg" />
             </Card>
             <MusicPlayerSlider />
         </Box>

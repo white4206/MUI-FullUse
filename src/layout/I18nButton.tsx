@@ -31,7 +31,9 @@ const I18nButton = () => {
                     <MenuItem key={language.id} onClick={() => handleChangeLanguage(language.code)} sx={{ m: '0 8px', borderRadius: 2 }}>
                         <Stack sx={{ width: 128 }} flex={1} direction="row" justifyContent="space-between" alignItems="center">
                             <Stack direction="row" justifyContent="space-between" alignItems="center">
-                                <Typography variant="body2">{language.label}</Typography>
+                                <Typography variant="body2" mr={0.5}>
+                                    {language.label}
+                                </Typography>
                                 <CallMadeIcon sx={{ fontSize: '0.75rem' }} />
                             </Stack>
                             <SvgIcon iconName={language.code} />

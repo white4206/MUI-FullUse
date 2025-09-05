@@ -1,5 +1,4 @@
 import { IconSelect, SvgIcon, FuTextField } from '@/components';
-import { openUrl } from '@/utils/url';
 import {
     Box,
     CardActionArea,
@@ -32,6 +31,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import { useDebounce } from '@/hooks';
 import type { ToolOption } from '@/api/types';
+import FULink from '@/components/FULink';
 
 // 新建工具项
 const NewToolOption = ({ editMode, onNewToolOption }: { editMode: boolean; onNewToolOption?: () => void }) => {
@@ -42,7 +42,7 @@ const NewToolOption = ({ editMode, onNewToolOption }: { editMode: boolean; onNew
                 onClick={() => onNewToolOption && onNewToolOption()}
             >
                 <Stack height="100%" direction="column" alignItems="center" justifyContent="center" borderRadius={2} p={1}>
-                    <AddIcon sx={{ fontSize: 32, color: 'text.secondary' }} />
+                    <AddIcon color="action" sx={{ fontSize: 32 }} />
                 </Stack>
             </CardActionArea>
         </Box>
@@ -71,9 +71,15 @@ const ToolboxItem = ({ sx, editMode, data }: { sx?: SxProps; editMode: boolean; 
                         cursor: editMode ? 'grabbing' : 'pointer',
                     },
                 }}
-                onClick={() => !editMode && openUrl(data.path)}
             >
-                <Stack direction="column" alignItems="center" justifyContent="center" borderRadius={2} p={1}>
+                <Stack
+                    {...(!editMode ? { component: FULink, to: data.path, target: '_blank', underline: 'none', color: 'inherit' } : {})}
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    borderRadius={2}
+                    p={1}
+                >
                     {/* 拖拽手柄图标 - 仅在编辑模式下显示 */}
                     {editMode && (
                         <Tooltip title={t('pages.home.toolbox.edit.dragSort')}>
@@ -248,7 +254,7 @@ const Toolbox = () => {
                                 onClick={() => toggleScroll(-itemWidth)}
                                 sx={{ borderRadius: 4, height: '1.5rem', width: '1.5rem' }}
                             >
-                                <KeyboardArrowLeftIcon sx={{ fontSize: '1.25rem' }} />
+                                <KeyboardArrowLeftIcon fontSize="small" />
                             </IconButton>
                             <IconButton
                                 color="primary"
@@ -256,7 +262,7 @@ const Toolbox = () => {
                                 onClick={() => toggleScroll(itemWidth)}
                                 sx={{ borderRadius: 4, height: '1.5rem', width: '1.5rem' }}
                             >
-                                <KeyboardArrowRightIcon sx={{ fontSize: '1.25rem' }} />
+                                <KeyboardArrowRightIcon fontSize="small" />
                             </IconButton>
                         </Stack>
                     </Stack>

@@ -17,7 +17,7 @@ const Article = () => {
     return (
         <Box overflow="hidden">
             <Card sx={{ maxWidth: 345, m: 2 }}>
-                <CardMedia component="img" sx={{ height: 140 }} image="https://mui.com/static/images/cards/contemplative-reptile.jpg" title="green iguana" />
+                <CardMedia component="img" sx={{ height: 140 }} src="https://mui.com/static/images/cards/contemplative-reptile.jpg" title="green iguana" />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                         Lizard

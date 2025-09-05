@@ -6,8 +6,6 @@ export default {
                 search: 'Search',
                 fold: 'Fold',
                 placeholder: 'Please Enter The Name Of The Icon',
-                name: 'Name',
-                path: 'Path',
             },
             backToTop: 'Back To The Top',
         },
@@ -21,6 +19,8 @@ export default {
                         exit: 'Exit editing',
                         dragSort: 'Draggable Sort',
                         new: 'Create A New Tool Option',
+                        name: 'Name',
+                        path: 'Path',
                         confirm: 'Confirm',
                         cancel: 'Cancel',
                     },
@@ -28,6 +28,8 @@ export default {
                 relatedLinkCard: {
                     title: 'Related Link',
                     expand: 'Expand/Collapse',
+                    repository: 'Repository',
+                    relatedLink: 'Related Link',
                 },
             },
             article: {

@@ -2,11 +2,12 @@ import { getCarousel } from '@/api/common';
 import { defaultCarousel } from '@/utils/constant';
 import { useBreakpoint } from '@/hooks';
 import { mapUrl } from '@/utils/url';
-import { Skeleton, Box, CircularProgress, CardMedia } from '@mui/material';
+import { Skeleton, Box, CircularProgress, CardMedia, CardActionArea } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Carousel } from '@/api/types';
+import FULink from '@/components/FULink';
 
 const MainSwiper = () => {
     const { xl, lg, md, sm } = useBreakpoint();
@@ -40,7 +41,14 @@ const MainSwiper = () => {
         >
             {swiperData.map(swiper => (
                 <SwiperSlide key={swiper.id}>
-                    <CardMedia height={xl ? 480 : lg ? 480 : md ? 480 : sm ? 320 : 160} component="img" image={swiper.image || undefined} alt={swiper.title} />
+                    <CardActionArea component={FULink} to="/article" target="_blank">
+                        <CardMedia
+                            component="img"
+                            height={xl ? 480 : lg ? 480 : md ? 480 : sm ? 320 : 160}
+                            image={swiper.image || undefined}
+                            alt={swiper.title}
+                        />
+                    </CardActionArea>
                 </SwiperSlide>
             ))}
         </Swiper>

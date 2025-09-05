@@ -87,9 +87,9 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect, size = 'large' }: Icon
                         {select ? (
                             <SvgIcon iconName={select} size="1rem" />
                         ) : isSearch ? (
-                            <ImageSearchTwoToneIcon sx={{ fontSize: '1rem' }} />
+                            <ImageSearchTwoToneIcon fontSize="small" />
                         ) : (
-                            <ImageSearchIcon sx={{ fontSize: '1rem' }} />
+                            <ImageSearchIcon fontSize="small" />
                         )}
                     </IconButton>
                 </Tooltip>

@@ -1,6 +1,6 @@
 import { Box, Button, Typography, SwipeableDrawer, IconButton, Stack, Divider, Paper } from '@mui/material';
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import WidgetsTwoToneIcon from '@mui/icons-material/WidgetsTwoTone';
 import { useTranslation } from 'react-i18next';
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
@@ -13,10 +13,10 @@ import config from '@/config';
 
 const Menu = () => {
     const routeLinks = [
-        { id: 1, title: 'pages.home.title', path: '/', icon: <HomeTwoToneIcon /> },
-        { id: 2, title: 'pages.article.title', path: '/article', icon: <ArticleTwoToneIcon /> },
-        { id: 3, title: 'pages.download.title', path: '/download', icon: <DownloadTwoToneIcon /> },
-        { id: 4, title: 'pages.video.title', path: '/video', icon: <VideoLibraryTwoToneIcon /> },
+        { id: 1, title: 'pages.home.title', path: '/', icon: HomeTwoToneIcon },
+        { id: 2, title: 'pages.article.title', path: '/article', icon: ArticleTwoToneIcon },
+        { id: 3, title: 'pages.download.title', path: '/download', icon: DownloadTwoToneIcon },
+        { id: 4, title: 'pages.video.title', path: '/video', icon: VideoLibraryTwoToneIcon },
     ];
     const [open, setOpen] = useState<boolean>(false);
     const { t } = useTranslation();
@@ -47,7 +47,7 @@ const Menu = () => {
                             alignItems="center"
                             className={currentPath === routeLink.path ? 'active-horizontal-menu-item' : ''}
                         >
-                            <Button color="primary" sx={{ borderRadius: 8, color: 'menuFontColor' }} size="large" component={Link} to={routeLink.path}>
+                            <Button color="primary" sx={{ borderRadius: 8, color: 'menuFontColor' }} size="large" component={NavLink} to={routeLink.path}>
                                 <Typography>{t(routeLink.title)}</Typography>
                             </Button>
                         </Box>
@@ -84,13 +84,13 @@ const Menu = () => {
                             direction="row"
                             alignItems="center"
                             key={routeLink.id}
-                            component={Link}
+                            component={NavLink}
                             to={routeLink.path}
                             className={(currentPath === routeLink.path ? 'active-vertical-menu-item' : '') + ' clear-default'}
                             borderRadius={4}
                         >
-                            <Stack className="icon" p={1} fontSize="1.5rem" borderRadius="16px 32px 32px 16px">
-                                {routeLink.icon}
+                            <Stack className="icon" p={1} borderRadius="16px 32px 32px 16px">
+                                <routeLink.icon />
                             </Stack>
                             <Typography ml={2} color="text.primary">
                                 {t(routeLink.title)}

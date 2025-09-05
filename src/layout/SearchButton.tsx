@@ -17,7 +17,7 @@ const SearchButton = () => {
                     in={isSearch}
                     timeout={{
                         // 缓进快出
-                        enter: theme.transitions.duration.enteringScreen + 100,
+                        enter: theme.transitions.duration.enteringScreen,
                         exit: 0,
                     }}
                 >

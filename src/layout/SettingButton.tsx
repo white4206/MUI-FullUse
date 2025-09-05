@@ -138,14 +138,14 @@ const SettingButton = () => {
                                     className={themeMode === ThemeMode.LIGHT ? 'active-theme-button' : ''}
                                     sx={{ borderRadius: 4 }}
                                 >
-                                    <LightModeTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
+                                    <LightModeTwoToneIcon fontSize="small" sx={{ mr: 1 }} />
                                     {t('setting.theme.light')}
                                 </Button>
                                 <Button
                                     onClick={e => void toggleThemeWithAnimation(e, ThemeMode.SYSTEM)}
                                     className={themeMode === ThemeMode.SYSTEM ? 'active-theme-button' : ''}
                                 >
-                                    <SettingsBrightnessTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
+                                    <SettingsBrightnessTwoToneIcon fontSize="small" sx={{ mr: 1 }} />
                                     {t('setting.theme.auto')}
                                 </Button>
 
@@ -154,7 +154,7 @@ const SettingButton = () => {
                                     className={themeMode === ThemeMode.DARK ? 'active-theme-button' : ''}
                                     sx={{ borderRadius: 4 }}
                                 >
-                                    <DarkModeTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
+                                    <DarkModeTwoToneIcon fontSize="small" sx={{ mr: 1 }} />
                                     {t('setting.theme.dark')}
                                 </Button>
                             </ButtonGroup>

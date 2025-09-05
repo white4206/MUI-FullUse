@@ -2,11 +2,15 @@ export interface Language {
     id: number;
     code: string;
     label: string;
+    locale: {
+        numeral?: () => Promise<any>;
+        dayjs: () => Promise<any>;
+    };
 }
 
 const languages: Language[] = [
-    { id: 1, code: 'zh-CN', label: '简体中文' },
-    { id: 2, code: 'en', label: 'English' },
+    { id: 1, code: 'zh-CN', label: '简体中文', locale: { numeral: () => import('numeral/locales/chs'), dayjs: () => import('dayjs/locale/zh') } },
+    { id: 2, code: 'en', label: 'English', locale: { dayjs: () => import('dayjs/locale/en') } },
 ];
 
 export interface Font {

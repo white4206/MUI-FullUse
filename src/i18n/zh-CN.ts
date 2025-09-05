@@ -6,8 +6,6 @@ export default {
                 search: '搜索',
                 fold: '折叠',
                 placeholder: '请输入图标名称',
-                name: '名称',
-                path: '路径',
             },
             backToTop: '回到顶部',
         },
@@ -21,6 +19,8 @@ export default {
                         exit: '退出编辑',
                         dragSort: '可拖动排序',
                         new: '新建',
+                        name: '名称',
+                        path: '路径',
                         confirm: '确认',
                         cancel: '取消',
                     },
@@ -28,6 +28,8 @@ export default {
                 relatedLinkCard: {
                     title: '相关链接',
                     expand: '展开/收起',
+                    repository: '远程仓库',
+                    relatedLink: '相关链接',
                 },
             },
             article: {

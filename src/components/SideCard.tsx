@@ -37,4 +37,5 @@ const SideCard = (props: SideCardProps) => {
         </Card>
     );
 };
+
 export default SideCard;

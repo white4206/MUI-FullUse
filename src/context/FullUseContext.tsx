@@ -9,4 +9,5 @@ const FullUseProvider = ({ children, ...props }: { children: ReactNode } & FullU
         <NotificationProvider>{children}</NotificationProvider>
     </FullUseContext>
 );
+
 export { FullUseContext, FullUseProvider };

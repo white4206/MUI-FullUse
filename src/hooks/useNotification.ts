@@ -1,9 +1,5 @@
 import { use } from 'react';
-import { FullUseContext } from '@/context/FullUseContext';
 import { NotificationContext } from '@/context/NotificationContext';
-
-// 全局参数
-const useFullUse = () => use(FullUseContext);
 
 // 全局通知调用组件
 const useNotification = () => {
@@ -12,4 +8,4 @@ const useNotification = () => {
     return ctx.notify;
 };
 
-export { useFullUse, useNotification };
+export default useNotification;

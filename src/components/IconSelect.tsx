@@ -28,10 +28,10 @@ const IconSelect = ({ iconAreaHeight = 300, onIconSelect, size = 'large' }: Icon
 
     // 加载本地所有静态svg图标
     const requireIcons = () => {
-        const icons = import.meta.glob('@/assets/icons/svg/*.svg');
+        const icons = import.meta.glob('/icons/svg/*.svg');
         const iconList = [];
         for (const icon in icons) {
-            const path = icon.split('assets/icons/svg/')[1].split('.svg')[0];
+            const path = icon.split('icons/svg/')[1].split('.svg')[0];
             iconList.push(path);
         }
         return iconList;

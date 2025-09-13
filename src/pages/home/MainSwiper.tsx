@@ -1,6 +1,5 @@
 import { getCarousel } from '@/api/common';
-import { defaultCarousel } from '@/utils/constant';
-import { useBreakpoint } from '@/utils/hooks';
+import { useBreakpoint } from '@/hooks';
 import { mapUrl } from '@/utils/url';
 import { Skeleton, Box, CircularProgress, CardMedia } from '@mui/material';
 import { useState, useEffect } from 'react';
@@ -16,7 +15,7 @@ const MainSwiper = () => {
         // * 获取轮播图数据
         const getCarouselData = async () => {
             const res = await getCarousel();
-            setSwiperData(res.data.map(carousel => ({ ...carousel, image: mapUrl(carousel.image) || defaultCarousel })));
+            setSwiperData(res.data.map(carousel => ({ ...carousel, image: mapUrl(carousel.image) })));
             setIsLoading(false);
         };
         void getCarouselData();

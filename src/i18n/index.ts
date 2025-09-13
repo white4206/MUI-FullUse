@@ -1,42 +1,34 @@
-import i18n from 'i18next';
+import i18n, { type Resource } from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import en from '@/i18n/en';
-import zh_CN from '@/i18n/zh-CN';
 import { useUserPreference } from '@/store';
+import config, { languages } from '@/config';
+import { transform } from 'lodash';
 
 const language = useUserPreference.getState().language;
-
-const lng =
-    language === 'auto'
-        ? navigator.language || navigator.languages[0] // 若i18n为auto则使用浏览器当前语言
-        : language || navigator.language || navigator.languages[0];
+const browserLanguage = navigator.language ?? navigator.languages[0];
 
 void i18n.use(initReactI18next).init({
-    resources: {
-        'zh-CN': zh_CN,
-        en,
-    },
-    lng: lng || 'zh-CN', // 默认语言
-    fallbackLng: 'zh-CN', // 回退默认语言
-    interpolation: {
-        escapeValue: false,
-    },
+    resources: transform(
+        languages,
+        // 根据config中的语言配置动态创建
+        (result: Resource, value) => {
+            result[value.code] = value.language;
+        },
+        {}
+    ),
+    lng: language === 'auto' ? browserLanguage : (language ?? browserLanguage), // 默认语言
+    fallbackLng: config.fallbackLng, // 回退默认语言
+    interpolation: { escapeValue: false },
 });
 
 const useI18n = () => {
-    const languages = [
-        { id: 1, language: 'zh-CN', label: '简体中文' },
-        { id: 2, language: 'en', label: 'English' },
-    ];
     const setLanguage = useUserPreference(state => state.setLanguage);
 
     const changeLanguage = (language: string) => {
         void i18n.changeLanguage(language);
-        // 若切换语言为浏览器当前语言则跟随浏览器变化
-        if ((navigator.language || navigator.languages[0]) === language || language === 'auto') setLanguage('auto');
-        else setLanguage(language);
+        setLanguage(language);
     };
 
-    return { languages, changeLanguage };
+    return { changeLanguage };
 };
 export default useI18n;

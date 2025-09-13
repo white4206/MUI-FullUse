@@ -1,5 +1,5 @@
 import { Box, Container, Grid, Stack } from '@mui/material';
-import { useBreakpoint } from '@/utils/hooks';
+import { useBreakpoint } from '@/hooks';
 import Toolbox from '@/pages/home/Toolbox';
 import RelatedLinkCard from '@/pages/home/RelatedLinkCard';
 import MainSwiper from '@/pages/home/MainSwiper';

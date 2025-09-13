@@ -1,4 +1,4 @@
-import { useBreakpoint, useDark, useFullScreen } from '@/utils/hooks';
+import { useBreakpoint, useDark, useFullScreen } from '@/hooks';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import SettingsBrightnessTwoToneIcon from '@mui/icons-material/SettingsBrightnessTwoTone';
 import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
@@ -32,6 +32,8 @@ import { useUserPreference } from '@/store';
 import useI18n from '@/i18n';
 import useFont from '@/font';
 import { FontTypographyList } from '@/layout/FontButton';
+import { ThemeMode } from '@/constant';
+import { languages } from '@/config';
 
 const SettingItemTitle = ({ props }: { props: { title: string; setting: string; canShow?: boolean } }) => {
     const { title, setting, canShow = true } = props;
@@ -72,7 +74,7 @@ const SettingButton = () => {
     const { t } = useTranslation();
     const { toggleThemeWithAnimation } = useDark();
     const themeMode = useUserPreference(state => state.themeMode);
-    const { languages, changeLanguage } = useI18n();
+    const { changeLanguage } = useI18n();
     const language = useUserPreference(state => state.language);
     const { fonts, changeFont } = useFont();
     const currentFont = useUserPreference(state => state.font);
@@ -132,21 +134,24 @@ const SettingButton = () => {
                                 }}
                             >
                                 <Button
-                                    onClick={e => void toggleThemeWithAnimation(e, 'light')}
-                                    className={themeMode === 'light' ? 'active-theme-button' : ''}
+                                    onClick={e => void toggleThemeWithAnimation(e, ThemeMode.LIGHT)}
+                                    className={themeMode === ThemeMode.LIGHT ? 'active-theme-button' : ''}
                                     sx={{ borderRadius: 4 }}
                                 >
                                     <LightModeTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
                                     {t('setting.theme.light')}
                                 </Button>
-                                <Button onClick={e => void toggleThemeWithAnimation(e, 'auto')} className={themeMode === 'auto' ? 'active-theme-button' : ''}>
+                                <Button
+                                    onClick={e => void toggleThemeWithAnimation(e, ThemeMode.SYSTEM)}
+                                    className={themeMode === ThemeMode.SYSTEM ? 'active-theme-button' : ''}
+                                >
                                     <SettingsBrightnessTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
                                     {t('setting.theme.auto')}
                                 </Button>
 
                                 <Button
-                                    onClick={e => void toggleThemeWithAnimation(e, 'dark')}
-                                    className={themeMode === 'dark' ? 'active-theme-button' : ''}
+                                    onClick={e => void toggleThemeWithAnimation(e, ThemeMode.DARK)}
+                                    className={themeMode === ThemeMode.DARK ? 'active-theme-button' : ''}
                                     sx={{ borderRadius: 4 }}
                                 >
                                     <DarkModeTwoToneIcon sx={{ fontSize: '1.25rem', mr: 1 }} />
@@ -158,16 +163,11 @@ const SettingButton = () => {
                         <Box mb={1}>
                             <SettingItemTitle props={{ title: 'setting.i18n.title', setting: 'i18n' }} />
                             <TextField select fullWidth value={language} sx={{ '& .MuiInputBase-root': { fontSize: '14px !important' } }}>
-                                <MenuItem sx={{ fontSize: 14 }} value="auto" onClick={() => changeLanguage('auto')}>
+                                <MenuItem sx={{ fontSize: 14 }} value="auto" onClick={() => changeLanguage(ThemeMode.SYSTEM)}>
                                     {t('setting.i18n.auto')}
                                 </MenuItem>
                                 {languages.map(language => (
-                                    <MenuItem
-                                        sx={{ fontSize: 14 }}
-                                        key={language.id}
-                                        value={language.language}
-                                        onClick={() => changeLanguage(language.language)}
-                                    >
+                                    <MenuItem sx={{ fontSize: 14 }} key={language.id} value={language.code} onClick={() => changeLanguage(language.code)}>
                                         {language.label}
                                     </MenuItem>
                                 ))}

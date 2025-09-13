@@ -22,7 +22,6 @@ import LinkIcon from '@mui/icons-material/Link';
 import { useTranslation } from 'react-i18next';
 import { getRelatedLink } from '@/api/common';
 import { mapUrl, openUrl } from '@/utils/url';
-import { defaultRelatedLinkIcon } from '@/utils/constant';
 import CommitIcon from '@mui/icons-material/Commit';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SvgIcon from '@/components/SvgIcon';
@@ -52,7 +51,7 @@ const RelatedLinkCard = () => {
             setRelatedLinkData(
                 res.data.map(link => ({
                     ...link,
-                    icon: mapUrl(link.icon) || defaultRelatedLinkIcon,
+                    icon: mapUrl(link.icon),
                     subLinks: link.id === 1 ? [res.data[0]] : [],
                     hasSub: link.id === 1,
                     open: false,

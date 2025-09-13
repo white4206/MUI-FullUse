@@ -1,15 +1,16 @@
 import Cookies from 'js-cookie';
+import { TOKEN_KEY } from '@/constant';
 
-const TokenKey = 'Admin-Token';
+const getToken = () => {
+    return Cookies.get(TOKEN_KEY);
+};
 
-export function getToken(): string | undefined {
-    return Cookies.get(TokenKey);
-}
+const setToken = (token: string) => {
+    return Cookies.set(TOKEN_KEY, token);
+};
 
-export function setToken(token: string): string | undefined {
-    return Cookies.set(TokenKey, token);
-}
+const removeToken = () => {
+    return Cookies.remove(TOKEN_KEY);
+};
 
-export function removeToken(): void {
-    return Cookies.remove(TokenKey);
-}
+export { getToken, setToken, removeToken };

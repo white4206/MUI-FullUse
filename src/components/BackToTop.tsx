@@ -34,4 +34,5 @@ const BackToTop = (props: BackToTopProps) => {
         )
     );
 };
+
 export default BackToTop;

@@ -1,12 +1,13 @@
+import { ThemeMode } from '@/constant';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface UserPreferenceState {
-    themeMode: 'light' | 'dark' | 'auto';
+    themeMode: ThemeMode;
     language: string;
     font: string;
     navBarButtons: Record<string, 'navBar' | 'setting'>;
-    setThemeMode: (themeMode: 'light' | 'dark' | 'auto') => void;
+    setThemeMode: (themeMode: ThemeMode) => void;
     setLanguage: (language: string) => void;
     setFont: (font: string) => void;
     setNavBarButton: (key: string, value: 'navBar' | 'setting') => void;
@@ -23,7 +24,7 @@ const defaultNavBarButton = {
 export const useUserPreference = create<UserPreferenceState>()(
     persist(
         (set, get) => ({
-            themeMode: 'auto',
+            themeMode: ThemeMode.SYSTEM,
             language: 'auto',
             font: "'Roboto','Helvetica','Arial',sans-serif",
             navBarButtons: { ...defaultNavBarButton } as Record<string, 'navBar' | 'setting'>,

@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, IconButton, CardMedia, Box, Typography, Divider, Link, Tooltip } from '@mui/material';
 import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 import LightModeTwoToneIcon from '@mui/icons-material/LightModeTwoTone';
-import logo from '@/assets/icons/svg/logo.svg';
+import logo from '/icons/svg/logo.svg';
 import { useRef, useLayoutEffect, type Dispatch, type SetStateAction } from 'react';
 import I18nButton from '@/layout/I18nButton';
 import { FontButton } from '@/layout/FontButton';
@@ -10,10 +10,10 @@ import SettingButton from '@/layout/SettingButton';
 import NotificationButton from '@/layout/NotificationButton';
 import Menu from '@/layout/Menu';
 import { useUserPreference } from '@/store';
-import { useDark } from '@/utils/hooks';
+import { useDark } from '@/hooks';
 import { useTranslation } from 'react-i18next';
 import FullscreenButton from '@/layout/FullscreenButton';
-import { name } from '@/utils/constant';
+import config from '@/config';
 import LoginUser from './LoginUser';
 
 const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<number>> }) => {
@@ -52,7 +52,7 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
                 </Link>
                 <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 2.5, ml: 1, mr: 0, display: { sm: 'block', xs: 'none' } }} />
                 <Typography display={{ sm: 'block', xs: 'none' }} p={1} color="text.primary">
-                    {name}
+                    {config.name}
                 </Typography>
                 {/* 导航 */}
                 <Menu />

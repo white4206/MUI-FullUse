@@ -5,7 +5,7 @@ import { CssBaseline, Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useDark } from '@/utils/hooks';
+import { useDark } from '@/hooks';
 import RouteProgress from '@/components/RouteProgress';
 import { useUserPreference } from '@/store/module/userPreference';
 import useFont from '@/font';

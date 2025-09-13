@@ -32,7 +32,7 @@ import { CSS } from '@dnd-kit/utilities';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
-import { useDebounce } from '@/utils/hooks';
+import { useDebounce } from '@/hooks';
 
 // 新建工具项
 const NewToolOption = ({ editMode, onNewToolOption }: { editMode: boolean; onNewToolOption?: () => void }) => {

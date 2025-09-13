@@ -25,7 +25,8 @@
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "erasableSyntaxOnly": true,
+        /* 禁用确保代码中只包含"可擦除"的TypeScript语法(如不含运行时代码的 enum, namespace) */
+        "erasableSyntaxOnly": false,
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true
     },

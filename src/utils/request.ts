@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getToken } from '@/utils/auth';
-import errorCode from '@/utils/errorCode';
+import errorCode from '@/utils/error';
 // import { blobValidate, tansParams } from '@/utils/ruoyi';
 // import cache from '@/plugins/cache';
 // import { saveAs } from 'file-saver';

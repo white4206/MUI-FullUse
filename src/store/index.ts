@@ -1,1 +1,1 @@
-export * from '@/store/module/userPreference';
+export * from '@/store/userPreference';

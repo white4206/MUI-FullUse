@@ -1,7 +1,8 @@
 import { createContext, useState, useMemo, useCallback, type ReactNode } from 'react';
-import Notification from '@/components/Notification';
+import { Notification } from '@/components';
 
 type NotifyOptions = Omit<Parameters<typeof Notification>[0], 'open' | 'onClose'>;
+
 interface NotificationContextProps {
     notify: (options: NotifyOptions) => void;
 }

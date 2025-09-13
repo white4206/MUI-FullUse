@@ -2,10 +2,11 @@ import { getHeadArticle } from '@/api/article';
 import { mapUrl } from '@/utils/url';
 import { Card, Skeleton, CardContent, CardActionArea, CardMedia, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
+import type { HeadArticle as IHeadArticle } from '@/api/types';
 
 const HeadArticle = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [headArticleData, setHeadArticleData] = useState<HeadArticle | null>(null);
+    const [headArticleData, setHeadArticleData] = useState<IHeadArticle | null>(null);
 
     useEffect(() => {
         // * 获取头文章

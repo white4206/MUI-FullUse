@@ -2,7 +2,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Box, useScrollTrigger, Tooltip, Fab } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-interface BackToTopProps {
+export interface BackToTopProps {
     target?: HTMLElement | null;
     visibilityHeight?: number;
     right?: number;
@@ -34,4 +34,5 @@ const BackToTop = (props: BackToTopProps) => {
         )
     );
 };
+
 export default BackToTop;

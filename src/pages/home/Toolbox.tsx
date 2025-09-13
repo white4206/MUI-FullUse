@@ -1,4 +1,4 @@
-import IconSelect from '@/components/IconSelect';
+import { IconSelect, SvgIcon, FuTextField } from '@/components';
 import { openUrl } from '@/utils/url';
 import {
     Box,
@@ -17,38 +17,31 @@ import {
     Paper,
     Skeleton,
     type SxProps,
+    ClickAwayListener,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import SvgIcon from '@/components/SvgIcon';
 import { getToolOption } from '@/api/common';
 import HardwareTwoToneIcon from '@mui/icons-material/HardwareTwoTone';
 import AddIcon from '@mui/icons-material/Add';
-import FuTextField from '@/components/FUTextField';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+import { useDebounce } from '@/hooks';
+import type { ToolOption } from '@/api/types';
 
 // 新建工具项
-const NewToolOption = ({ onNewToolOption }: { onNewToolOption?: () => void }) => {
+const NewToolOption = ({ editMode, onNewToolOption }: { editMode: boolean; onNewToolOption?: () => void }) => {
     return (
-        <Box flex="0 0 25%" p={0.5}>
+        <Box flex={editMode ? '0 0 25%' : 0} p={editMode ? 0.5 : 0} overflow="hidden" sx={{ transition: '.4s' }}>
             <CardActionArea
-                sx={{ height: '100%', borderRadius: 2, borderWidth: 2, borderStyle: 'dashed', borderColor: 'buttonBorderColor' }}
+                sx={{ height: '100%', borderRadius: 2, borderWidth: 2, borderStyle: 'dashed', borderColor: editMode ? 'buttonBorderColor' : 'transparent' }}
                 onClick={() => onNewToolOption && onNewToolOption()}
             >
-                <Stack
-                    height="100%"
-                    direction="column"
-                    alignItems="center"
-                    justifyContent="center"
-                    borderRadius={2}
-                    p={1}
-                    sx={{ transition: '.4s', cursor: 'pointer', '&:hover': { bgcolor: 'action.hover' } }}
-                >
+                <Stack height="100%" direction="column" alignItems="center" justifyContent="center" borderRadius={2} p={1}>
                     <AddIcon sx={{ fontSize: 32, color: 'text.secondary' }} />
                 </Stack>
             </CardActionArea>
@@ -80,18 +73,7 @@ const ToolboxItem = ({ sx, editMode, data }: { sx?: SxProps; editMode: boolean; 
                 }}
                 onClick={() => !editMode && openUrl(data.path)}
             >
-                <Stack
-                    direction="column"
-                    alignItems="center"
-                    justifyContent="center"
-                    borderRadius={2}
-                    p={1}
-                    sx={{
-                        transition: '.4s',
-                        bgcolor: isDragging ? 'action.selected' : 'inherit',
-                        '&:hover': { bgcolor: 'action.hover' },
-                    }}
-                >
+                <Stack direction="column" alignItems="center" justifyContent="center" borderRadius={2} p={1}>
                     {/* 拖拽手柄图标 - 仅在编辑模式下显示 */}
                     {editMode && (
                         <Tooltip title={t('pages.home.toolbox.edit.dragSort')}>
@@ -146,6 +128,7 @@ const Toolbox = () => {
     const [scrollContainer, setScrollContainer] = useState<HTMLDivElement | null>(null);
     const [canScrollLeft, setCanScrollLeft] = useState<boolean>(false);
     const [canScrollRight, setCanScrollRight] = useState<boolean>(false);
+    const [canScroll, setCanScroll] = useState<boolean>(false);
     const [itemWidth, setItemWidth] = useState(0); // 存储单个项目的宽度
 
     // 配置传感器
@@ -187,34 +170,32 @@ const Toolbox = () => {
         void getToolOptionData();
     }, []);
 
+    const checkScroll = useCallback(() => {
+        if (!scrollContainer) return;
+        setCanScrollLeft(scrollContainer.scrollLeft > 0);
+        setCanScrollRight(scrollContainer.scrollLeft + scrollContainer.clientWidth < scrollContainer.scrollWidth);
+        setCanScroll(scrollContainer.clientWidth < scrollContainer.scrollWidth);
+    }, [scrollContainer]);
+
+    // 使用防抖优化频繁触发的检查
+    const debouncedCheckScroll = useDebounce(checkScroll, 100);
+
     useEffect(() => {
         if (!scrollContainer) return;
-        const checkScroll = () => {
-            if (!scrollContainer) return;
-            setCanScrollLeft(scrollContainer.scrollLeft > 0);
-            setCanScrollRight(scrollContainer.scrollLeft + scrollContainer.clientWidth < scrollContainer.scrollWidth);
-        };
-        // 初始检查
         checkScroll();
+        // 监听容器大小变化
+        const observer = new window.ResizeObserver(debouncedCheckScroll);
+        observer.observe(scrollContainer);
         // 监听滚动事件
-        scrollContainer.addEventListener('scroll', checkScroll);
+        scrollContainer.addEventListener('scroll', debouncedCheckScroll);
+        // 监听过渡动画结束 (由于子组件过渡属性导致宽度变化无法在监听容器大小变化时立刻执行的回调中获取到最新的dom元素)
+        scrollContainer.addEventListener('transitionend', debouncedCheckScroll);
         return () => {
-            scrollContainer.removeEventListener('scroll', checkScroll);
+            observer.disconnect();
+            scrollContainer.removeEventListener('scroll', debouncedCheckScroll);
+            scrollContainer.removeEventListener('transitionend', debouncedCheckScroll);
         };
-    }, [scrollContainer]); // 依赖scrollContainer
-
-    // 数据加载后手动检查滚动状态
-    useEffect(() => {
-        if (!isLoading) {
-            // 下一帧检查确保DOM更新完成
-            requestAnimationFrame(() => {
-                if (scrollContainer) {
-                    setCanScrollLeft(scrollContainer.scrollLeft > 0);
-                    setCanScrollRight(scrollContainer.scrollLeft + scrollContainer.clientWidth < scrollContainer.scrollWidth);
-                }
-            });
-        }
-    }, [isLoading, toolOptionData, editMode, scrollContainer]); // 编辑模式变化时也触发
+    }, [scrollContainer, editMode, checkScroll, debouncedCheckScroll]); // 依赖scrollContainer
 
     // 获取单个项目的宽度 (包括间距)
     useEffect(() => {
@@ -234,25 +215,33 @@ const Toolbox = () => {
     }, [scrollContainer, toolOptionData, editMode]); // 依赖项
 
     return (
-        <Card elevation={3}>
-            <CardContent sx={{ p: '0 !important', bgcolor: 'toolboxBgColor' }}>
-                <Stack direction="row" alignItems="center" justifyContent="space-between" p={2} pb={1}>
-                    <Stack direction="row" alignItems="center">
-                        <Typography fontWeight={600} variant="h6">
-                            {t('pages.home.toolbox.title')}
-                        </Typography>
-                        <Tooltip title={t(`pages.home.toolbox.edit.${editMode ? 'exit' : 'title'}`)} placement="right">
-                            <IconButton
-                                color={editMode ? 'primary' : undefined}
-                                onClick={() => setEditMode(editMode => !editMode)}
-                                sx={{ ml: 0.5, transition: '.4s', transform: editMode ? 'rotate(15deg)' : undefined }}
-                            >
-                                <HardwareTwoToneIcon sx={{ fontSize: '1rem' }} />
-                            </IconButton>
-                        </Tooltip>
-                    </Stack>
-                    {scrollContainer && scrollContainer.clientWidth < scrollContainer.scrollWidth && (
-                        <Stack direction="row" alignItems="center" borderRadius={4} bgcolor="navBarButtonBgColor">
+        <ClickAwayListener onClickAway={() => setEditMode(false)}>
+            <Card elevation={3}>
+                <CardContent sx={{ p: '0 !important', bgcolor: 'toolboxBgColor' }}>
+                    <Stack direction="row" alignItems="center" justifyContent="space-between" p={2} pb={1}>
+                        <Stack direction="row" alignItems="center">
+                            <Typography fontWeight={600} variant="h6">
+                                {t('pages.home.toolbox.title')}
+                            </Typography>
+                            <Tooltip title={t(`pages.home.toolbox.edit.${editMode ? 'exit' : 'title'}`)} placement="right">
+                                <IconButton
+                                    color={editMode ? 'primary' : undefined}
+                                    onClick={() => setEditMode(editMode => !editMode)}
+                                    sx={{ ml: 0.5, transition: '.4s', transform: editMode ? 'rotate(15deg)' : undefined }}
+                                >
+                                    <HardwareTwoToneIcon sx={{ fontSize: '1rem' }} />
+                                </IconButton>
+                            </Tooltip>
+                        </Stack>
+                        <Stack
+                            direction="row"
+                            alignItems="center"
+                            borderRadius={4}
+                            bgcolor="navBarButtonBgColor"
+                            overflow="hidden"
+                            width={scrollContainer && canScroll ? 'auto' : 0}
+                            sx={{ transition: '.4s' }}
+                        >
                             <IconButton
                                 color="primary"
                                 disabled={!canScrollLeft}
@@ -270,52 +259,53 @@ const Toolbox = () => {
                                 <KeyboardArrowRightIcon sx={{ fontSize: '1.25rem' }} />
                             </IconButton>
                         </Stack>
-                    )}
-                </Stack>
-                {/* 新建工具项Dialog */}
-                <NewToolOptionDialog open={newToolOptionOpen} setOpen={setNewToolOptionOpen} />
-                <Paper sx={{ borderRadius: 4 }} elevation={3}>
-                    {isLoading ? (
-                        <Stack direction="row" justifyContent="space-around" p={1}>
-                            {[1, 2, 3, 4].map(item => (
-                                <React.Fragment key={item}>
-                                    <Stack direction="column" alignItems="center" spacing={1} p={1} m={1}>
-                                        <Skeleton height={32} width={32} sx={{ borderRadius: 2 }} variant="rounded" />
-                                        <Skeleton height={12} width={32} variant="rounded" />
-                                    </Stack>
-                                </React.Fragment>
-                            ))}
-                        </Stack>
-                    ) : (
-                        <Stack direction="row" p={1} ref={setScrollContainer} sx={{ overflowX: 'auto', '::-webkit-scrollbar': { height: 0 } }}>
-                            {editMode && <NewToolOption onNewToolOption={() => setNewToolOptionOpen(true)} />}
-                            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                                <SortableContext items={toolOptionData.map(tool => tool.id)}>
-                                    {toolOptionData.map(item => (
-                                        <ToolboxItem
-                                            key={item.id}
-                                            data={item}
-                                            editMode={editMode}
-                                            sx={{
-                                                '& .MuiButtonBase-root': {
-                                                    borderWidth: 2,
-                                                    borderStyle: ' dashed',
-                                                    borderColor: editMode ? 'buttonBorderColor' : 'transparent',
-                                                    animation: editMode ? 'shake 0.4s ease infinite' : undefined,
-                                                },
-                                                '& :hover': {
-                                                    animation: 'none',
-                                                },
-                                            }}
-                                        />
-                                    ))}
-                                </SortableContext>
-                            </DndContext>
-                        </Stack>
-                    )}
-                </Paper>
-            </CardContent>
-        </Card>
+                    </Stack>
+                    {/* 新建工具项Dialog */}
+                    <NewToolOptionDialog open={newToolOptionOpen} setOpen={setNewToolOptionOpen} />
+                    <Paper sx={{ borderRadius: 4 }} elevation={3}>
+                        {isLoading ? (
+                            <Stack direction="row" justifyContent="space-around" p={1}>
+                                {[1, 2, 3, 4].map(item => (
+                                    <React.Fragment key={item}>
+                                        <Stack direction="column" alignItems="center" spacing={1} p={1} m={1}>
+                                            <Skeleton height={32} width={32} sx={{ borderRadius: 2 }} variant="rounded" />
+                                            <Skeleton height={12} width={32} variant="rounded" />
+                                        </Stack>
+                                    </React.Fragment>
+                                ))}
+                            </Stack>
+                        ) : (
+                            <Stack direction="row" p={1} ref={setScrollContainer} sx={{ overflowX: 'auto', '::-webkit-scrollbar': { height: 0 } }}>
+                                <NewToolOption editMode={editMode} onNewToolOption={() => setNewToolOptionOpen(true)} />
+                                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                                    <SortableContext items={toolOptionData.map(tool => tool.id)}>
+                                        {toolOptionData.map(item => (
+                                            <ToolboxItem
+                                                key={item.id}
+                                                data={item}
+                                                editMode={editMode}
+                                                sx={{
+                                                    '& .MuiButtonBase-root': {
+                                                        borderWidth: 2,
+                                                        borderStyle: ' dashed',
+                                                        borderColor: editMode ? 'buttonBorderColor' : 'transparent',
+                                                        transition: '.4s',
+                                                        animation: editMode ? 'shake 0.4s ease infinite' : undefined,
+                                                    },
+                                                    '& :hover': {
+                                                        animation: 'none',
+                                                    },
+                                                }}
+                                            />
+                                        ))}
+                                    </SortableContext>
+                                </DndContext>
+                            </Stack>
+                        )}
+                    </Paper>
+                </CardContent>
+            </Card>
+        </ClickAwayListener>
     );
 };
 export default Toolbox;

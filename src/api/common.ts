@@ -1,4 +1,5 @@
-import request, { type ApiResponse } from '@/utils/request.js';
+import request, { type ApiResponse } from '@/utils/request';
+import type { Carousel, RelatedLink, ToolOption } from '@/api/types';
 
 export const getCarousel = (): Promise<ApiResponse<Carousel[]>> => {
     return request({

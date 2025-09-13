@@ -1,4 +1,4 @@
-import SideCard from '@/components/SideCard';
+import { SideCard, SvgIcon } from '@/components';
 import {
     List,
     ListItemButton,
@@ -25,7 +25,7 @@ import { mapUrl, openUrl } from '@/utils/url';
 import { defaultRelatedLinkIcon } from '@/utils/constant';
 import CommitIcon from '@mui/icons-material/Commit';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
-import SvgIcon from '@/components/SvgIcon';
+import type { RelatedLink } from '@/api/types';
 
 const RelatedLinkCard = () => {
     const { t } = useTranslation();

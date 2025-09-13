@@ -1,4 +1,5 @@
-import request, { type ApiResponse } from '@/utils/request.js';
+import request, { type ApiResponse } from '@/utils/request';
+import type { HeadArticle } from '@/api/types';
 
 export const getHeadArticle = (): Promise<ApiResponse<HeadArticle>> => {
     return request({

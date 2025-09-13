@@ -1,12 +1,12 @@
 import { Alert, Snackbar, Zoom } from '@mui/material';
 import type { AlertColor, AlertProps, SnackbarOrigin, SnackbarProps } from '@mui/material';
 
-interface NotificationProps {
+export interface NotificationProps {
     open: boolean;
     option?: { snackbarProps: SnackbarProps; alertProps: AlertProps };
     content: string;
     type?: AlertColor;
-    variant?: 'standard' | 'filled' | 'outlined';
+    variant?: AlertProps['variant'];
     position?: SnackbarOrigin;
     autoHideDuration?: number;
     onClose?: (event: React.SyntheticEvent | Event, reason: string) => void;

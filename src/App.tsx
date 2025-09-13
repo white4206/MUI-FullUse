@@ -5,11 +5,9 @@ import { CssBaseline, Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useDark } from '@/utils/hooks';
-import RouteProgress from '@/components/RouteProgress';
-import { useUserPreference } from '@/store/module/userPreference';
+import { useDark } from '@/hooks';
+import { RouteProgress, BackToTop } from '@/components';
 import useFont from '@/font';
-import BackToTop from '@/components/BackToTop';
 import { FullUseProvider } from '@/context/FullUseContext';
 
 const Home = lazy(() => import('@/pages/home'));
@@ -20,15 +18,14 @@ const Video = lazy(() => import('@/pages/video'));
 const App = () => {
     const { theme } = useDark();
     const [navBarHeight, setNavBarHeight] = useState<number>(0);
-    const font = useUserPreference(state => state.font);
-    const { changeFont } = useFont();
+    const { initFont } = useFont();
 
     console.log(theme);
 
-    // 页面加载时读取用户字体首选项
     useEffect(() => {
-        changeFont(font);
-    }, [changeFont, font]);
+        // 初始化字体
+        initFont();
+    }, [initFont]);
 
     return (
         <ThemeProvider theme={theme}>

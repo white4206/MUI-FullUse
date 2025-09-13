@@ -1,4 +1,4 @@
-interface HeadArticle {
+export interface HeadArticle {
     id: number;
     title: string;
     cover: string | null;

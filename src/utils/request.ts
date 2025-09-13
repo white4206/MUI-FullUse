@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getToken } from '@/utils/auth';
-import errorCode from '@/utils/errorCode';
+import errorCode from '@/utils/error';
 // import { blobValidate, tansParams } from '@/utils/ruoyi';
 // import cache from '@/plugins/cache';
 // import { saveAs } from 'file-saver';
@@ -91,7 +91,6 @@ service.interceptors.response.use(
         const request = res.request as { responseType: string };
         // 二进制数据则直接返回
         if (request.responseType === 'blob' || request.responseType === 'arraybuffer') {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             return res.data;
         }
         if (code === 401) {

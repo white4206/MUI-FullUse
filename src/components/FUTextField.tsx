@@ -1,12 +1,12 @@
 import { Box, Stack, TextField, Typography } from '@mui/material';
 import type { StackProps, TextFieldProps, CSSProperties } from '@mui/material';
 
-interface FuTextFieldProps {
+export interface FuTextFieldProps {
     labelPosition?: 'left' | 'top';
     requiredColor?: CSSProperties['color'];
 }
 
-type Layout = { labelMargin?: string; labelWidth?: 'auto' | '100%'; topRequired: boolean } & StackProps;
+export type Layout = { labelMargin?: string; labelWidth?: 'auto' | '100%'; topRequired: boolean } & StackProps;
 
 const FuTextField = (props: FuTextFieldProps & TextFieldProps) => {
     const { labelPosition = 'top', requiredColor = 'currentcolor', label, required, ...rest } = props;
@@ -29,6 +29,7 @@ const FuTextField = (props: FuTextFieldProps & TextFieldProps) => {
                   topRequired: true,
               };
     const { labelWidth, labelMargin, topRequired, ...layoutRest } = layout;
+
     return (
         <Stack {...layoutRest}>
             <Stack direction="row" width={labelWidth}>

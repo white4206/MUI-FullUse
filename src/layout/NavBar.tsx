@@ -9,12 +9,12 @@ import SearchButton from '@/layout/SearchButton';
 import SettingButton from '@/layout/SettingButton';
 import NotificationButton from '@/layout/NotificationButton';
 import Menu from '@/layout/Menu';
-import { useUserPreference } from '@/store';
-import { useDark } from '@/utils/hooks';
+import { NavBarButton, useUserPreference } from '@/store';
+import { useDark } from '@/hooks';
 import { useTranslation } from 'react-i18next';
 import FullscreenButton from '@/layout/FullscreenButton';
-import { name } from '@/utils/constant';
 import LoginUser from './LoginUser';
+import config from '@/config';
 
 const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<number>> }) => {
     const appBarRef = useRef<HTMLElement>(null);
@@ -52,7 +52,7 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
                 </Link>
                 <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 2.5, ml: 1, mr: 0, display: { sm: 'block', xs: 'none' } }} />
                 <Typography display={{ sm: 'block', xs: 'none' }} p={1} color="text.primary">
-                    {name}
+                    {config.name}
                 </Typography>
                 {/* 导航 */}
                 <Menu />
@@ -64,13 +64,13 @@ const NavBar = ({ setNavBarHeight }: { setNavBarHeight: Dispatch<SetStateAction<
                 {/* 功能按钮 */}
                 <Box display={{ md: 'block', xs: 'none' }}>
                     {/* 国际化切换 */}
-                    {navBarButtons.i18n === 'navBar' && <I18nButton />}
+                    {navBarButtons.i18n === NavBarButton.NAV_BAR && <I18nButton />}
                     {/* 全屏切换 */}
-                    {navBarButtons.fullscreen === 'navBar' && <FullscreenButton />}
+                    {navBarButtons.fullscreen === NavBarButton.NAV_BAR && <FullscreenButton />}
                     {/* 字体切换 */}
-                    {navBarButtons.font === 'navBar' && <FontButton />}
+                    {navBarButtons.font === NavBarButton.NAV_BAR && <FontButton />}
                     {/* 主题切换按钮 */}
-                    {navBarButtons.theme === 'navBar' && (
+                    {navBarButtons.theme === NavBarButton.NAV_BAR && (
                         <Tooltip title={t('navBar.theme')}>
                             <IconButton onClick={e => void toggleThemeWithAnimation(e)}>
                                 {isDark ? <LightModeTwoToneIcon /> : <DarkModeTwoToneIcon />}

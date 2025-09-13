@@ -20,7 +20,7 @@ export default {
                         title: '编辑工具箱',
                         exit: '退出编辑',
                         dragSort: '可拖动排序',
-                        new: '新建工具项',
+                        new: '新建',
                         confirm: '确认',
                         cancel: '取消',
                     },

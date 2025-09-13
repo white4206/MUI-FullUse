@@ -3,12 +3,13 @@ import { IconButton, Menu, MenuItem, Box, Typography, Tooltip, type TypographyPr
 import { useState } from 'react';
 import FontDownloadTwoToneIcon from '@mui/icons-material/FontDownloadTwoTone';
 import { useTranslation } from 'react-i18next';
+import { FONT_SAMPLE } from '@/constant';
+import { fonts } from '@/config';
 
 const FontTypographyList = ({ font }: { font: string }) => {
-    const { fontTypographyList } = useFont();
     return (
         <>
-            {fontTypographyList.map(typography => (
+            {FONT_SAMPLE.map(typography => (
                 <Typography
                     key={typography.id}
                     sx={{ fontFamily: `${font} !important`, ...typography.sx }}
@@ -25,7 +26,7 @@ const FontTypographyList = ({ font }: { font: string }) => {
 const FontButton = () => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const fontOpen = Boolean(anchorEl);
-    const { fonts, changeFont } = useFont();
+    const { changeFont } = useFont();
     const { t } = useTranslation();
 
     // 字体切换

@@ -4,12 +4,13 @@ import CallMadeIcon from '@mui/icons-material/CallMade';
 import useI18n from '@/i18n';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import SvgIcon from '@/components/SvgIcon';
+import { SvgIcon } from '@/components';
+import { languages } from '@/config';
 
 const I18nButton = () => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const i18nOpen = Boolean(anchorEl);
-    const { languages, changeLanguage } = useI18n();
+    const { changeLanguage } = useI18n();
     const { t } = useTranslation();
 
     // 语言切换
@@ -27,13 +28,13 @@ const I18nButton = () => {
             </Tooltip>
             <Menu anchorEl={anchorEl} open={i18nOpen} onClose={() => setAnchorEl(null)}>
                 {languages.map(language => (
-                    <MenuItem key={language.id} onClick={() => handleChangeLanguage(language.language)} sx={{ m: '0 8px', borderRadius: 2 }}>
+                    <MenuItem key={language.id} onClick={() => handleChangeLanguage(language.code)} sx={{ m: '0 8px', borderRadius: 2 }}>
                         <Stack sx={{ width: 128 }} flex={1} direction="row" justifyContent="space-between" alignItems="center">
                             <Stack direction="row" justifyContent="space-between" alignItems="center">
                                 <Typography variant="body2">{language.label}</Typography>
                                 <CallMadeIcon sx={{ fontSize: '0.75rem' }} />
                             </Stack>
-                            <SvgIcon iconName={language.language} />
+                            <SvgIcon iconName={language.code} />
                         </Stack>
                     </MenuItem>
                 ))}

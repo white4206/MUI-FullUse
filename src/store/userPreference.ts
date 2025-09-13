@@ -1,32 +1,38 @@
+import { ThemeMode } from '@/constant';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface UserPreferenceState {
-    themeMode: 'light' | 'dark' | 'auto';
+export enum NavBarButton {
+    NAV_BAR = 'navBar',
+    SETTING = 'setting',
+}
+
+export interface UserPreferenceState {
+    themeMode: ThemeMode;
     language: string;
     font: string;
-    navBarButtons: Record<string, 'navBar' | 'setting'>;
-    setThemeMode: (themeMode: 'light' | 'dark' | 'auto') => void;
+    navBarButtons: Record<string, NavBarButton>;
+    setThemeMode: (themeMode: ThemeMode) => void;
     setLanguage: (language: string) => void;
     setFont: (font: string) => void;
-    setNavBarButton: (key: string, value: 'navBar' | 'setting') => void;
+    setNavBarButton: (key: string, value: NavBarButton) => void;
     toggleShowNavBarButton: (key: string) => void;
 }
 
 const defaultNavBarButton = {
-    theme: 'navBar',
-    i18n: 'navBar',
-    font: 'setting',
-    fullscreen: 'navBar',
+    theme: NavBarButton.NAV_BAR,
+    i18n: NavBarButton.NAV_BAR,
+    font: NavBarButton.SETTING,
+    fullscreen: NavBarButton.NAV_BAR,
 };
 
 export const useUserPreference = create<UserPreferenceState>()(
     persist(
         (set, get) => ({
-            themeMode: 'auto',
+            themeMode: ThemeMode.SYSTEM,
             language: 'auto',
-            font: "'Roboto','Helvetica','Arial',sans-serif",
-            navBarButtons: { ...defaultNavBarButton } as Record<string, 'navBar' | 'setting'>,
+            font: '',
+            navBarButtons: { ...defaultNavBarButton },
             setThemeMode: themeMode => set({ themeMode }),
             setLanguage: language => set({ language }),
             setFont: font => set({ font }),
@@ -38,7 +44,7 @@ export const useUserPreference = create<UserPreferenceState>()(
                 set(state => ({
                     navBarButtons: {
                         ...state.navBarButtons,
-                        [key]: state.navBarButtons[key] === 'navBar' ? 'setting' : 'navBar',
+                        [key]: state.navBarButtons[key] === NavBarButton.NAV_BAR ? NavBarButton.SETTING : NavBarButton.NAV_BAR,
                     },
                 })),
         }),

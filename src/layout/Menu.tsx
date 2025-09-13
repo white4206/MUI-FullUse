@@ -7,9 +7,9 @@ import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import ArticleTwoToneIcon from '@mui/icons-material/ArticleTwoTone';
 import DownloadTwoToneIcon from '@mui/icons-material/DownloadTwoTone';
 import VideoLibraryTwoToneIcon from '@mui/icons-material/VideoLibraryTwoTone';
-import { useBreakpoint } from '@/utils/hooks';
-import SvgIcon from '@/components/SvgIcon';
-import { name } from '@/utils/constant';
+import { useBreakpoint } from '@/hooks';
+import { SvgIcon } from '@/components';
+import config from '@/config';
 
 const Menu = () => {
     const routeLinks = [
@@ -75,7 +75,7 @@ const Menu = () => {
                     <SvgIcon iconName="logo" size="32px" />
                     <Divider variant="middle" orientation="vertical" flexItem sx={{ m: 1, ml: 1, mr: 0 }} />
                     <Typography p={1} color="text.primary">
-                        {name}
+                        {config.name}
                     </Typography>
                 </Stack>
                 <Box p={1}>

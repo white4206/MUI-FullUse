@@ -5,11 +5,11 @@ export default {
                 title: 'Icon Select',
                 search: 'Search',
                 fold: 'Fold',
-                placeholder: 'Please enter the name of the icon',
+                placeholder: 'Please Enter The Name Of The Icon',
                 name: 'Name',
                 path: 'Path',
             },
-            backToTop: 'Back to the top',
+            backToTop: 'Back To The Top',
         },
         pages: {
             home: {
@@ -19,8 +19,8 @@ export default {
                     edit: {
                         title: 'Edit Toolbox',
                         exit: 'Exit editing',
-                        dragSort: '可拖动排序',
-                        new: 'Create a new tool option',
+                        dragSort: 'Draggable Sort',
+                        new: 'Create A New Tool Option',
                         confirm: 'Confirm',
                         cancel: 'Cancel',
                     },
@@ -51,8 +51,8 @@ export default {
         },
         setting: {
             title: 'Settings',
-            visible: 'Display on the toolbar',
-            invisible: 'Hide on the toolbar',
+            visible: 'Display On The Toolbar',
+            invisible: 'Hide On The Toolbar',
             theme: {
                 title: 'Mode',
                 light: 'Light',

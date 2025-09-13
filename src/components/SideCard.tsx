@@ -2,7 +2,7 @@ import { Card, CardActions, CardContent, CardHeader, CardMedia } from '@mui/mate
 import type { CardActionsProps, CardContentProps, CardHeaderProps, CardMediaProps, CardProps } from '@mui/material';
 import type { ReactNode } from 'react';
 
-interface SideCardProps {
+export interface SideCardProps {
     avatar?: CardHeaderProps['avatar'];
     title?: CardHeaderProps['title'];
     subheader?: CardHeaderProps['subheader'];
@@ -18,6 +18,7 @@ interface SideCardProps {
 
 const SideCard = (props: SideCardProps) => {
     const { avatar, title, subheader, headerAction, children, actions, cardProps, cardHeaderProps, cardMediaProps, cardContentProps, cardActionsProps } = props;
+
     return (
         <Card elevation={3} {...cardProps}>
             <CardHeader
@@ -37,4 +38,5 @@ const SideCard = (props: SideCardProps) => {
         </Card>
     );
 };
+
 export default SideCard;

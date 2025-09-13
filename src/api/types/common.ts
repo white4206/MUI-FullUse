@@ -1,15 +1,15 @@
-interface Carousel {
+export interface Carousel {
     id: number;
     title: string;
     image: string;
 }
-interface ToolOption {
+export interface ToolOption {
     id: number;
     icon: string;
     name: string;
     path: string;
 }
-interface RelatedLink {
+export interface RelatedLink {
     id: number;
     icon: string;
     title: string;

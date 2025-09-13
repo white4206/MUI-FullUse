@@ -1,4 +1,4 @@
-import { useBreakpoint } from '@/utils/hooks';
+import { useBreakpoint } from '@/hooks';
 import { IconButton, Paper, Typography, Modal, Card, CardContent, useTheme, Slide, Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useTranslation } from 'react-i18next';

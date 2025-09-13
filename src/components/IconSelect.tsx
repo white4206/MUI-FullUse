@@ -1,5 +1,5 @@
 import { CardActionArea, IconButton, InputAdornment, Paper, Stack, Tooltip, Typography, TextField } from '@mui/material';
-import SvgIcon from '@/components/SvgIcon';
+import { SvgIcon } from '@/components';
 import { useTranslation } from 'react-i18next';
 import AppsIcon from '@mui/icons-material/Apps';
 import SearchIcon from '@mui/icons-material/Search';
@@ -9,7 +9,7 @@ import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 import ImageSearchTwoToneIcon from '@mui/icons-material/ImageSearchTwoTone';
 import { useEffect, useRef, useState } from 'react';
 
-interface IconSelectProps {
+export interface IconSelectProps {
     iconAreaHeight?: number | string;
     onIconSelect: (icon: string) => void;
     size?: 'small' | 'large';

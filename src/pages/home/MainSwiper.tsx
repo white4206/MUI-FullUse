@@ -1,11 +1,12 @@
 import { getCarousel } from '@/api/common';
 import { defaultCarousel } from '@/utils/constant';
-import { useBreakpoint } from '@/utils/hooks';
+import { useBreakpoint } from '@/hooks';
 import { mapUrl } from '@/utils/url';
 import { Skeleton, Box, CircularProgress, CardMedia } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Carousel } from '@/api/types';
 
 const MainSwiper = () => {
     const { xl, lg, md, sm } = useBreakpoint();
